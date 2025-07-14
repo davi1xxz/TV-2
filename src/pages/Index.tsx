@@ -5,6 +5,7 @@ import NewsCard from '../components/NewsCard';
 import NewsModal from '../components/NewsModal';
 import { useNews } from '../hooks/use-news';
 import { NewsItem } from '../lib/supabase';
+import RecadoForm from '../components/RecadoForm';
 
 const Index = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
@@ -22,7 +23,7 @@ const Index = () => {
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
         {/* Hero Section */}
-        <section id="inicio" className="pt-24 pb-20">
+        <section id="inicio" className="pt-24 pb-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-8">
@@ -94,7 +95,8 @@ const Index = () => {
           </div>
         </section>
       {/* Barra de patrocinadores */}
-      <div className="w-full bg-gradient-to-r from-red-500 to-pink-500 flex flex-col items-center justify-center py-12">
+      <RecadoForm />
+      <div className="w-full py-10 bg-gradient-to-r from-red-500 to-pink-500 flex flex-col items-center justify-center">
         <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Patrocinadores</h2>
       </div>
     </div>

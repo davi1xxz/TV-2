@@ -17,17 +17,34 @@ import {
   BarChart3, 
   Users,
   Newspaper,
-  Clock
+  Clock,
+  Menu
 } from 'lucide-react'
+import { useRef } from 'react'
 
 const Admin = () => {
   const [showForm, setShowForm] = useState(false)
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null)
   const [newsPerHome, setNewsPerHome] = useState(6)
+  const [menuOpen, setMenuOpen] = useState(false)
   
   const { user, signOut, loading: authLoading } = useAuth()
   const { news, loading, loadNews } = useNews()
   const navigate = useNavigate()
+
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  // Fecha o menu ao clicar fora
+  useEffect(() => {
+    if (!menuOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [menuOpen])
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -84,19 +101,17 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 relative">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b z-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center justify-center h-16 relative">
+            <div className="flex items-center gap-3 justify-center w-full">
               <Settings className="w-8 h-8 text-blue-600" />
-              <h1 className="text-xl font-bold">Painel Administrativo</h1>
+              <h1 className="text-xl font-bold text-center">Painel Administrativo</h1>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">
-                Olá, {user.email}
-              </span>
+            {/* Desktop: botões visíveis */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
@@ -116,13 +131,41 @@ const Admin = () => {
                 Sair
               </Button>
             </div>
+            {/* Mobile: menu 3 pontinhos */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex md:hidden items-center z-50">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="flex items-center justify-center w-10 h-10"
+                aria-label="Abrir menu"
+              >
+                <Menu className="w-5 h-5" />
+              </Button>
+              {menuOpen && (
+                <div ref={menuRef} className="absolute right-0 top-14 w-44 bg-white dark:bg-gray-900 rounded-lg shadow-lg border z-50 flex flex-col animate-fade-in">
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-left"
+                    onClick={() => { setMenuOpen(false); navigate('/') }}
+                  >
+                    <Home className="w-4 h-4" /> Ver Site
+                  </button>
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-left border-t"
+                    onClick={() => { setMenuOpen(false); handleLogout() }}
+                  >
+                    <LogOut className="w-4 h-4" /> Sair
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <main className={`max-w-7xl mx-auto px-2 pt-4 pb-8 sm:px-4 sm:pt-8 sm:pb-8 lg:px-8 transition-all duration-200 ${menuOpen ? 'filter blur-sm brightness-90 pointer-events-none select-none' : ''}`}>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="space-y-4">
