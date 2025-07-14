@@ -66,6 +66,8 @@ const Index = () => {
                     onClick={() => setSelectedNews(news)}
                     isVideo={news.tipo_midia === 'youtube'}
                     videoUrl={news.tipo_midia === 'youtube' ? news.url_midia : ''}
+                    autor={news.autor}
+                    created_at={news.created_at}
                   />
                 ))}
               </div>
@@ -84,26 +86,16 @@ const Index = () => {
             subtitulo={selectedNews?.subtitulo || ''}
             details={selectedNews?.descricao || ''}
             date={selectedNews ? new Date(selectedNews.created_at).toLocaleDateString('pt-BR') : ''}
+            autor={selectedNews?.autor || ''}
+            created_at={selectedNews?.created_at || ''}
             isVideo={selectedNews?.tipo_midia === 'youtube'}
             videoUrl={selectedNews?.tipo_midia === 'youtube' ? selectedNews.url_midia : ''}
           />
           </div>
         </section>
       {/* Barra de patrocinadores */}
-      <div className="w-full bg-gradient-to-r from-red-500 to-pink-500 pt-0 pb-8 flex flex-col items-center justify-center">
-        <h2 className="text-2xl font-bold text-white mt-0 mb-4">Patrocinadores</h2>
-        {/* Substitua as imagens abaixo pelas logos reais dos patrocinadores */}
-        <div className="flex gap-8 flex-wrap justify-center items-center">
-          <div className="w-32 h-12 bg-white/80 rounded-lg flex items-center justify-center text-gray-700 font-bold text-sm shadow">
-            Logo 1
-          </div>
-          <div className="w-32 h-12 bg-white/80 rounded-lg flex items-center justify-center text-gray-700 font-bold text-sm shadow">
-            Logo 2
-          </div>
-          <div className="w-32 h-12 bg-white/80 rounded-lg flex items-center justify-center text-gray-700 font-bold text-sm shadow">
-            Logo 3
-          </div>
-        </div>
+      <div className="w-full bg-gradient-to-r from-red-500 to-pink-500 flex flex-col items-center justify-center py-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Patrocinadores</h2>
       </div>
     </div>
   );

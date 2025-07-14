@@ -1,12 +1,18 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
 import NewsCard from '../components/NewsCard';
 import NewsModal from '../components/NewsModal';
-import { newsData } from '../data/news';
+import { useNews } from '../hooks/use-news';
 
 const Noticias = () => {
-  const [selectedNews, setSelectedNews] = useState<null | typeof newsData[0]>(null);
+  const { news, loading, loadNews } = useNews();
+  const [selectedNews, setSelectedNews] = useState<any>(null);
+
+  useEffect(() => {
+    loadNews();
+    // eslint-disable-next-line
+  }, []);
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300">
@@ -25,27 +31,39 @@ const Noticias = () => {
             </div>
 
             {/* News Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {newsData.map((news) => (
-              <NewsCard
-                key={news.id}
-                image={news.image}
-                title={news.title}
-                summary={news.summary}
-                date={news.date}
-                onClick={() => setSelectedNews(news)}
-              />
-            ))}
-          </div>
+          {loading ? (
+            <div className="text-center py-16 text-muted-foreground">Carregando notícias...</div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {news.map((item) => (
+                <NewsCard
+                  key={item.id}
+                  image={item.tipo_midia === 'imagem' ? item.url_midia : `https://img.youtube.com/vi/${(item.url_midia?.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/) || [])[1] || ''}/maxresdefault.jpg`}
+                  title={item.titulo}
+                  subtitulo={item.subtitulo}
+                  date={new Date(item.created_at).toLocaleDateString('pt-BR')}
+                  onClick={() => setSelectedNews(item)}
+                  isVideo={item.tipo_midia === 'youtube'}
+                  videoUrl={item.tipo_midia === 'youtube' ? item.url_midia : undefined}
+                  autor={item.autor}
+                  created_at={item.created_at}
+                />
+              ))}
+            </div>
+          )}
           {/* Modal de detalhes da notícia */}
           <NewsModal
             open={!!selectedNews}
             onClose={() => setSelectedNews(null)}
-            image={selectedNews?.image || ''}
-            title={selectedNews?.title || ''}
-            summary={selectedNews?.summary || ''}
-            details={selectedNews?.details || ''}
-            date={selectedNews?.date || ''}
+            image={selectedNews?.tipo_midia === 'imagem' ? selectedNews?.url_midia : selectedNews?.tipo_midia === 'youtube' ? `https://img.youtube.com/vi/${(selectedNews?.url_midia?.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/) || [])[1] || ''}/maxresdefault.jpg` : ''}
+            title={selectedNews?.titulo || ''}
+            subtitulo={selectedNews?.subtitulo || ''}
+            details={selectedNews?.descricao || ''}
+            date={selectedNews ? new Date(selectedNews.created_at).toLocaleDateString('pt-BR') : ''}
+            autor={selectedNews?.autor || ''}
+            created_at={selectedNews?.created_at || ''}
+            isVideo={selectedNews?.tipo_midia === 'youtube'}
+            videoUrl={selectedNews?.tipo_midia === 'youtube' ? selectedNews?.url_midia : ''}
           />
           </div>
         </section>

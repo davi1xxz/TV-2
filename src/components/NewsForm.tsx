@@ -21,7 +21,8 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
     descricao: '',
     tipo_midia: 'imagem' as 'imagem' | 'youtube',
     url_midia: '',
-    destaque_home: false
+    destaque_home: false,
+    autor: '' // Novo campo
   })
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
@@ -37,7 +38,8 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
         descricao: editingNews.descricao,
         tipo_midia: editingNews.tipo_midia,
         url_midia: editingNews.url_midia,
-        destaque_home: editingNews.destaque_home
+        destaque_home: editingNews.destaque_home,
+        autor: editingNews.autor || ''
       })
       if (editingNews.tipo_midia === 'imagem') {
         setImagePreview(editingNews.url_midia)
@@ -68,7 +70,7 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!formData.titulo || !formData.descricao) {
+    if (!formData.titulo || !formData.descricao || !formData.autor) {
       return
     }
 
@@ -92,7 +94,8 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
         descricao: formData.descricao,
         tipo_midia: formData.tipo_midia,
         url_midia: finalUrlMidia,
-        destaque_home: formData.destaque_home
+        destaque_home: formData.destaque_home,
+        autor: formData.autor
       }
 
       let result
@@ -119,7 +122,8 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
       descricao: '',
       tipo_midia: 'imagem',
       url_midia: '',
-      destaque_home: false
+      destaque_home: false,
+      autor: ''
     })
     setImageFile(null)
     setImagePreview('')
@@ -177,6 +181,18 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
               onChange={handleInputChange}
               placeholder="Digite a descrição da notícia"
               rows={4}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="autor">Autor *</Label>
+            <Input
+              id="autor"
+              name="autor"
+              value={formData.autor}
+              onChange={handleInputChange}
+              placeholder="Nome do autor da matéria"
               required
             />
           </div>

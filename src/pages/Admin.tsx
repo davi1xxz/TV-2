@@ -16,7 +16,8 @@ import {
   Home, 
   BarChart3, 
   Users,
-  Newspaper
+  Newspaper,
+  Clock
 } from 'lucide-react'
 
 const Admin = () => {
@@ -125,25 +126,21 @@ const Admin = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="space-y-4">
-              {/* Stats Cards */}
+              {/* Tabelas Sidebar */}
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
-                    Estatísticas
+                    Tabelas
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="space-y-4">
                   <div className="flex items-center gap-2">
                     <Newspaper className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm">Total de Notícias</span>
+                    <span className="text-sm font-semibold">Tabela de Notícias</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4 text-green-500" />
-                    <span className="text-sm">Em Destaque</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-purple-500" />
-                    <span className="text-sm">Usuários Ativos</span>
+                    <Clock className="w-4 h-4 text-green-500" />
+                    <span className="text-sm font-semibold">Tabela de Programação</span>
                   </div>
                 </CardContent>
               </Card>

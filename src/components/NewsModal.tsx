@@ -11,6 +11,8 @@ interface NewsModalProps {
   date: string;
   isVideo?: boolean;
   videoUrl?: string;
+  autor?: string;
+  created_at?: string;
 }
 
 const NewsModal: React.FC<NewsModalProps> = ({ 
@@ -22,7 +24,9 @@ const NewsModal: React.FC<NewsModalProps> = ({
   details, 
   date, 
   isVideo = false, 
-  videoUrl 
+  videoUrl,
+  autor,
+  created_at
 }) => {
   const extractYouTubeId = (url: string): string | null => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
@@ -87,13 +91,22 @@ const NewsModal: React.FC<NewsModalProps> = ({
             {subtitulo || ''}
           </p>
           <div className="w-full max-w-xl">
-            <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-left bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+            <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-left bg-gray-50 dark:bg-gray-800 rounded-lg p-4 break-words whitespace-pre-line">
               {details}
             </p>
           </div>
           <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mt-6">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
             {date}
+            {created_at && (
+              <span>às {new Date(created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
+            )}
+            {autor && (
+              <>
+                <span className="mx-2">|</span>
+                <span>Por {autor}</span>
+              </>
+            )}
           </div>
         </div>
       </div>

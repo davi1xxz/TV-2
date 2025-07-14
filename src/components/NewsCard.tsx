@@ -9,6 +9,8 @@ interface NewsCardProps {
   onClick?: () => void;
   isVideo?: boolean;
   videoUrl?: string;
+  autor?: string;
+  created_at?: string;
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ 
@@ -18,7 +20,9 @@ const NewsCard: React.FC<NewsCardProps> = ({
   date, 
   onClick, 
   isVideo = false, 
-  videoUrl 
+  videoUrl,
+  autor,
+  created_at
 }) => {
   const extractYouTubeId = (url: string): string | null => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
@@ -73,7 +77,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
         <h3 className="text-[21px] font-bold mb-2 text-gray-900 dark:text-white leading-tight">
           {title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed flex-1">
+        <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed flex-1 break-words line-clamp-2">
           {subtitulo || ''}
         </p>
         <div className="mt-auto flex items-center justify-start text-sm text-gray-500 dark:text-gray-400 gap-2">

@@ -51,7 +51,7 @@ const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
   if (news.length === 0) {
     return (
       <Card>
-        <CardContent className="p-6">
+        <CardContent className="p-6 py-16">
           <div className="text-center text-muted-foreground">
             Nenhuma notícia encontrada
           </div>
