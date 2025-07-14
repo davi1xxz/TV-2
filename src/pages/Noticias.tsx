@@ -1,6 +1,5 @@
 
 import React from 'react';
-import NewsSlider from '../components/NewsSlider';
 import { Calendar, Clock, User } from 'lucide-react';
 
 const Noticias = () => {
@@ -48,9 +47,6 @@ const Noticias = () => {
           </div>
 
           {/* Featured News Slider */}
-          <div className="mb-16">
-            <NewsSlider />
-          </div>
 
           {/* News Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
