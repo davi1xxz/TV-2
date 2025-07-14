@@ -27,8 +27,8 @@ export const newsData: NewsItem[] = [
   {
     id: 3,
     title: "Entrevista exclusiva com artista local",
-    summary: "O cantor João Silva fala sobre seu novo álbum e projetos futuros em entrevista exclusiva.",
-    details: "Ele compartilha detalhes do processo criativo, inspirações e planos para shows na região. Uma conversa imperdível para quem gosta de música nacional! João Silva compartilha curiosidades sobre o processo criativo do novo álbum e revela planos para shows e colaborações futuras. Não perca essa conversa inspiradora!",
+    summary: "O cantor Marcos Lopes fala sobre seu novo álbum e projetos futuros em entrevista exclusiva.",
+    details: "Ele compartilha detalhes do processo criativo, inspirações e planos para shows na região. Uma conversa imperdível para quem gosta de música nacional! Marcos Lopes compartilha curiosidades sobre o processo criativo do novo álbum e revela planos para shows e colaborações futuras. Não perca essa conversa inspiradora!",
     date: "09/07/2025",
     image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=350&fit=crop"
   },

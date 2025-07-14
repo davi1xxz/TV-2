@@ -41,7 +41,7 @@ const NewsSlider = () => {
     {
       id: 3,
       title: "Entrevista exclusiva com artista local",
-      summary: "O cantor João Silva fala sobre seu novo álbum e projetos futuros em entrevista exclusiva.",
+      summary: "O cantor Marcos Lopes fala sobre seu novo álbum e projetos futuros em entrevista exclusiva.",
       date: "09/07/2025",
       time: "10:15",
       image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=250&fit=crop",

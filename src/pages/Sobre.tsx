@@ -12,20 +12,20 @@ const Sobre = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300">
-      {/* Header Section */}
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300">
+        {/* Header Section */}
       <section className="pt-32 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
                 Sobre a TV OK
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Há mais de 15 anos levando música, informação e entretenimento para toda a região com qualidade e dedicação
-            </p>
-          </div>
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Há mais de 15 anos levando música, informação e entretenimento para toda a região com qualidade e dedicação
+              </p>
+            </div>
 
             {/* Mission Section */}
             <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
@@ -61,21 +61,21 @@ const Sobre = () => {
               </h2>
               <div className="flex justify-center">
                 <div className="text-center group">
-                  <div className="relative mb-4 overflow-hidden rounded-full w-32 h-32 mx-auto">
-                    <img
+                    <div className="relative mb-4 overflow-hidden rounded-full w-32 h-32 mx-auto">
+                      <img
                       src={team[0].image}
                       alt={team[0].name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                     {team[0].name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-2">
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2">
                     {team[0].role}
-                  </p>
-                </div>
+                    </p>
+                  </div>
               </div>
             </div>
 
