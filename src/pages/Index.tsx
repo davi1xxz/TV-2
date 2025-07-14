@@ -1,9 +1,37 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Waves, Users, Radio, Headphones } from 'lucide-react';
 import NewsSlider from '../components/NewsSlider';
 
+const newsDetails = [
+  {
+    id: 1,
+    title: "Nova programação da rádio estreia na próxima semana",
+    summary: "Confira os novos programas que chegam para diversificar ainda mais nossa grade de programação.",
+    date: "11/07/2025",
+    image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=250&fit=crop",
+    details: "A nova grade trará programas inéditos, com foco em música regional, entrevistas exclusivas e participação dos ouvintes. Fique ligado para não perder as novidades!"
+  },
+  {
+    id: 2,
+    title: "Festival de música local será transmitido ao vivo",
+    summary: "Não perca a cobertura completa do maior festival de música da região, direto dos nossos estúdios.",
+    date: "10/07/2025",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=250&fit=crop",
+    details: "O festival contará com bandas locais, entrevistas ao vivo e sorteios para os ouvintes. Acompanhe nossa transmissão e participe dessa grande festa da música!"
+  },
+  {
+    id: 3,
+    title: "Entrevista exclusiva com artista local",
+    summary: "O cantor João Silva fala sobre seu novo álbum e projetos futuros em entrevista exclusiva.",
+    date: "09/07/2025",
+    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=250&fit=crop",
+    details: "João Silva compartilha curiosidades sobre o processo criativo do novo álbum e revela planos para shows e colaborações futuras. Não perca essa conversa inspiradora!"
+  },
+];
+
 const Index = () => {
+  const [selectedNews, setSelectedNews] = useState(null);
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
       {/* Hero Section */}
@@ -36,32 +64,11 @@ const Index = () => {
               Últimas Notícias
             </h2>
             <div className="grid gap-8 md:grid-cols-3">
-              {[
-                {
-                  id: 1,
-                  title: "Nova programação da rádio estreia na próxima semana",
-                  summary: "Confira os novos programas que chegam para diversificar ainda mais nossa grade de programação.",
-                  date: "11/07/2025",
-                  image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=250&fit=crop",
-                },
-                {
-                  id: 2,
-                  title: "Festival de música local será transmitido ao vivo",
-                  summary: "Não perca a cobertura completa do maior festival de música da região, direto dos nossos estúdios.",
-                  date: "10/07/2025",
-                  image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=250&fit=crop",
-                },
-                {
-                  id: 3,
-                  title: "Entrevista exclusiva com artista local",
-                  summary: "O cantor João Silva fala sobre seu novo álbum e projetos futuros em entrevista exclusiva.",
-                  date: "09/07/2025",
-                  image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=250&fit=crop",
-                },
-              ].map((news) => (
+              {newsDetails.map((news) => (
                 <div
                   key={news.id}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col h-full transition-transform duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col h-full transition-transform duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl cursor-pointer"
+                  onClick={() => setSelectedNews(news)}
                 >
                   <img
                     src={news.image}
@@ -83,6 +90,38 @@ const Index = () => {
                 </div>
               ))}
             </div>
+            {/* Modal de detalhes da notícia */}
+            {selectedNews && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-2xl w-full p-0 relative animate-fade-in overflow-hidden">
+                  <button
+                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 dark:hover:text-white text-2xl font-bold z-10"
+                    onClick={() => setSelectedNews(null)}
+                    aria-label="Fechar"
+                  >
+                    &times;
+                  </button>
+                  <div className="flex flex-col items-center p-8 md:p-12">
+                    <img
+                      src={selectedNews.image}
+                      alt={selectedNews.title}
+                      className="w-full max-w-2xl h-80 object-cover object-center rounded-2xl mb-10 shadow-2xl border border-gray-200 dark:border-gray-800"
+                    />
+                    <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white leading-tight text-center">
+                      {selectedNews.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed text-center max-w-xl">
+                      {selectedNews.summary}
+                    </p>
+                    <div className="w-full max-w-xl">
+                      <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-left bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                        {selectedNews.details}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

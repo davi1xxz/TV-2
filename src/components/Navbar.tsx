@@ -40,7 +40,7 @@ const Navbar = () => {
                 </div>
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
-                WebRadio
+                TV OK
               </span>
             </Link>
           </div>
@@ -101,7 +101,7 @@ const Navbar = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer">
                   <Mail className="mr-2 h-4 w-4" />
-                  <span>contato@webradio.com</span>
+                  <span>contato@tvok.com</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
