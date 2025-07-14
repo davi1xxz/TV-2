@@ -1,83 +1,36 @@
 import React, { useState } from "react";
-import { cidadesBrasil } from '../data/cidades-brasil';
 
 const RecadoForm: React.FC = () => {
-  const [cidade, setCidade] = useState("");
-  const [sugestoes, setSugestoes] = useState<string[]>([]);
-  const [showSugestoes, setShowSugestoes] = useState(false);
-
-  const handleCidadeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const valor = e.target.value;
-    setCidade(valor);
-    if (valor.length >= 3) {
-      const filtradas = cidadesBrasil.filter(c => c.toLowerCase().startsWith(valor.toLowerCase()));
-      setSugestoes(filtradas.slice(0, 8));
-      setShowSugestoes(true);
-    } else {
-      setSugestoes([]);
-      setShowSugestoes(false);
-    }
-  };
-
-  const handleSugestaoClick = (s: string) => {
-    setCidade(s);
-    setSugestoes([]);
-    setShowSugestoes(false);
-  };
-
   return (
-    <div className="w-full flex justify-center items-center pb-2">
+    <div className="w-full flex justify-center items-center pb-2 px-2">
       <form
-        className="w-full max-w-5xl flex flex-col sm:flex-row items-center gap-2 px-4 py-3 bg-white rounded-xl shadow border border-gray-200"
+        className="w-full max-w-5xl flex flex-col sm:flex-row items-center gap-2 px-2 sm:px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow transition-colors"
         style={{backdropFilter: 'blur(2px)'}}
         onSubmit={e => {
           e.preventDefault();
           (e.target as HTMLFormElement).reset();
-          setCidade("");
-          setSugestoes([]);
-          setShowSugestoes(false);
         }}
       >
-        <span className="font-semibold text-gray-700 text-xs sm:text-sm whitespace-nowrap mr-1 sm:mr-2">DEIXE SEU RECADO</span>
+        <span className="font-semibold text-gray-700 dark:text-gray-100 text-xs sm:text-sm whitespace-nowrap mr-1 sm:mr-2">DEIXE SEU RECADO</span>
         <input
           name="nome"
           required
           placeholder="Nome"
-          className="rounded px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 bg-white/90 text-xs sm:text-sm w-full sm:w-32"
+          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-pink-500 bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors"
           maxLength={32}
         />
-        <div className="relative w-full sm:w-32">
-          <input
-            name="cidade"
-            required
-            autoComplete="off"
-            placeholder="Cidade"
-            value={cidade}
-            onChange={handleCidadeChange}
-            onBlur={() => setTimeout(() => setShowSugestoes(false), 100)}
-            onFocus={() => cidade.length >= 3 && sugestoes.length > 0 && setShowSugestoes(true)}
-            className="rounded px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 bg-white/90 text-xs sm:text-sm w-full"
-            maxLength={32}
-          />
-          {showSugestoes && sugestoes.length > 0 && (
-            <ul className="absolute z-10 left-0 right-0 bg-white border border-gray-200 rounded shadow mt-1 max-h-40 overflow-y-auto text-xs sm:text-sm">
-              {sugestoes.map((s, i) => (
-                <li
-                  key={s + i}
-                  className="px-3 py-1 hover:bg-red-100 cursor-pointer"
-                  onMouseDown={() => handleSugestaoClick(s)}
-                >
-                  {s}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <input
+          name="cidade"
+          required
+          placeholder="Cidade"
+          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-pink-500 bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors"
+          maxLength={32}
+        />
         <input
           name="recado"
           required
           placeholder="Seu recado..."
-          className="rounded px-2 py-1 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 bg-white/90 text-xs sm:text-sm flex-1 min-w-0"
+          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-pink-500 bg-white dark:bg-gray-800 text-xs sm:text-sm flex-1 min-w-0 transition-colors"
           maxLength={120}
         />
         <button
