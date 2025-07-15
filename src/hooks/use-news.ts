@@ -14,6 +14,7 @@ export const useNews = () => {
         .from('noticias')
         .select('*')
         .order('created_at', { ascending: false })
+        .limit(30)
 
       if (error) throw error
       setNews(data || [])
@@ -154,6 +155,32 @@ export const useNews = () => {
     return (match && match[2].length === 11) ? match[2] : null
   }
 
+  // Atualizar ordem de destaque
+  const setDestaqueOrdem = async (id: string, ordem: number | null) => {
+    try {
+      // Remove esse valor de outros
+      if (ordem) {
+        await supabase
+          .from('noticias')
+          .update({ destaque_ordem: null })
+          .eq('destaque_ordem', ordem)
+      }
+      // Atualiza a notícia
+      const { error } = await supabase
+        .from('noticias')
+        .update({ destaque_ordem: ordem, destaque_home: !!ordem })
+        .eq('id', id)
+      if (error) throw error
+      await loadNews()
+      return { success: true }
+    } catch (err) {
+      return {
+        success: false,
+        error: err instanceof Error ? err.message : 'Erro ao atualizar destaque'
+      }
+    }
+  }
+
   return {
     news,
     loading,
@@ -164,6 +191,7 @@ export const useNews = () => {
     updateNews,
     deleteNews,
     uploadImage,
-    extractYouTubeId
+    extractYouTubeId,
+    setDestaqueOrdem
   }
 } 

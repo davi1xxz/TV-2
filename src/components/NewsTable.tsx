@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useNews } from '@/hooks/use-news'
 import { NewsItem } from '@/lib/supabase'
 import { Edit, Trash2, Eye, Image, Video, Star } from 'lucide-react'
 import { useRef } from 'react'
-import { useEffect } from 'react'
 
 // Hook para detectar se está em tela md+ (desktop)
 function useIsDesktop() {
@@ -25,12 +24,20 @@ export interface NewsTableProps {
 }
 
 const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
-  const { deleteNews, loadNews } = useNews()
+  const { deleteNews, loadNews, setDestaqueOrdem } = useNews()
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [confirmId, setConfirmId] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [localDestaques, setLocalDestaques] = useState<{[id: string]: number | null}>({})
   const confirmButtonRef = useRef<HTMLButtonElement>(null)
   const isDesktop = useIsDesktop()
+
+  useEffect(() => {
+    // Sincroniza localDestaques com o backend
+    const map: {[id: string]: number | null} = {}
+    news.forEach(n => { map[n.id] = n.destaque_ordem ?? null })
+    setLocalDestaques(map)
+  }, [news])
 
   const handleDelete = async (id: string) => {
     setDeletingId(id)
@@ -45,6 +52,20 @@ const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
       setIsLoading(false)
       setConfirmId(null)
     }
+  }
+
+  const handleDestaqueClick = async (id: string, ordem: number) => {
+    setLocalDestaques(prev => {
+      // Remove ordem de outros
+      const novo = { ...prev }
+      Object.keys(novo).forEach(k => {
+        if (novo[k] === ordem) novo[k] = null
+      })
+      novo[id] = prev[id] === ordem ? null : ordem
+      return novo
+    })
+    await setDestaqueOrdem(id, localDestaques[id] === ordem ? null : ordem)
+    // Depois do backend, loadNews já sincroniza
   }
 
   const formatDate = (dateString: string) => {
@@ -79,7 +100,7 @@ const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Eye className="w-5 h-5" />
-            Gerenciar Notícias ({news.length})
+            Gerenciar Notícias ({news.length}/30)
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -131,14 +152,19 @@ const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
                       </div>
                     </td>
                     <td className="p-2">
-                      {item.destaque_home ? (
-                        <div className="flex items-center gap-1 text-yellow-600">
-                          <Star className="w-4 h-4 fill-current" />
-                          <span>Sim</span>
-                        </div>
-                      ) : (
-                        <span className="text-muted-foreground">Não</span>
-                      )}
+                      <div className="flex gap-1">
+                        {[1, 2, 3].map((ordem) => (
+                          <Button
+                            key={ordem}
+                            size="sm"
+                            variant={localDestaques[item.id] === ordem ? 'default' : 'outline'}
+                            className={localDestaques[item.id] === ordem ? 'bg-[#ad1917] text-white' : 'text-[#ad1917]'}
+                            onClick={() => handleDestaqueClick(item.id, ordem)}
+                          >
+                            {ordem}
+                          </Button>
+                        ))}
+                      </div>
                     </td>
                     <td className="p-2 text-sm text-muted-foreground">
                       {formatDate(item.created_at)}
@@ -233,6 +259,20 @@ const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
               <div className="flex gap-2 mt-2">
                 <Button size="sm" variant="outline" onClick={() => onEdit(item)} disabled={isLoading} className="flex-1"><Edit className="w-4 h-4" />Editar</Button>
                 <Button size="sm" variant="outline" onClick={() => setConfirmId(item.id)} disabled={deletingId === item.id || isLoading} className="flex-1 text-red-600 hover:text-red-700 hover:bg-red-50"><Trash2 className="w-4 h-4" />Excluir</Button>
+              </div>
+              {/** Destaque ordem mobile */}
+              <div className="flex gap-2 mt-2">
+                {[1, 2, 3].map((ordem) => (
+                  <Button
+                    key={ordem}
+                    size="sm"
+                    variant={localDestaques[item.id] === ordem ? 'default' : 'outline'}
+                    className={localDestaques[item.id] === ordem ? 'bg-[#ad1917] text-white' : 'text-[#ad1917]'}
+                    onClick={() => handleDestaqueClick(item.id, ordem)}
+                  >
+                    {ordem}
+                  </Button>
+                ))}
               </div>
             </div>
           ))}

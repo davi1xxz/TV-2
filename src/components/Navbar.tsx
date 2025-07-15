@@ -30,14 +30,11 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[70px]">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center space-x-2">
-              <img src="/imagens/logo.png" alt="Logo TV OK" className="w-10 h-10 object-contain" />
-              <span className="text-xl font-bold bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
-                TV OK
-              </span>
+            <Link to="/" className="flex items-center">
+              <img src="/imagens/logo.png" alt="Logo TV OK" className="w-16 h-16 object-contain" />
             </Link>
           </div>
 

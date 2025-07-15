@@ -240,7 +240,7 @@ const Admin = () => {
                   <>
                     {/* Actions */}
                     <div className="flex justify-between items-center">
-                      <h2 className="text-2xl font-bold">Gerenciar Notícias</h2>
+                      <h2 className="text-2xl font-bold">Mural de Notícias</h2>
                       <Button
                         onClick={() => setShowForm(true)}
                         className="flex items-center gap-2"
@@ -251,7 +251,7 @@ const Admin = () => {
                     </div>
 
                     {/* News Table */}
-                    <NewsTable news={news} loading={loading} onEdit={handleEdit} />
+                    <NewsTable news={news.slice(0, 30)} loading={loading} onEdit={handleEdit} />
                   </>
                 )}
               </>
@@ -269,7 +269,7 @@ const Admin = () => {
                     <div className="flex justify-between items-center">
                       <h2 className="text-2xl font-bold">Gerenciar Programação</h2>
                       <div className="flex gap-2">
-                        <TestDataButton />
+                        {/* <TestDataButton /> removido */}
                         <Button
                           onClick={() => setShowForm(true)}
                           className="flex items-center gap-2"
@@ -280,9 +280,16 @@ const Admin = () => {
                       </div>
                     </div>
 
-                    {/* Schedule Table */}
-                    <ScheduleTable schedule={schedule} loading={scheduleLoading} onEdit={handleEditSchedule} />
-                    
+                    {/* Schedule Table ordenada por horário */}
+                    <ScheduleTable schedule={schedule.slice().sort((a, b) => {
+                      // Ordena pelo horário inicial (ex: 06:00 - 09:00)
+                      const getMinutes = (h: string) => {
+                        const [start] = h.split(' - ')
+                        const [hh, mm] = start.split(':').map(Number)
+                        return hh * 60 + mm
+                      }
+                      return getMinutes(a.horario) - getMinutes(b.horario)
+                    })} loading={scheduleLoading} onEdit={handleEditSchedule} />
                     {/* Debug Info */}
                     {scheduleError && (
                       <Card className="mt-4 border-red-200 bg-red-50 dark:bg-red-900/20">

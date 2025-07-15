@@ -14,6 +14,7 @@ export interface NewsItem {
   tipo_midia: 'imagem' | 'youtube'
   url_midia: string
   destaque_home: boolean
+  destaque_ordem?: number // 1, 2, 3 ou null
   autor: string
   data_publicacao: string
   created_at: string

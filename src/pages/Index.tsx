@@ -16,9 +16,12 @@ const Index = () => {
     // eslint-disable-next-line
   }, []);
 
-  // Removido console.log
-
-  const ultimasNoticias = news.slice(0, 3);
+  // Ordena por destaque_ordem: 1, 2, 3, depois as demais
+  const ultimasNoticias = [1, 2, 3]
+    .map(ordem => news.find(n => n.destaque_ordem === ordem))
+    .filter(Boolean)
+    .concat(news.filter(n => ![1, 2, 3].includes(n.destaque_ordem)).slice(0, 3))
+    .slice(0, 3);
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
@@ -27,7 +30,7 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-8">
-                <span className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
                   Sua Rádio Online
                 </span>
               </h1>

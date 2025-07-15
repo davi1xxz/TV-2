@@ -39,6 +39,7 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
         tipo_midia: editingNews.tipo_midia,
         url_midia: editingNews.url_midia,
         destaque_home: editingNews.destaque_home,
+        destaque_ordem: editingNews.destaque_ordem ?? null,
         autor: editingNews.autor || ''
       })
       if (editingNews.tipo_midia === 'imagem') {
@@ -228,15 +229,24 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
           {formData.tipo_midia === 'imagem' && (
             <div className="space-y-2">
               <Label htmlFor="imageFile">Upload de Imagem</Label>
-              <Input
-                id="imageFile"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="cursor-pointer"
-              />
+              <div className="flex items-center gap-4">
+                <label htmlFor="imageFile" className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-black font-semibold rounded-lg cursor-pointer shadow-sm hover:bg-gray-50 transition-all">
+                  <Upload className="w-5 h-5 mr-2 text-black" />
+                  {imageFile ? 'Trocar Imagem' : 'Escolher Imagem'}
+                  <input
+                    id="imageFile"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                </label>
+                {imageFile && (
+                  <span className="text-sm text-gray-700 dark:text-gray-200 max-w-[180px] truncate">{imageFile.name}</span>
+                )}
+              </div>
               {imagePreview && (
-                <div className="relative inline-block">
+                <div className="relative inline-block mt-2">
                   <img
                     src={imagePreview}
                     alt="Preview"
@@ -272,16 +282,24 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
             </div>
           )}
 
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="destaque_home"
-              name="destaque_home"
-              checked={formData.destaque_home}
-              onChange={handleInputChange}
-              className="w-4 h-4"
-            />
-            <Label htmlFor="destaque_home">Destaque na Página Inicial</Label>
+          <div className="flex items-center gap-2 mt-2">
+            <Label className="mr-2">Destaque na Página Inicial:</Label>
+            {[1, 2, 3].map((ordem) => (
+              <Button
+                key={ordem}
+                type="button"
+                size="sm"
+                variant={formData.destaque_ordem === ordem ? 'default' : 'outline'}
+                className={formData.destaque_ordem === ordem ? 'bg-[#ad1917] text-white' : 'text-[#ad1917]'}
+                onClick={() => setFormData((prev) => ({
+                  ...prev,
+                  destaque_ordem: prev.destaque_ordem === ordem ? null : ordem,
+                  destaque_home: prev.destaque_ordem === ordem ? false : true
+                }))}
+              >
+                {ordem}
+              </Button>
+            ))}
           </div>
 
           <div className="flex gap-2 pt-4">
