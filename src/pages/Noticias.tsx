@@ -34,9 +34,9 @@ const Noticias = () => {
           {loading ? (
             <div className="text-center py-16 text-muted-foreground">Carregando notícias...</div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {news.map((item) => (
-                <NewsCard
+              <NewsCard
                   key={item.id}
                   image={item.tipo_midia === 'imagem' ? item.url_midia : `https://img.youtube.com/vi/${(item.url_midia?.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/) || [])[1] || ''}/maxresdefault.jpg`}
                   title={item.titulo}
@@ -47,9 +47,9 @@ const Noticias = () => {
                   videoUrl={item.tipo_midia === 'youtube' ? item.url_midia : undefined}
                   autor={item.autor}
                   created_at={item.created_at}
-                />
-              ))}
-            </div>
+              />
+            ))}
+          </div>
           )}
           {/* Modal de detalhes da notícia */}
           <NewsModal

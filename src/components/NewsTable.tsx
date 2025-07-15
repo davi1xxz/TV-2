@@ -26,13 +26,13 @@ export interface NewsTableProps {
 
 const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
   const { deleteNews, loadNews } = useNews()
-  const [deletingId, setDeletingId] = useState<number | null>(null)
-  const [confirmId, setConfirmId] = useState<number | null>(null)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [confirmId, setConfirmId] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const confirmButtonRef = useRef<HTMLButtonElement>(null)
   const isDesktop = useIsDesktop()
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     setDeletingId(id)
     setIsLoading(true)
     try {

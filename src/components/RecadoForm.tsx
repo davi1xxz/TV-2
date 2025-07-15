@@ -16,22 +16,22 @@ const RecadoForm: React.FC = () => {
           name="nome"
           required
           placeholder="Nome"
-          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-pink-500 bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors"
+          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors"
           maxLength={32}
         />
         <input
           name="cidade"
           required
           placeholder="Cidade"
-          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-pink-500 bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors"
+          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors"
           maxLength={32}
         />
         <input
           name="recado"
           required
-          placeholder="Seu recado..."
-          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-pink-500 bg-white dark:bg-gray-800 text-xs sm:text-sm flex-1 min-w-0 transition-colors"
-          maxLength={120}
+          placeholder="Seu recado... (máx. 100 caracteres)"
+          className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none bg-white dark:bg-gray-800 text-xs sm:text-sm flex-1 min-w-0 transition-colors"
+          maxLength={100}
         />
         <button
           type="submit"

@@ -6,9 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useNews } from '@/hooks/use-news'
-import { NewsItem } from '@/lib/supabase'
+import { useSchedule } from '@/hooks/use-schedule'
+import { NewsItem, ScheduleItem } from '@/lib/supabase'
 import NewsForm from '@/components/NewsForm'
 import NewsTable from '@/components/NewsTable'
+import ScheduleForm from '@/components/ScheduleForm'
+import ScheduleTable from '@/components/ScheduleTable'
+import TestDataButton from '@/components/TestDataButton'
 import { 
   Settings, 
   Plus, 
@@ -25,11 +29,14 @@ import { useRef } from 'react'
 const Admin = () => {
   const [showForm, setShowForm] = useState(false)
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null)
+  const [editingSchedule, setEditingSchedule] = useState<ScheduleItem | null>(null)
   const [newsPerHome, setNewsPerHome] = useState(6)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeTable, setActiveTable] = useState<'news' | 'schedule'>('news')
   
   const { user, signOut, loading: authLoading } = useAuth()
   const { news, loading, loadNews } = useNews()
+  const { schedule, loading: scheduleLoading, error: scheduleError, loadSchedule } = useSchedule()
   const navigate = useNavigate()
 
   const menuRef = useRef<HTMLDivElement>(null)
@@ -55,6 +62,7 @@ const Admin = () => {
   useEffect(() => {
     if (user) {
       loadNews()
+      loadSchedule()
     }
   }, [user])
 
@@ -72,15 +80,23 @@ const Admin = () => {
     setShowForm(true)
   }
 
+  const handleEditSchedule = (schedule: ScheduleItem) => {
+    setEditingSchedule(schedule)
+    setShowForm(true)
+  }
+
   const handleFormSuccess = () => {
     setShowForm(false)
     setEditingNews(null)
+    setEditingSchedule(null)
     loadNews()
+    loadSchedule()
   }
 
   const handleCancelForm = () => {
     setShowForm(false)
     setEditingNews(null)
+    setEditingSchedule(null)
   }
 
   const handleSaveConfig = () => {
@@ -111,7 +127,7 @@ const Admin = () => {
               <h1 className="text-xl font-bold text-center">Painel Administrativo</h1>
             </div>
             {/* Desktop: botões visíveis */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex md:flex items-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
@@ -177,14 +193,28 @@ const Admin = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setActiveTable('news')}
+                    className={`flex items-center gap-2 w-full text-left p-2 rounded transition-colors ${
+                      activeTable === 'news' 
+                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' 
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                    }`}
+                  >
                     <Newspaper className="w-4 h-4 text-blue-500" />
                     <span className="text-sm font-semibold">Tabela de Notícias</span>
-                  </div>
-                  <div className="flex items-center gap-2">
+                  </button>
+                  <button
+                    onClick={() => setActiveTable('schedule')}
+                    className={`flex items-center gap-2 w-full text-left p-2 rounded transition-colors ${
+                      activeTable === 'schedule' 
+                        ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' 
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                    }`}
+                  >
                     <Clock className="w-4 h-4 text-green-500" />
                     <span className="text-sm font-semibold">Tabela de Programação</span>
-                  </div>
+                  </button>
                 </CardContent>
               </Card>
             </div>
@@ -192,28 +222,78 @@ const Admin = () => {
 
           {/* Main Content Area */}
           <div className="lg:col-span-3 space-y-6">
-            {showForm ? (
-              <NewsForm
-                editingNews={editingNews}
-                onCancel={handleCancelForm}
-                onSuccess={handleFormSuccess}
-              />
+            {activeTable === 'news' ? (
+              <>
+                {showForm ? (
+                  <NewsForm
+                    editingNews={editingNews}
+                    onCancel={handleCancelForm}
+                    onSuccess={handleFormSuccess}
+                  />
+                ) : (
+                  <>
+                    {/* Actions */}
+                    <div className="flex justify-between items-center">
+                      <h2 className="text-2xl font-bold">Gerenciar Notícias</h2>
+                      <Button
+                        onClick={() => setShowForm(true)}
+                        className="flex items-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" />
+                        Nova Notícia
+                      </Button>
+                    </div>
+
+                    {/* News Table */}
+                    <NewsTable news={news} loading={loading} onEdit={handleEdit} />
+                  </>
+                )}
+              </>
             ) : (
               <>
-                {/* Actions */}
-                <div className="flex justify-between items-center">
-                  <h2 className="text-2xl font-bold">Gerenciar Notícias</h2>
-                  <Button
-                    onClick={() => setShowForm(true)}
-                    className="flex items-center gap-2"
-                  >
-                    <Plus className="w-4 h-4" />
-                    Nova Notícia
-                  </Button>
-                </div>
+                {showForm ? (
+                  <ScheduleForm
+                    editingSchedule={editingSchedule}
+                    onCancel={handleCancelForm}
+                    onSuccess={handleFormSuccess}
+                  />
+                ) : (
+                  <>
+                    {/* Actions */}
+                    <div className="flex justify-between items-center">
+                      <h2 className="text-2xl font-bold">Gerenciar Programação</h2>
+                      <div className="flex gap-2">
+                        <TestDataButton />
+                        <Button
+                          onClick={() => setShowForm(true)}
+                          className="flex items-center gap-2"
+                        >
+                          <Plus className="w-4 h-4" />
+                          Nova Programação
+                        </Button>
+                      </div>
+                    </div>
 
-                {/* News Table */}
-                <NewsTable news={news} loading={loading} onEdit={handleEdit} />
+                    {/* Schedule Table */}
+                    <ScheduleTable schedule={schedule} loading={scheduleLoading} onEdit={handleEditSchedule} />
+                    
+                    {/* Debug Info */}
+                    {scheduleError && (
+                      <Card className="mt-4 border-red-200 bg-red-50 dark:bg-red-900/20">
+                        <CardContent className="p-4">
+                          <div className="text-red-800 dark:text-red-200">
+                            <p className="font-medium">Erro na Programação:</p>
+                            <p className="text-sm">{scheduleError}</p>
+                            <p className="text-xs mt-2">
+                              <strong>Solução:</strong> Crie a tabela 'programacao' no Supabase com as colunas: 
+                              id, horario, titulo, subtitulo, autor, created_at, updated_at
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+                  </>
+                )}
               </>
             )}
           </div>

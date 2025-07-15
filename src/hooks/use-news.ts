@@ -66,7 +66,7 @@ export const useNews = () => {
   }
 
   // Atualizar notícia
-  const updateNews = async (id: number, newsData: Partial<NewsItem>) => {
+  const updateNews = async (id: string, newsData: Partial<NewsItem>) => {
     try {
       const { error } = await supabase
         .from('noticias')
@@ -85,7 +85,7 @@ export const useNews = () => {
   }
 
   // Deletar notícia
-  const deleteNews = async (id: number) => {
+  const deleteNews = async (id: string) => {
     try {
       // Primeiro, buscar a notícia para pegar informações da mídia
       const { data: news, error: fetchError } = await supabase

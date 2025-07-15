@@ -19,7 +19,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <AuthProvider>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Routes>
             {/* Admin routes - without navbar/footer */}
             <Route path="/admin" element={<Admin />} />
@@ -56,13 +56,13 @@ const App = () => (
             } />
             <Route path="*" element={
               <>
-                <Navbar />
+        <Navbar />
                 <NotFound />
                 <Footer />
               </>
             } />
-          </Routes>
-        </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
       </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>

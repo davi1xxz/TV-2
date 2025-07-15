@@ -7,15 +7,27 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Tipos para as notícias
 export interface NewsItem {
-  id: number
+  id: string
   titulo: string
-  subtitulo: string // Novo campo
+  subtitulo: string
   descricao: string
   tipo_midia: 'imagem' | 'youtube'
   url_midia: string
   destaque_home: boolean
+  autor: string
+  data_publicacao: string
   created_at: string
-  autor: string // Campo do autor da notícia
+  updated_at: string
+}
+
+export interface ScheduleItem {
+  id: string
+  horario: string
+  titulo: string
+  subtitulo: string
+  autor: string
+  created_at: string
+  updated_at: string
 }
 
 // Configurações do site
