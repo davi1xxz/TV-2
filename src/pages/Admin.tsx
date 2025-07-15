@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
@@ -24,7 +24,17 @@ import {
   Clock,
   Menu
 } from 'lucide-react'
-import { useRef } from 'react'
+
+// Hook para detectar se está em tela md+ (desktop)
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 768 : true)
+  useEffect(() => {
+    const onResize = () => setIsDesktop(window.innerWidth >= 768)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+  return isDesktop
+}
 
 const Admin = () => {
   const [showForm, setShowForm] = useState(false)
@@ -40,18 +50,9 @@ const Admin = () => {
   const navigate = useNavigate()
 
   const menuRef = useRef<HTMLDivElement>(null)
+  const isDesktop = useIsDesktop();
 
-  // Fecha o menu ao clicar fora
-  useEffect(() => {
-    if (!menuOpen) return;
-    function handleClick(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setMenuOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [menuOpen])
+  // REMOVIDO: Não fecha mais ao clicar fora, só pelo botão (toggle)
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -127,54 +128,59 @@ const Admin = () => {
               <h1 className="text-xl font-bold text-center">Painel Administrativo</h1>
             </div>
             {/* Desktop: botões visíveis */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex md:flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => navigate('/')}
-                className="flex items-center gap-2"
-              >
-                <Home className="w-4 h-4" />
-                Ver Site
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                className="flex items-center gap-2"
-              >
-                <LogOut className="w-4 h-4" />
-                Sair
-              </Button>
-            </div>
+            {isDesktop && (
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate('/')}
+                  className="flex items-center gap-2"
+                >
+                  <Home className="w-4 h-4" />
+                  Ver Site
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="flex items-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sair
+                </Button>
+              </div>
+            )}
             {/* Mobile: menu 3 pontinhos */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex md:hidden items-center z-50">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setMenuOpen((v) => !v)}
-                className="flex items-center justify-center w-10 h-10"
-                aria-label="Abrir menu"
-              >
-                <Menu className="w-5 h-5" />
-              </Button>
-              {menuOpen && (
-                <div ref={menuRef} className="absolute right-0 top-14 w-44 bg-white dark:bg-gray-900 rounded-lg shadow-lg border z-50 flex flex-col animate-fade-in">
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-left"
-                    onClick={() => { setMenuOpen(false); navigate('/') }}
-                  >
-                    <Home className="w-4 h-4" /> Ver Site
-                  </button>
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-left border-t"
-                    onClick={() => { setMenuOpen(false); handleLogout() }}
-                  >
-                    <LogOut className="w-4 h-4" /> Sair
-                  </button>
-                </div>
-              )}
-            </div>
+            {!isDesktop && (
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center z-50">
+                <Button
+                  id="menu-hamburguer-btn"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setMenuOpen((v) => !v)}
+                  className="flex items-center justify-center w-10 h-10"
+                  aria-label="Abrir menu"
+                >
+                  <Menu className="w-5 h-5" />
+                </Button>
+                {menuOpen && (
+                  <div ref={menuRef} className="absolute right-0 top-14 w-44 bg-white dark:bg-gray-900 rounded-lg shadow-lg border z-50 flex flex-col animate-fade-in">
+                    <button
+                      className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-left"
+                      onClick={() => { setMenuOpen(false); navigate('/') }}
+                    >
+                      <Home className="w-4 h-4" /> Ver Site
+                    </button>
+                    <button
+                      className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-left border-t"
+                      onClick={() => { setMenuOpen(false); handleLogout() }}
+                    >
+                      <LogOut className="w-4 h-4" /> Sair
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </header>
