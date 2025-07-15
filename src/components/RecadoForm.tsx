@@ -35,7 +35,7 @@ const RecadoForm: React.FC = () => {
         />
         <button
           type="submit"
-          className="bg-gradient-to-r from-red-500 to-pink-500 text-white font-semibold rounded px-3 py-1 shadow hover:from-red-600 hover:to-pink-600 transition-all text-xs sm:text-sm whitespace-nowrap"
+          className="bg-gradient-to-br from-[#ad1917] via-[#f37335] to-[#fda63d] text-white font-semibold rounded px-3 py-1 shadow hover:from-[#b81a18] hover:to-[#ffb14d] transition-all text-xs sm:text-sm whitespace-nowrap"
         >
           Enviar
         </button>

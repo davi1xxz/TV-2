@@ -34,12 +34,8 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-3 h-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-full animate-pulse"></div>
-                </div>
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
+              <img src="/imagens/logo.png" alt="Logo TV OK" className="w-10 h-10 object-contain" />
+              <span className="text-xl font-bold bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
                 TV OK
               </span>
             </Link>
@@ -54,12 +50,12 @@ const Navbar = () => {
                   to={item.href}
                   className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative group ${
                     isActive(item.href)
-                      ? 'text-red-500 dark:text-red-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400'
+                      ? 'text-[#ad1917]'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-[#ad1917]'
                   }`}
                 >
                   {item.name}
-                  <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-red-500 to-pink-500 transition-all duration-300 ${
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-[#ad1917] transition-all duration-300 ${
                     isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}></span>
                 </Link>

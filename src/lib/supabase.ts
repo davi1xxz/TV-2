@@ -15,6 +15,7 @@ export interface NewsItem {
   url_midia: string
   destaque_home: boolean
   created_at: string
+  autor: string // Campo do autor da notícia
 }
 
 // Configurações do site

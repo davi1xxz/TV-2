@@ -32,7 +32,7 @@ const Index = () => {
                 </span>
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-                Conectando você com o que há de melhor na região.
+                Conectando você com o melhor conteudo que há na região.
               </p>
             </div>
 
@@ -48,7 +48,7 @@ const Index = () => {
 
           {/* Últimas Notícias */}
           <div className="mb-10">
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent mb-8">
+            <h2 className="text-3xl font-bold mb-8" style={{ color: '#ad1917' }}>
               Últimas Notícias
             </h2>
             {loading ? (
@@ -96,7 +96,7 @@ const Index = () => {
         </section>
       {/* Barra de patrocinadores */}
       <RecadoForm />
-      <div className="w-full py-10 bg-gradient-to-r from-red-500 to-pink-500 flex flex-col items-center justify-center">
+      <div className="w-full py-10 bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] flex flex-col items-center justify-center">
         <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Patrocinadores</h2>
       </div>
     </div>

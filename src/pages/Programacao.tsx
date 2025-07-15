@@ -57,7 +57,7 @@ const Programacao = () => {
 
           {/* Current Program Highlight */}
           {current && (
-            <div className="bg-gradient-to-r from-red-500 to-pink-500 rounded-lg p-8 text-white mb-12 text-center">
+            <div className="bg-gradient-to-br from-[#ad1917] via-[#f37335] to-[#fda63d] rounded-lg p-8 text-white mb-12 text-center">
               <div className="mb-4">
                 <span className="text-lg font-semibold">NO AR AGORA</span>
               </div>
@@ -73,7 +73,7 @@ const Programacao = () => {
               <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
                 <div className="flex items-center space-x-6">
                   <div className="flex-shrink-0 text-right">
-                    <div className="text-lg font-bold text-red-500">{item.time}</div>
+                    <div className="text-lg font-bold" style={{ color: '#ad1917' }}>{item.time}</div>
                   </div>
                   <div className="flex-grow">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">

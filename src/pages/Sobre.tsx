@@ -5,7 +5,7 @@ import { Award, Heart, Radio, Users, Headphones, Music, MapPin, Phone, Mail } fr
 const Sobre = () => {
   const team = [
     {
-      name: "Marcos",
+      name: "Marcos Lopes",
       role: "Presidente",
       image: "/placeholder.svg"
     }
@@ -44,10 +44,10 @@ const Sobre = () => {
               </div>
               <div className="flex justify-center">
                 <div className="relative">
-                  <div className="w-64 h-64 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center">
+                  <div className="w-64 h-64 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center">
                     <Radio className="w-32 h-32 text-white" />
                   </div>
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center animate-pulse">
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-[#2563eb] to-[#60a5fa] rounded-full flex items-center justify-center animate-pulse">
                     <Heart className="w-12 h-12 text-white" />
                   </div>
                 </div>
@@ -87,7 +87,7 @@ const Sobre = () => {
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="flex justify-center mb-4">
-                    <Award className="w-12 h-12 text-red-500" />
+                    <Award className="w-12 h-12 text-[#ad1917]" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                     Qualidade
@@ -98,7 +98,7 @@ const Sobre = () => {
                 </div>
                 <div className="text-center">
                   <div className="flex justify-center mb-4">
-                    <Heart className="w-12 h-12 text-red-500" />
+                    <Heart className="w-12 h-12 text-[#ad1917]" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                     Paixão
@@ -109,7 +109,7 @@ const Sobre = () => {
                 </div>
                 <div className="text-center">
                   <div className="flex justify-center mb-4">
-                    <Users className="w-12 h-12 text-red-500" />
+                    <Users className="w-12 h-12 text-[#ad1917]" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                     Comunidade
@@ -128,21 +128,21 @@ const Sobre = () => {
               </h2>
               <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">Endereço</h3>
                   <p className="text-gray-600 dark:text-gray-300">Rua da Rádio, 123<br />Centro, Cidade</p>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">Telefone</h3>
                   <p className="text-gray-600 dark:text-gray-300">(11) 9999-9999</p>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">Email</h3>
