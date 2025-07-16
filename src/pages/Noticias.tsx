@@ -16,7 +16,7 @@ const Noticias = () => {
   }, []);
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300 pt-[10px]">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 pt-[10px]">
         {/* Header Section */}
       <section className="pt-16 pb-8 md:pt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
