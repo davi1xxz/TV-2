@@ -1,9 +1,10 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Waves, Users, Radio, Headphones, ChevronLeft, ChevronRight } from 'lucide-react';
 import NewsCard from '../components/NewsCard';
 import NewsModal from '../components/NewsModal';
 import { useNews } from '../hooks/use-news';
+import { useSchedule } from '../hooks/use-schedule';
 import { NewsItem } from '../lib/supabase';
 import RecadoForm from '../components/RecadoForm';
 
@@ -12,6 +13,31 @@ const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const { news, loading, loadHomeNews } = useNews();
+  const { schedule } = useSchedule();
+
+  // Função para obter o programa atual
+  const getCurrentProgram = (schedule) => {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    for (let i = 0; i < schedule.length; i++) {
+      const [start, end] = schedule[i].horario.split(' - ');
+      const [startH, startM] = start.split(':').map(Number);
+      const [endH, endM] = end.split(':').map(Number);
+      const startMinutes = startH * 60 + startM;
+      let endMinutes = endH * 60 + endM;
+      if (endMinutes <= startMinutes) endMinutes += 24 * 60;
+      let nowMinutes = currentMinutes;
+      if (endMinutes > 24 * 60) {
+        if (nowMinutes < startMinutes) nowMinutes += 24 * 60;
+      }
+      if (nowMinutes >= startMinutes && nowMinutes < endMinutes) {
+        return schedule[i];
+      }
+    }
+    return null;
+  };
+
+  const currentProgram = useMemo(() => getCurrentProgram(schedule), [schedule]);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -77,26 +103,40 @@ const Index = () => {
         <section id="inicio" className="pt-24 pb-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-8">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
                 <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
                   Sua Rádio Online
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+              <p className="text-sm md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-4 leading-relaxed">
                 Conectando você com o melhor conteudo que há na região.
               </p>
             </div>
 
             {/* Video Player com borda vermelha e RecadoForm dentro */}
-          <div className="mb-8 flex justify-center">
-            <div className="w-full max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-6 flex flex-col items-center">
-              <div className="w-full aspect-video rounded-lg overflow-hidden mb-4">
-                <video controls className="w-full h-full object-cover bg-[#222] rounded-lg">
+          <div className="mb-6 flex justify-center">
+            <div className="w-full max-w-5xl md:max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-4 md:p-6 flex flex-col items-center">
+              <div className="w-full aspect-video rounded-t-lg overflow-hidden mb-0">
+                <video controls className="w-full h-full object-cover bg-[#222] rounded-t-lg">
                   <source src="/sample.mp4" type="video/mp4" />
                   Seu navegador não suporta o elemento de vídeo.
                 </video>
               </div>
-              <div className="w-full">
+              
+              {/* Faixa do programa atual */}
+              {currentProgram && (
+                <div className="w-full bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] text-white py-2 px-3 rounded-b-lg">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center space-x-2">
+                      <span className="font-semibold">NO AR:</span>
+                      <span className="font-bold">{currentProgram.titulo}</span>
+                    </div>
+                    <span className="opacity-80">{currentProgram.horario}</span>
+                  </div>
+                </div>
+              )}
+              
+              <div className="w-full mt-4">
                 <RecadoForm />
               </div>
             </div>
