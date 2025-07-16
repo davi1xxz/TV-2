@@ -46,7 +46,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative group ${
+                  className={`flex items-center h-12 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group ${
                     isActive(item.href)
                       ? 'text-[#ad1917]'
                       : 'text-gray-700 dark:text-gray-300 hover:text-[#ad1917]'
@@ -137,6 +137,14 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+              <a
+                href="tel:11999999999"
+                className="flex items-center gap-2 px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200"
+                style={{ borderTop: '1px solid #eee', marginTop: 8, paddingTop: 12 }}
+              >
+                <Phone className="h-5 w-5" />
+                <span>(11) 9999-9999</span>
+              </a>
             </div>
           </div>
         )}

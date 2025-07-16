@@ -155,7 +155,7 @@ const NewsSlider = () => {
           onClick={prevSlide}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-12 h-12 p-0"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-6 h-6 text-[#ad1917]" />
         </Button>
         <Button
           variant="ghost"
@@ -163,7 +163,7 @@ const NewsSlider = () => {
           onClick={nextSlide}
           className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-12 h-12 p-0"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-6 h-6 text-[#ad1917]" />
         </Button>
 
         {/* Dots Indicator */}
