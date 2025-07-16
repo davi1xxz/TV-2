@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sempre mostrar a barra de rolagem vertical para evitar pulo de layout */
+html {
+  overflow-y: scroll !important;
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
@@ -102,6 +107,7 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     zoom: 0.9;
+    overflow-y: scroll !important;
   }
 }
 

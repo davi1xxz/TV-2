@@ -70,7 +70,7 @@ const NewsModal: React.FC<NewsModalProps> = ({
       <img
         src={image}
         alt={title}
-        className="w-full max-w-2xl h-80 object-cover object-center rounded-2xl mb-10 shadow-2xl border border-gray-200 dark:border-gray-800"
+        className="w-full max-w-2xl aspect-video object-cover object-center rounded-2xl mb-10 shadow-2xl border border-gray-200 dark:border-gray-800"
       />
     )
   }
@@ -88,7 +88,7 @@ const NewsModal: React.FC<NewsModalProps> = ({
       >
         <div
           className="bg-white dark:bg-gray-900 max-h-[90vh] overflow-y-auto hide-scrollbar outline-none border-none rounded-2xl"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', padding: 0, margin: 0, boxShadow: 'inset 0 0 8px 0 #fff' }}
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', padding: 0, margin: 0 }}
           onClick={e => e.stopPropagation()}
           onMouseDown={e => e.stopPropagation()}
         >
@@ -117,6 +117,12 @@ const NewsModal: React.FC<NewsModalProps> = ({
               .hide-scrollbar::-webkit-scrollbar-thumb {
                 background: #bbb !important;
                 border-radius: 8px !important;
+              }
+              .dark .hide-scrollbar::-webkit-scrollbar {
+                background: #232936 !important;
+              }
+              .dark .hide-scrollbar::-webkit-scrollbar-thumb {
+                background: #444 !important;
               }
             }
           `}</style>

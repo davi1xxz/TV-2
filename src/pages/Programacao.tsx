@@ -38,9 +38,9 @@ const Programacao = () => {
   const current = getCurrentProgram(sortedSchedule);
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300 pt-[10px]">
         {/* Header Section */}
-      <section className="pt-32 pb-12">
+      <section className="pt-16 pb-8 md:pt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -49,7 +49,7 @@ const Programacao = () => {
                 </span>
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Confira nossa programação completa com os melhores programas e apresentadores
+                Confira nossa programação completa.
               </p>
             </div>
 

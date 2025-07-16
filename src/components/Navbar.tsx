@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Sun, Moon, Phone, Mail } from 'lucide-react';
 import { useTheme } from '../hooks/use-theme';
@@ -10,9 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import ContactDropdown from './ContactDropdown';
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
+  const [showContact, setShowContact] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
@@ -63,6 +64,8 @@ const Navbar = () => {
 
           {/* Right Side Controls */}
           <div className="flex items-center space-x-4">
+            {/* ContactDropdown à esquerda do botão de tema */}
+            <ContactDropdown />
             {/* Theme Toggle */}
             <Button
               variant="ghost"
@@ -76,29 +79,6 @@ const Navbar = () => {
                 <Sun className="h-5 w-5 text-gray-600 dark:text-gray-400" />
               )}
             </Button>
-
-            {/* Contact Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200"
-                >
-                  <Phone className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem className="cursor-pointer">
-                  <Phone className="mr-2 h-4 w-4" />
-                  <span>(11) 9999-9999</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  <Mail className="mr-2 h-4 w-4" />
-                  <span>contato@tvok.com</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
 
             {/* Mobile menu button (Mobile Only) */}
             <div className="md:hidden">
@@ -121,7 +101,10 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 animate-fade-in">
+          <div
+            className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 animate-fade-in fixed left-0 right-0 top-[70px] z-50"
+            onClick={e => e.stopPropagation()}
+          >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 <Link
@@ -137,14 +120,25 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              <a
-                href="tel:11999999999"
-                className="flex items-center gap-2 px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200"
+              <button
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200"
                 style={{ borderTop: '1px solid #eee', marginTop: 8, paddingTop: 12 }}
+                onClick={() => setShowContact((v) => !v)}
               >
-                <Phone className="h-5 w-5" />
-                <span>(11) 9999-9999</span>
-              </a>
+                Contato
+              </button>
+              {showContact && (
+                <div className="pl-6 pb-2 space-y-1">
+                  <a href="tel:11999999999" className="flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200">
+                    <Phone className="h-4 w-4" />
+                    <span>(11) 9999-9999</span>
+                  </a>
+                  <a href="mailto:contato@tvok.com" className="flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200">
+                    <Mail className="h-4 w-4" />
+                    <span>contato@tvok.com</span>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         )}
