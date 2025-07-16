@@ -52,7 +52,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
     }
     
     return (
-      <div className="relative w-full h-48">
+      <div className="relative w-full h-40">
         <img
           src={image}
           alt={title}
@@ -69,15 +69,15 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
   return (
   <div
-    className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col h-full transition-transform duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl cursor-pointer"
+    className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col h-full min-h-[320px] transition-transform duration-300 ease-out md:hover:scale-105 md:hover:-translate-y-1 md:hover:shadow-2xl cursor-pointer"
     onClick={onClick}
   >
       {renderMedia()}
-    <div className="flex-1 flex flex-col p-6">
-      <h3 className="text-[21px] font-bold mb-2 text-gray-900 dark:text-white leading-tight">
+    <div className="flex-1 flex flex-col p-4">
+      <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white leading-tight line-clamp-2">
         {title}
       </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed flex-1 break-words line-clamp-2">
+        <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed flex-1 break-words line-clamp-2 text-sm">
           {subtitulo || ''}
       </p>
       <div className="mt-auto flex items-center justify-start text-sm text-gray-500 dark:text-gray-400 gap-2">

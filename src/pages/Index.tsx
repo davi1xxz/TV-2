@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { Waves, Users, Radio, Headphones } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Waves, Users, Radio, Headphones, ChevronLeft, ChevronRight } from 'lucide-react';
 import NewsCard from '../components/NewsCard';
 import NewsModal from '../components/NewsModal';
 import { useNews } from '../hooks/use-news';
@@ -9,11 +9,25 @@ import RecadoForm from '../components/RecadoForm';
 
 const Index = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const { news, loading, loadHomeNews } = useNews();
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     loadHomeNews();
     // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   // Ordena por destaque_ordem: 1, 2, 3, depois as demais
@@ -22,6 +36,40 @@ const Index = () => {
     .filter(Boolean)
     .concat(news.filter(n => ![1, 2, 3].includes(n.destaque_ordem)).slice(0, 3))
     .slice(0, 3);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % ultimasNoticias.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + ultimasNoticias.length) % ultimasNoticias.length);
+  };
+
+  const startAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    autoPlayRef.current = setInterval(nextSlide, 5000);
+  };
+
+  const resetAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    startAutoPlay();
+  };
+
+  // Autoplay do carrossel
+  useEffect(() => {
+    if (isMobile && ultimasNoticias.length > 0) {
+      startAutoPlay();
+      return () => {
+        if (autoPlayRef.current) {
+          clearInterval(autoPlayRef.current);
+        }
+      };
+    }
+  }, [isMobile, ultimasNoticias.length]);
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
@@ -56,30 +104,107 @@ const Index = () => {
 
           {/* Últimas Notícias */}
           <div className="mb-10">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: '#ad1917' }}>
-              Últimas Notícias
+            <h2 className="text-3xl font-bold mb-8 text-center md:text-left">
+              <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
+                Últimas Notícias
+              </span>
             </h2>
             {loading ? (
               <div className="text-center py-8">
                 <div className="text-gray-600 dark:text-gray-400">Carregando notícias...</div>
               </div>
             ) : ultimasNoticias.length > 0 ? (
-              <div className="grid gap-8 md:grid-cols-3">
-                {ultimasNoticias.map((news) => (
-                  <NewsCard
-                    key={news.id}
-                    image={news.tipo_midia === 'imagem' ? news.url_midia : ''}
-                    title={news.titulo}
-                    subtitulo={news.subtitulo || ''}
-                    date={new Date(news.created_at).toLocaleDateString('pt-BR')}
-                    onClick={() => setSelectedNews(news)}
-                    isVideo={news.tipo_midia === 'youtube'}
-                    videoUrl={news.tipo_midia === 'youtube' ? news.url_midia : ''}
-                    autor={news.autor}
-                    created_at={news.created_at}
-                  />
-                ))}
-              </div>
+              <>
+                {/* MOBILE: Carrossel */}
+                {isMobile && (
+                  <div className="relative w-full">
+                    <div className="overflow-hidden rounded-xl pb-4">
+                      <div 
+                        className="flex transition-transform duration-500 ease-in-out"
+                        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                      >
+                        {ultimasNoticias.map((news) => (
+                          <div key={news.id} className="w-full flex-shrink-0 min-w-full">
+                            <div className="px-4 w-full h-full">
+                              <div className="h-full max-w-sm mx-auto">
+                                <NewsCard
+                                  image={news.tipo_midia === 'imagem' ? news.url_midia : ''}
+                                  title={news.titulo}
+                                  subtitulo={news.subtitulo || ''}
+                                  date={new Date(news.created_at).toLocaleDateString('pt-BR')}
+                                  onClick={() => setSelectedNews(news)}
+                                  isVideo={news.tipo_midia === 'youtube'}
+                                  videoUrl={news.tipo_midia === 'youtube' ? news.url_midia : ''}
+                                  autor={news.autor}
+                                  created_at={news.created_at}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Botões de navegação */}
+                    <button
+                      onClick={() => {
+                        prevSlide();
+                        resetAutoPlay();
+                      }}
+                      className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        nextSlide();
+                        resetAutoPlay();
+                      }}
+                      className="absolute -right-2 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+
+                    {/* Indicadores */}
+                    <div className="flex justify-center space-x-2 mt-4">
+                      {ultimasNoticias.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setCurrentSlide(index);
+                            resetAutoPlay();
+                          }}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            index === currentSlide
+                              ? 'bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] w-6'
+                              : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* DESKTOP: Grid */}
+                {!isMobile && (
+                  <div className="grid gap-8 md:grid-cols-3">
+                    {ultimasNoticias.map((news) => (
+                      <NewsCard
+                        key={news.id}
+                        image={news.tipo_midia === 'imagem' ? news.url_midia : ''}
+                        title={news.titulo}
+                        subtitulo={news.subtitulo || ''}
+                        date={new Date(news.created_at).toLocaleDateString('pt-BR')}
+                        onClick={() => setSelectedNews(news)}
+                        isVideo={news.tipo_midia === 'youtube'}
+                        videoUrl={news.tipo_midia === 'youtube' ? news.url_midia : ''}
+                        autor={news.autor}
+                        created_at={news.created_at}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
             ) : (
               <div className="text-center py-8">
                 <div className="text-gray-600 dark:text-gray-400">Nenhuma notícia em destaque encontrada.</div>
