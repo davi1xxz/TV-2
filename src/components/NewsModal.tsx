@@ -84,27 +84,61 @@ const NewsModal: React.FC<NewsModalProps> = ({
         </button>
         <div className="flex flex-col items-center p-8 md:p-12">
           {renderMedia()}
-          <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white leading-tight text-center">
-            {title}
-          </h3>
-          <p className="text-lg text-gray-500 dark:text-gray-300 mb-4 leading-relaxed text-center max-w-xl">
-            {subtitulo || ''}
-          </p>
-          <div className="w-full max-w-xl">
-            <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-left bg-gray-50 dark:bg-gray-800 rounded-lg p-4 break-words whitespace-pre-line">
-              {details}
-            </p>
-          </div>
-          <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mt-6">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-            {date}
-            {created_at && (
-              <span>às {new Date(created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
+          
+          {/* Título */}
+          <div className="w-full max-w-3xl mb-6">
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight text-justify mb-4">
+              {title}
+            </h3>
+            
+            {/* Subtítulo */}
+            {subtitulo && (
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed text-justify max-w-2xl mx-auto">
+                {subtitulo}
+              </p>
             )}
+          </div>
+
+          {/* Conteúdo principal */}
+          <div className="w-full max-w-3xl">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 md:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="prose prose-lg max-w-none text-gray-800 dark:text-gray-100">
+                <div 
+                  className="leading-relaxed text-justify whitespace-pre-wrap break-words"
+                  style={{
+                    textAlign: 'justify',
+                    lineHeight: '1.8',
+                    fontSize: '1.1rem',
+                    fontFamily: 'inherit'
+                  }}
+                >
+                  {details}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Metadados */}
+          <div className="flex items-center justify-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex items-center space-x-1">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>{date}</span>
+            </div>
+            
+            {created_at && (
+              <div className="flex items-center space-x-1">
+                <span>às {new Date(created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
+              </div>
+            )}
+            
             {autor && (
               <>
-                <span className="mx-2">|</span>
-                <span>Por {autor}</span>
+                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                <div className="flex items-center space-x-1">
+                  <span>Por {autor}</span>
+                </div>
               </>
             )}
           </div>

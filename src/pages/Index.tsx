@@ -56,12 +56,10 @@ const Index = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // Ordena por destaque_ordem: 1, 2, 3, depois as demais
+  // Mostrar apenas notícias com destaque_ordem definido (1, 2 ou 3), na ordem correta
   const ultimasNoticias = [1, 2, 3]
     .map(ordem => news.find(n => n.destaque_ordem === ordem))
-    .filter(Boolean)
-    .concat(news.filter(n => ![1, 2, 3].includes(n.destaque_ordem)).slice(0, 3))
-    .slice(0, 3);
+    .filter(Boolean);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % ultimasNoticias.length);
@@ -103,7 +101,7 @@ const Index = () => {
         <section id="inicio" className="pt-24 pb-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 px-4">
                 <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
                   Sua Rádio Online
                 </span>
@@ -125,13 +123,26 @@ const Index = () => {
               
               {/* Faixa do programa atual */}
               {currentProgram && (
-                <div className="w-full bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] text-white py-2 px-3 rounded-b-lg">
-                  <div className="flex items-center justify-between text-sm">
+                <div className="w-full bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] text-white py-2 px-3 rounded-b-lg shadow-lg border-t-2 border-white/20 animate-fade-in"
+                  style={{
+                    background: 'linear-gradient(90deg, #ad1917 0%, #f37335 50%, #fda63d 100%)',
+                    boxShadow: '0 4px 24px 0 rgba(173,25,23,0.15), 0 1.5px 0 0 #fff2',
+                    borderTopLeftRadius: '0',
+                    borderTopRightRadius: '0',
+                    borderBottomLeftRadius: '0.75rem',
+                    borderBottomRightRadius: '0.75rem',
+                    minHeight: '38px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    transition: 'background 0.5s cubic-bezier(.4,0,.2,1)'
+                  }}
+                >
+                  <div className="flex items-center justify-between w-full text-sm px-1">
                     <div className="flex items-center space-x-2">
-                      <span className="font-semibold">NO AR:</span>
-                      <span className="font-bold">{currentProgram.titulo}</span>
+                      <span className="font-semibold drop-shadow">NO AR:</span>
+                      <span className="font-bold drop-shadow-lg">{currentProgram.titulo}</span>
                     </div>
-                    <span className="opacity-80">{currentProgram.horario}</span>
+                    <span className="opacity-90 font-medium tracking-wide drop-shadow">{currentProgram.horario}</span>
                   </div>
                 </div>
               )}
@@ -144,9 +155,9 @@ const Index = () => {
 
           {/* Últimas Notícias */}
           <div className="mb-10">
-            <h2 className="text-3xl font-bold mb-8 text-center md:text-left">
+            <h2 className="text-3xl font-bold mb-8 text-center md:text-left px-4">
               <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
-                Últimas Notícias
+                Notícias em Destaque
               </span>
             </h2>
             {loading ? (

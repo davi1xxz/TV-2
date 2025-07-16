@@ -22,13 +22,14 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
     tipo_midia: 'imagem' as 'imagem' | 'youtube',
     url_midia: '',
     destaque_home: false,
+    destaque_ordem: null as number | null, // garantir no estado inicial
     autor: '' // Novo campo
   })
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
   const [imagePreview, setImagePreview] = useState<string>('')
 
-  const { createNews, updateNews, uploadImage } = useNews()
+  const { createNews, updateNews, uploadImage, setDestaqueOrdem } = useNews()
 
   useEffect(() => {
     if (editingNews) {
@@ -39,7 +40,7 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
         tipo_midia: editingNews.tipo_midia,
         url_midia: editingNews.url_midia,
         destaque_home: editingNews.destaque_home,
-        destaque_ordem: editingNews.destaque_ordem ?? null,
+        destaque_ordem: editingNews.destaque_ordem ?? null, // garantir destaque_ordem
         autor: editingNews.autor || ''
       })
       if (editingNews.tipo_midia === 'imagem') {
@@ -96,6 +97,7 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
         tipo_midia: formData.tipo_midia,
         url_midia: finalUrlMidia,
         destaque_home: formData.destaque_home,
+        destaque_ordem: formData.destaque_ordem, // garantir envio
         autor: formData.autor
       }
 
@@ -108,6 +110,11 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
 
       if (result.success) {
         onSuccess()
+      }
+
+      if (!editingNews && formData.destaque_ordem) {
+        // Garante exclusividade ao criar
+        await setDestaqueOrdem('new', formData.destaque_ordem)
       }
     } catch (error) {
       // Silenciar erros
@@ -124,6 +131,7 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
       tipo_midia: 'imagem',
       url_midia: '',
       destaque_home: false,
+      destaque_ordem: null, // garantir reset
       autor: ''
     })
     setImageFile(null)
@@ -158,6 +166,7 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
               onChange={handleInputChange}
               placeholder="Digite o título da notícia"
               required
+              maxLength={150}
             />
           </div>
 
@@ -170,19 +179,21 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
               onChange={handleInputChange}
               placeholder="Digite o subtítulo da notícia"
               required
+              maxLength={150}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="descricao">Descrição *</Label>
+            <Label htmlFor="descricao">Conteúdo *</Label>
             <Textarea
               id="descricao"
               name="descricao"
               value={formData.descricao}
               onChange={handleInputChange}
-              placeholder="Digite a descrição da notícia"
+              placeholder="Digite o conteúdo da notícia"
               rows={4}
               required
+              maxLength={2000}
             />
           </div>
 
@@ -291,11 +302,23 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
                 size="sm"
                 variant={formData.destaque_ordem === ordem ? 'default' : 'outline'}
                 className={formData.destaque_ordem === ordem ? 'bg-[#ad1917] text-white' : 'text-[#ad1917]'}
-                onClick={() => setFormData((prev) => ({
-                  ...prev,
-                  destaque_ordem: prev.destaque_ordem === ordem ? null : ordem,
-                  destaque_home: prev.destaque_ordem === ordem ? false : true
-                }))}
+                onClick={async () => {
+                  if (editingNews) {
+                    // Chama o backend para garantir exclusividade
+                    await setDestaqueOrdem(editingNews.id, formData.destaque_ordem === ordem ? null : ordem)
+                    setFormData((prev) => ({
+                      ...prev,
+                      destaque_ordem: prev.destaque_ordem === ordem ? null : ordem,
+                      destaque_home: prev.destaque_ordem === ordem ? false : true
+                    }))
+                  } else {
+                    setFormData((prev) => ({
+                      ...prev,
+                      destaque_ordem: prev.destaque_ordem === ordem ? null : ordem,
+                      destaque_home: prev.destaque_ordem === ordem ? false : true
+                    }))
+                  }
+                }}
               >
                 {ordem}
               </Button>

@@ -35,7 +35,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
       const videoId = extractYouTubeId(videoUrl)
       if (videoId) {
         return (
-          <div className="relative w-full h-48 bg-gray-900">
+          <div className="relative w-full h-40">
             <img
               src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
               alt={title}
@@ -73,11 +73,11 @@ const NewsCard: React.FC<NewsCardProps> = ({
     onClick={onClick}
   >
       {renderMedia()}
-    <div className="flex-1 flex flex-col p-4">
-      <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white leading-tight line-clamp-2">
+    <div className="flex-1 flex flex-col px-5 py-4">
+      <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white leading-tight line-clamp-2 break-normal">
         {title}
       </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed flex-1 break-words line-clamp-2 text-sm">
+        <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed flex-1 break-normal line-clamp-3 text-sm">
           {subtitulo || ''}
       </p>
       <div className="mt-auto flex items-center justify-start text-sm text-gray-500 dark:text-gray-400 gap-2">
