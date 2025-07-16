@@ -39,13 +39,18 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Video Player */}
+            {/* Video Player com borda vermelha e RecadoForm dentro */}
           <div className="mb-8 flex justify-center">
-            <div className="w-full max-w-3xl aspect-video rounded-xl overflow-hidden shadow-lg">
-              <video controls className="w-full h-full object-cover bg-[#222] rounded-xl">
-                <source src="/sample.mp4" type="video/mp4" />
-                Seu navegador não suporta o elemento de vídeo.
-              </video>
+            <div className="w-full max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-6 flex flex-col items-center">
+              <div className="w-full aspect-video rounded-lg overflow-hidden mb-4">
+                <video controls className="w-full h-full object-cover bg-[#222] rounded-lg">
+                  <source src="/sample.mp4" type="video/mp4" />
+                  Seu navegador não suporta o elemento de vídeo.
+                </video>
+              </div>
+              <div className="w-full">
+                <RecadoForm />
+              </div>
             </div>
           </div>
 
@@ -98,7 +103,7 @@ const Index = () => {
           </div>
         </section>
       {/* Barra de patrocinadores */}
-      <RecadoForm />
+      {/* Remover <RecadoForm /> de fora do card */}
       <div className="w-full py-10 bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] flex flex-col items-center justify-center">
         <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Patrocinadores</h2>
       </div>

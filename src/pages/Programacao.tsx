@@ -38,22 +38,22 @@ const Programacao = () => {
   const current = getCurrentProgram(sortedSchedule);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300">
-      {/* Header Section */}
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black transition-colors duration-300">
+        {/* Header Section */}
       <section className="pt-32 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
-                Programação
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Confira nossa programação completa com os melhores programas e apresentadores
-            </p>
-          </div>
+                  Programação
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Confira nossa programação completa com os melhores programas e apresentadores
+              </p>
+            </div>
 
-          {/* Current Program Highlight */}
+            {/* Current Program Highlight */}
           {current && (
             <div className="bg-gradient-to-br from-[#ad1917] via-[#f37335] to-[#fda63d] rounded-lg p-8 text-white mb-12 text-center">
               <div className="mb-4">
@@ -65,8 +65,8 @@ const Programacao = () => {
             </div>
           )}
 
-          {/* Schedule Grid */}
-          <div className="space-y-4">
+            {/* Schedule Grid */}
+            <div className="space-y-4">
             {loading ? (
               <div className="text-center py-8 text-gray-500">Carregando programação...</div>
             ) : (
@@ -91,10 +91,10 @@ const Programacao = () => {
                 </div>
               ))
             )}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
   );
 };
 
