@@ -9,10 +9,8 @@ const Footer: React.FC = () => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
-    
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
@@ -36,16 +34,17 @@ const Footer: React.FC = () => {
                 <img src="/imagens/icones/whats.png" alt="WhatsApp" className="w-6 h-6 object-contain"/>
               </a>
             </div>
-            <p
-              className="text-sm text-gray-600 dark:text-gray-300 font-medium cursor-pointer hover:underline"
-              onClick={() => navigate('/admin/login')}
-              title="Acessar painel admin"
-            >
-              ©2025 Todos os direitos reservados | @flash.grafico
-            </p>
+            <div className="overflow-x-auto">
+              <p
+                className="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer hover:underline whitespace-nowrap"
+                onClick={() => navigate('/admin/login')}
+                title="Acessar painel admin"
+              >
+                ©2025 TV OK. Todos os direitos reservados | @flash.grafico
+              </p>
+            </div>
           </div>
         )}
-        
         {/* DESKTOP: Layout horizontal */}
         {!isMobile && (
           <div className="flex justify-between items-center">
@@ -54,7 +53,7 @@ const Footer: React.FC = () => {
               onClick={() => navigate('/admin/login')}
               title="Acessar painel admin"
             >
-              ©2025 Todos os direitos reservados | @flash.grafico
+              ©2025 TV OK. Todos os direitos reservados | @flash.grafico
             </p>
             <div className="flex space-x-6">
               <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
