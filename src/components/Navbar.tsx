@@ -132,11 +132,11 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
                 <div className="pl-6 pb-2 space-y-1">
                   <a href="tel:11999999999" className="flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200">
                     <Phone className="h-4 w-4" />
-                    <span>(11) 9999-9999</span>
+                    <span>(35) 9979-9988</span>
                   </a>
-                  <a href="mailto:contato@tvok.com" className="flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200">
+                  <a href="mailto:lopeshow@hotmail.com" className="flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200">
                     <Mail className="h-4 w-4" />
-                    <span>contato@tvok.com</span>
+                    <span>lopeshow@hotmail.com</span>
                   </a>
                 </div>
               )}

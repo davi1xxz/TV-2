@@ -35,11 +35,11 @@ const ContactDropdown = () => {
         <DropdownMenuContent align="start" className="w-56">
           <DropdownMenuItem className="cursor-pointer">
             <Phone className="mr-2 h-4 w-4" />
-            <span>(11) 9999-9999</span>
+            <span>(35) 9979-9988</span>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <Mail className="mr-2 h-4 w-4" />
-            <span>contato@tvok.com</span>
+            <span>lopeshow@hotmail.com</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -224,38 +224,60 @@ const Sobre = () => {
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
                 Entre em Contato
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
-                <div className="flex flex-col items-center">
+              <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-4xl mx-auto justify-center">
+                <a 
+                  href="https://maps.google.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                >
                   <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">Endereço</h3>
-                  <p className="text-gray-600 dark:text-gray-300">Rua da Rádio, 123<br />Centro, Cidade</p>
-                </div>
-                <div className="flex flex-col items-center">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Rua da Rádio, 123<br />Centro, Cidade</p>
+                </a>
+                <a 
+                  href="tel:3599799988"
+                  className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                >
                   <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">Telefone</h3>
-                  <p className="text-gray-600 dark:text-gray-300">(11) 9999-9999</p>
-                </div>
-                <div className="flex flex-col items-center">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">(35) 9979-9988</p>
+                </a>
+                <a 
+                  href="mailto:lopeshow@hotmail.com" 
+                  className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                >
                   <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">Email</h3>
-                  <p className="text-gray-600 dark:text-gray-300">contato@tvok.com</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4">
-                    {/* Ícone WhatsApp */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6">
-                      <path d="M12.04 2.003a9.97 9.97 0 0 0-8.89 14.36l-1.08 3.14a1.25 1.25 0 0 0 1.58 1.59l3.14-1.08A9.97 9.97 0 1 0 12.04 2.003zm0 1.5a8.47 8.47 0 0 1 7.5 12.5.75.75 0 0 0-.07.56l1.18 3.44-3.44-1.18a.75.75 0 0 0-.56.07A8.47 8.47 0 1 1 12.04 3.503zm-3.1 5.22c-.18-.4-.37-.41-.54-.42-.14-.01-.3-.01-.46-.01a.89.89 0 0 0-.64.3c-.2.22-.84.82-.84 2.01 0 1.19.86 2.34.98 2.5.12.16 1.7 2.7 4.2 3.68.59.23 1.05.37 1.41.47.59.16 1.13.14 1.56.09.48-.06 1.48-.6 1.69-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.46-.28-.24-.12-1.48-.73-1.71-.81-.23-.08-.4-.12-.57.12-.17.24-.66.81-.81.98-.15.17-.3.19-.54.07-.24-.12-.99-.37-1.89-1.18-.7-.62-1.18-1.38-1.32-1.62-.14-.24-.01-.37.11-.49.12-.12.27-.31.4-.47.13-.16.18-.27.27-.45.09-.18.05-.34-.02-.47-.07-.13-.62-1.54-.88-2.19z"/>
-                    </svg>
-                  </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">WhatsApp</h3>
-                  <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:underline">(11) 9999-9999</a>
-                </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">lopeshow@hotmail.com</p>
+                </a>
+              </div>
+            </div>
+
+            {/* Social Media Section */}
+            <div className="mt-20">
+              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                Nossas Redes Sociais
+              </h2>
+              <div className="flex justify-center space-x-8">
+                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300">
+                  <Headphones className="w-10 h-10" />
+                </a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition-colors duration-300">
+                  <Music className="w-10 h-10" />
+                </a>
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
+                  <Users className="w-10 h-10" />
+                </a>
+                <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-300">
+                  <Phone className="w-10 h-10" />
+                </a>
               </div>
             </div>
           </div>
