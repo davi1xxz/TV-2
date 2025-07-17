@@ -8,7 +8,6 @@ import { useNews } from '../hooks/use-news';
 const Noticias = () => {
   const { news, loading, loadNews } = useNews();
   const [selectedNews, setSelectedNews] = useState<any>(null);
-  const [mobileCols, setMobileCols] = useState(2); // 2 colunas por padrão
 
   useEffect(() => {
     loadNews();
@@ -29,23 +28,13 @@ const Noticias = () => {
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-2 md:mb-0">
                 Fique por dentro das últimas novidades.
               </p>
-              {/* Botão de alternância de visualização (apenas mobile) */}
-              <div className="flex justify-center md:hidden mt-[-4px] mb-2">
-                <button
-                  className={`px-4 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-[#ad1917] to-[#fda63d] text-white shadow transition-all duration-300 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#f37335]/50 focus:ring-offset-2 ${mobileCols === 2 ? 'hover:from-[#b81a18] hover:to-[#ffb14d]' : 'hover:from-[#f37335] hover:to-[#ad1917]'}`}
-                  style={{ boxShadow: '0 2px 8px 0 rgba(0,0,0,0.10)' }}
-                  onClick={() => setMobileCols(cols => cols === 2 ? 1 : 2)}
-                >
-                  {mobileCols === 2 ? 'Ver em lista' : 'Ver em grade'}
-                </button>
-              </div>
             </div>
 
             {/* News Grid */}
           {loading ? (
             <div className="text-center py-16 text-muted-foreground">Carregando notícias...</div>
           ) : (
-          <div className={`grid ${mobileCols === 2 ? 'grid-cols-2' : 'grid-cols-1'} md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 transition-all duration-300`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 transition-all duration-300">
               {news.map((item) => (
               <NewsCard
                   key={item.id}

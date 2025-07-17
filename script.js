@@ -221,7 +221,7 @@ window.addEventListener('resize', () => {
 });
 
 // Console welcome message
-console.log('🎵 TV OK - Sua Rádio Online');
+console.log('🎵 TV OK - Sua TV Online');
 console.log('📻 Sistema carregado com sucesso!');
 console.log('🔊 Todos os controles funcionando perfeitamente');
 

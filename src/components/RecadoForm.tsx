@@ -45,7 +45,7 @@ const RecadoForm: React.FC = () => {
   );
 
   return (
-    <div className="w-full pb-2">
+    <div className="w-full pb-0">
       {isMobile ? (
         <>
           <button
@@ -58,14 +58,14 @@ const RecadoForm: React.FC = () => {
         </>
       ) : (
         <form
-          className="w-full max-w-5xl px-2 sm:px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow transition-colors mx-auto"
+          className="w-full max-w-5xl px-2px-4 py-1 bg-transparent border-0 shadow-none transition-colors mx-auto"
           style={{backdropFilter: 'blur(2px)'}}
           onSubmit={e => {
             e.preventDefault();
             (e.target as HTMLFormElement).reset();
           }}
         >
-          <div className="flex flex-col sm:flex-row items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center gap-1">
             <span className="font-semibold text-gray-700 dark:text-gray-100 text-xs sm:text-sm whitespace-nowrap mr-1 sm:mr-2">DEIXE SEU RECADO</span>
             <input name="nome" required placeholder="Nome" className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors" maxLength={32} />
             <input name="cidade" required placeholder="Cidade" className="rounded px-2 py-1 border border-gray-300 dark:border-gray-700 focus:outline-none bg-white dark:bg-gray-800 text-xs sm:text-sm w-full sm:w-32 transition-colors" maxLength={32} />

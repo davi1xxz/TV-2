@@ -103,7 +103,7 @@ const Index = () => {
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 px-4">
                 <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
-                  Sua Rádio Online
+                  Sua TV Online
                 </span>
               </h1>
               <p className="text-sm md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-4 leading-relaxed">
@@ -113,7 +113,7 @@ const Index = () => {
 
             {/* Video Player com borda vermelha e RecadoForm dentro */}
           <div className="mb-6 flex justify-center">
-            <div className="w-full max-w-5xl md:max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-4 md:p-6 flex flex-col items-center">
+            <div className="w-full max-w-5xl md:max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-2 md:p-4 flex flex-col items-center">
               <div className="w-full aspect-video rounded-t-lg overflow-hidden mb-0">
                 <video controls className="w-full h-full object-cover bg-[#222] rounded-t-lg">
                   <source src="/sample.mp4" type="video/mp4" />
@@ -202,18 +202,18 @@ const Index = () => {
                         prevSlide();
                         resetAutoPlay();
                       }}
-                      className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10"
+                      className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10 border border-gray-300 dark:border-gray-600"
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-5 h-5 text-white" />
                     </button>
                     <button
                       onClick={() => {
                         nextSlide();
                         resetAutoPlay();
                       }}
-                      className="absolute -right-2 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10"
+                      className="absolute -right-2 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10 border border-gray-300 dark:border-gray-600"
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-5 h-5 text-white" />
                     </button>
 
                     {/* Indicadores */}

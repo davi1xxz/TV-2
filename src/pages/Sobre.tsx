@@ -1,15 +1,82 @@
 
-import React from 'react';
-import { Award, Heart, Radio, Users, Headphones, Music, MapPin, Phone, Mail } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Award, Heart, Radio, Users, Headphones, Music, MapPin, Phone, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Sobre = () => {
+  const [currentValueSlide, setCurrentValueSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+
   const team = [
     {
       name: "Marcos Lopes",
       role: "Presidente",
-      image: "/placeholder.svg"
+      image: "/imagens/marcos.jpg"
     }
   ];
+
+  const values = [
+    {
+      icon: Award,
+      title: "Qualidade",
+      description: "Oferecemos sempre a melhor qualidade de som e conteúdo para nossos ouvintes"
+    },
+    {
+      icon: Heart,
+      title: "Paixão",
+      description: "Fazemos nosso trabalho com amor e dedicação, transmitindo essa energia"
+    },
+    {
+      icon: Users,
+      title: "Comunidade",
+      description: "Valorizamos nossa conexão com a comunidade e ouvimos nossos ouvintes"
+    }
+  ];
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  const nextValueSlide = () => {
+    setCurrentValueSlide((prev) => (prev + 1) % values.length);
+  };
+
+  const prevValueSlide = () => {
+    setCurrentValueSlide((prev) => (prev - 1 + values.length) % values.length);
+  };
+
+  const startAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    autoPlayRef.current = setInterval(nextValueSlide, 4000);
+  };
+
+  const resetAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    startAutoPlay();
+  };
+
+  // Autoplay do carrossel de valores
+  useEffect(() => {
+    if (isMobile && values.length > 0) {
+      startAutoPlay();
+      return () => {
+        if (autoPlayRef.current) {
+          clearInterval(autoPlayRef.current);
+        }
+      };
+    }
+  }, [isMobile, values.length]);
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 pt-[10px]">
@@ -84,41 +151,72 @@ const Sobre = () => {
               <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
                 Nossos Valores
               </h2>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <Award className="w-12 h-12 text-[#ad1917]" />
+              {/* MOBILE: Carrossel */}
+              {isMobile && (
+                <div className="relative w-full">
+                  <div className="overflow-hidden rounded-xl pb-4">
+                    <div
+                      className="flex transition-transform duration-500 ease-in-out"
+                      style={{ transform: `translateX(-${currentValueSlide * 100}%)` }}
+                    >
+                      {values.map((value, index) => (
+                        <div key={index} className="w-full flex-shrink-0 min-w-full">
+                          <div className="px-4 w-full h-full">
+                            <div className="h-full max-w-sm mx-auto">
+                              <div className="text-center">
+                                <div className="flex justify-center mb-4">
+                                  <value.icon className="w-12 h-12 text-[#ad1917]" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                  {value.title}
+                                </h3>
+                                <p className="text-gray-600 dark:text-gray-300">
+                                  {value.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                    Qualidade
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Oferecemos sempre a melhor qualidade de som e conteúdo para nossos ouvintes
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <Heart className="w-12 h-12 text-[#ad1917]" />
+                  {/* Indicadores */}
+                  <div className="flex justify-center space-x-2 mt-4">
+                    {values.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setCurrentValueSlide(index);
+                          resetAutoPlay();
+                        }}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          index === currentValueSlide
+                            ? 'bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] w-6'
+                            : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                        }`}
+                      />
+                    ))}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                    Paixão
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Fazemos nosso trabalho com amor e dedicação, transmitindo essa energia
-                  </p>
                 </div>
-                <div className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <Users className="w-12 h-12 text-[#ad1917]" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                    Comunidade
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Valorizamos nossa conexão com a comunidade e ouvimos nossos ouvintes
-                  </p>
+              )}
+              {/* DESKTOP: Grid */}
+              {!isMobile && (
+                <div className="grid md:grid-cols-3 gap-8">
+                  {values.map((value, index) => (
+                    <div key={index} className="text-center">
+                      <div className="flex justify-center mb-4">
+                        <value.icon className="w-12 h-12 text-[#ad1917]" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        {value.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300">
+                        {value.description}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Contact Section */}

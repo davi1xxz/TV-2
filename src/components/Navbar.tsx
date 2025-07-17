@@ -71,7 +71,8 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200"
+              tabIndex={-1}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200 focus:outline-none focus:ring-0 active:bg-transparent shadow-none ring-0 outline-none"
             >
               {theme === 'light' ? (
                 <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400" />

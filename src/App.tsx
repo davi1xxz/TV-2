@@ -13,8 +13,20 @@ import Footer from "./components/Footer";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const queryClient = new QueryClient();
+
+// Componente para rolar para o topo
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,6 +35,7 @@ const App = () => {
       <ThemeProvider>
         <AuthProvider>
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <ScrollToTop />
             {/* Overlay global para menu mobile */}
             {isMenuOpen && (
               <div
