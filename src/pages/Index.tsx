@@ -8,6 +8,7 @@ import { useSchedule } from '../hooks/use-schedule';
 import { NewsItem } from '../lib/supabase';
 import RecadoForm from '../components/RecadoForm';
 
+
 const Index = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -340,11 +341,6 @@ const Index = () => {
           />
           </div>
         </section>
-      {/* Barra de patrocinadores */}
-      {/* Remover <RecadoForm /> de fora do card */}
-      <div className="w-full py-10 bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] flex flex-col items-center justify-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-white text-center">Patrocinadores</h2>
-      </div>
     </div>
   );
 };

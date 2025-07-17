@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Award, Heart, Radio, Users, Headphones, Music, MapPin, Phone, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
 
+
 const Sobre = () => {
   const [currentValueSlide, setCurrentValueSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -79,11 +80,11 @@ const Sobre = () => {
   }, [isMobile, values.length]);
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 pt-[10px]">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 pt-0">
         {/* Header Section */}
       <section className="pt-16 pb-8 md:pt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 mt-4">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
                 Sobre a TV OK
@@ -97,7 +98,7 @@ const Sobre = () => {
             {/* Mission Section */}
             <div className="grid lg:grid-cols-2 gap-6 items-center mb-10">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center md:text-left">
                   Nossa Missão
                 </h2>
                 <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
@@ -219,67 +220,14 @@ const Sobre = () => {
               )}
             </div>
 
-            {/* Contact Section */}
+            {/* Contact Section - Carrossel 3D */}
             <div className="text-center">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 Entre em Contato
               </h2>
-              <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-4xl mx-auto justify-center">
-                <a 
-                  href="https://maps.google.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Endereço</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">Rua da Rádio, 123<br />Centro, Cidade</p>
-                </a>
-                <a 
-                  href="tel:3599799988"
-                  className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Telefone</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">(35) 9979-9988</p>
-                </a>
-                <a 
-                  href="mailto:lopeshow@hotmail.com" 
-                  className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Email</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">lopeshow@hotmail.com</p>
-                </a>
-              </div>
+              <ContactCarousel3D />
             </div>
 
-            {/* Social Media Section */}
-            <div className="mt-10">
-              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
-                Nossas Redes Sociais
-              </h2>
-              <div className="flex justify-center space-x-8">
-                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-                  <img src="/imagens/icones/you.png" alt="YouTube" className="w-10 h-10 object-contain" />
-                </a>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                  <img src="/imagens/icones/insta.png" alt="Instagram" className="w-10 h-10 object-contain" />
-                </a>
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                  <img src="/imagens/icones/face.png" alt="Facebook" className="w-10 h-10 object-contain" />
-                </a>
-                <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">
-                  <img src="/imagens/icones/whats.png" alt="WhatsApp" className="w-10 h-10 object-contain" />
-                </a>
-              </div>
-            </div>
           </div>
         </section>
       </div>
@@ -287,3 +235,119 @@ const Sobre = () => {
 };
 
 export default Sobre;
+
+const contactCards = [
+  {
+    href: "https://maps.google.com",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    icon: <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4"><MapPin className="w-6 h-6 text-white" /></div>,
+    title: "Endereço",
+    desc: <span>Rua da Rádio, 123<br/>Centro, Cidade</span>,
+  },
+  {
+    href: "tel:3599799988",
+    icon: <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4"><Phone className="w-6 h-6 text-white" /></div>,
+    title: "Telefone",
+    desc: <span>(35) 9979-9988</span>,
+  },
+  {
+    href: "mailto:lopeshow@hotmail.com",
+    icon: <div className="w-12 h-12 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center mb-4"><Mail className="w-6 h-6 text-white" /></div>,
+    title: "Email",
+    desc: <span>lopeshow@hotmail.com</span>,
+  },
+];
+
+function ContactCarousel3D() {
+  const [current, setCurrent] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+
+  // Sempre declarar hooks no topo!
+  React.useEffect(() => {
+    const checkScreenSize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  // Autoplay só no mobile
+  React.useEffect(() => {
+    if (!isMobile) return;
+    const timer = setInterval(() => setCurrent((prev) => (prev + 1) % contactCards.length), 4000);
+    return () => clearInterval(timer);
+  }, [isMobile]);
+
+  if (isMobile) {
+    const next = () => setCurrent((prev) => (prev + 1) % contactCards.length);
+    const prev = () => setCurrent((prev) => (prev - 1 + contactCards.length) % contactCards.length);
+    return (
+      <div className="relative flex flex-col items-center">
+        <div className="flex items-center justify-center w-full">
+          <button
+            onClick={prev}
+            className="p-2 rounded-full bg-gray-300 dark:bg-gray-700 shadow hover:scale-110 transition-all absolute left-0 z-10 top-1/2 -translate-y-1/2"
+            aria-label="Anterior"
+          >
+            <ChevronLeft className="w-6 h-6 text-black dark:text-white" />
+          </button>
+          <div className="w-full flex justify-center">
+            {contactCards.map((card, idx) =>
+              idx === current ? (
+                <a
+                  key={card.title}
+                  href={card.href}
+                  target={card.target}
+                  rel={card.rel}
+                  className="bg-white dark:bg-gray-800 rounded-2xl w-[260px] h-[200px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 space-y-3"
+                >
+                  <div className="flex items-center justify-center min-h-[48px]">{card.icon}</div>
+                  <div className="flex items-center justify-center min-h-[28px]">
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg text-center">{card.title}</h3>
+                  </div>
+                  <div className="text-gray-700 dark:text-gray-200 text-sm text-center min-h-[40px] flex items-center justify-center">{card.desc}</div>
+                </a>
+              ) : null
+            )}
+          </div>
+          <button
+            onClick={next}
+            className="p-2 rounded-full bg-gray-300 dark:bg-gray-700 shadow hover:scale-110 transition-all absolute right-0 z-10 top-1/2 -translate-y-1/2"
+            aria-label="Próximo"
+          >
+            <ChevronRight className="w-6 h-6 text-black dark:text-white" />
+          </button>
+        </div>
+        <div className="flex justify-center space-x-2 mt-4">
+          {contactCards.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrent(idx)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === current ? 'bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] w-6' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'}`}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Grid padrão no desktop
+  return (
+    <div className="flex justify-center gap-8">
+      {contactCards.map((card) => (
+        <a
+          key={card.title}
+          href={card.href}
+          target={card.target}
+          rel={card.rel}
+          className="bg-white dark:bg-gray-800 rounded-2xl w-[260px] h-[200px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 space-y-3"
+        >
+          <div className="flex items-center justify-center min-h-[48px]">{card.icon}</div>
+          <div className="flex items-center justify-center min-h-[28px]">
+            <h3 className="font-bold text-gray-900 dark:text-white text-lg text-center">{card.title}</h3>
+          </div>
+          <div className="text-gray-700 dark:text-gray-200 text-sm text-center min-h-[40px] flex items-center justify-center">{card.desc}</div>
+        </a>
+      ))}
+    </div>
+  );
+}

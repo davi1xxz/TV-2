@@ -4,6 +4,8 @@ import { Calendar } from 'lucide-react';
 import NewsCard from '../components/NewsCard';
 import NewsModal from '../components/NewsModal';
 import { useNews } from '../hooks/use-news';
+import { NewsItem } from '../lib/supabase';
+
 
 const Noticias = () => {
   const { news, loading, loadNews } = useNews();
@@ -65,9 +67,9 @@ const Noticias = () => {
             isVideo={selectedNews?.tipo_midia === 'youtube'}
             videoUrl={selectedNews?.tipo_midia === 'youtube' ? selectedNews?.url_midia : ''}
           />
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

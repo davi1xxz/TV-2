@@ -1,6 +1,8 @@
 
 import React, { useMemo } from 'react';
 import { useSchedule } from '@/hooks/use-schedule';
+import { Calendar, Clock, Play, Pause } from 'lucide-react';
+
 // Removido importação de ícones
 
 function getCurrentProgram(schedule) {
@@ -92,9 +94,9 @@ const Programacao = () => {
               ))
             )}
             </div>
-          </div>
-        </section>
-      </div>
+                  </div>
+      </section>
+    </div>
   );
 };
 

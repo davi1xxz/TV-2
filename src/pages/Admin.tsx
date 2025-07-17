@@ -25,6 +25,7 @@ import {
   Menu
 } from 'lucide-react'
 
+
 // Hook para detectar se está em tela md+ (desktop)
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 768 : true)
