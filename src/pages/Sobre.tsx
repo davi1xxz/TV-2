@@ -95,7 +95,7 @@ const Sobre = () => {
             </div>
 
             {/* Mission Section */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div className="grid lg:grid-cols-2 gap-6 items-center mb-10">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                   Nossa Missão
@@ -122,8 +122,8 @@ const Sobre = () => {
             </div>
 
             {/* Team Section */}
-            <div className="mb-20">
-              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            <div className="mb-10">
+              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
                 Nossa Equipe
               </h2>
               <div className="flex justify-center">
@@ -147,8 +147,8 @@ const Sobre = () => {
             </div>
 
             {/* Values Section */}
-            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 mb-20 md:bg-transparent md:dark:bg-transparent md:shadow-none md:rounded-none">
-              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 mb-10 md:bg-transparent md:dark:bg-transparent md:shadow-none md:rounded-none">
+              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
                 Nossos Valores
               </h2>
               {/* MOBILE: Carrossel */}
@@ -221,7 +221,7 @@ const Sobre = () => {
 
             {/* Contact Section */}
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 Entre em Contato
               </h2>
               <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-4xl mx-auto justify-center">
@@ -261,22 +261,22 @@ const Sobre = () => {
             </div>
 
             {/* Social Media Section */}
-            <div className="mt-20">
-              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            <div className="mt-10">
+              <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
                 Nossas Redes Sociais
               </h2>
               <div className="flex justify-center space-x-8">
-                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300">
-                  <Headphones className="w-10 h-10" />
+                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+                  <img src="/imagens/icones/you.png" alt="YouTube" className="w-10 h-10 object-contain" />
                 </a>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition-colors duration-300">
-                  <Music className="w-10 h-10" />
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                  <img src="/imagens/icones/insta.png" alt="Instagram" className="w-10 h-10 object-contain" />
                 </a>
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
-                  <Users className="w-10 h-10" />
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                  <img src="/imagens/icones/face.png" alt="Facebook" className="w-10 h-10 object-contain" />
                 </a>
-                <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-300">
-                  <Phone className="w-10 h-10" />
+                <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">
+                  <img src="/imagens/icones/whats.png" alt="WhatsApp" className="w-10 h-10 object-contain" />
                 </a>
               </div>
             </div>
