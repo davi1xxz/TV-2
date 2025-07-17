@@ -11,9 +11,18 @@ import RecadoForm from '../components/RecadoForm';
 const Index = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentBannerSlide, setCurrentBannerSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const { news, loading, loadHomeNews } = useNews();
   const { schedule } = useSchedule();
+
+  const banners = ['/imagens/banner.jpg', '/imagens/banner2.jpg', '/imagens/banner3.jpg'];
+
+  const bannerHeights = [
+    { aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' },
+    { aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' },
+    { aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' }
+  ];
 
   // Função para obter o programa atual
   const getCurrentProgram = (schedule) => {
@@ -39,6 +48,7 @@ const Index = () => {
 
   const currentProgram = useMemo(() => getCurrentProgram(schedule), [schedule]);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const bannerAutoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     loadHomeNews();
@@ -69,6 +79,14 @@ const Index = () => {
     setCurrentSlide((prev) => (prev - 1 + ultimasNoticias.length) % ultimasNoticias.length);
   };
 
+  const nextBannerSlide = () => {
+    setCurrentBannerSlide((prev) => (prev + 1) % banners.length);
+  };
+
+  const prevBannerSlide = () => {
+    setCurrentBannerSlide((prev) => (prev - 1 + banners.length) % banners.length);
+  };
+
   const startAutoPlay = () => {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
@@ -76,11 +94,25 @@ const Index = () => {
     autoPlayRef.current = setInterval(nextSlide, 5000);
   };
 
+  const startBannerAutoPlay = () => {
+    if (bannerAutoPlayRef.current) {
+      clearInterval(bannerAutoPlayRef.current);
+    }
+    bannerAutoPlayRef.current = setInterval(nextBannerSlide, 4000);
+  };
+
   const resetAutoPlay = () => {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
     }
     startAutoPlay();
+  };
+
+  const resetBannerAutoPlay = () => {
+    if (bannerAutoPlayRef.current) {
+      clearInterval(bannerAutoPlayRef.current);
+    }
+    startBannerAutoPlay();
   };
 
   // Autoplay do carrossel
@@ -94,6 +126,16 @@ const Index = () => {
       };
     }
   }, [isMobile, ultimasNoticias.length]);
+
+  // Autoplay do carrossel de banners
+  useEffect(() => {
+    startBannerAutoPlay();
+    return () => {
+      if (bannerAutoPlayRef.current) {
+        clearInterval(bannerAutoPlayRef.current);
+      }
+    };
+  }, []);
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
@@ -114,8 +156,20 @@ const Index = () => {
             {/* Video Player com borda vermelha e RecadoForm dentro */}
           <div className="mb-6 flex justify-center">
             <div className="w-full max-w-5xl md:max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-2 md:p-4 flex flex-col items-center">
-              <div className="w-full aspect-video rounded-t-lg overflow-hidden mb-0">
-                <video controls className="w-full h-full object-cover bg-[#222] rounded-t-lg">
+              {/* Banner acima do player */}
+              <div className="w-full rounded-t-lg overflow-hidden relative">
+                <img 
+                  src={banners[currentBannerSlide]} 
+                  alt="Banner TV OK" 
+                  className="w-full h-auto object-cover"
+                  style={{ 
+                    ...bannerHeights[currentBannerSlide]
+                  }}
+                />
+              </div>
+              
+              <div className="w-full aspect-video overflow-hidden mb-0">
+                <video controls className="w-full h-full object-cover bg-[#222]">
                   <source src="/sample.mp4" type="video/mp4" />
                   Seu navegador não suporta o elemento de vídeo.
                 </video>
