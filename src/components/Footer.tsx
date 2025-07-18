@@ -22,16 +22,16 @@ const Footer: React.FC = () => {
           <div className="text-center">
             <div className="flex justify-center space-x-6 mb-3">
               <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/you.png" alt="YouTube" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/you.ico" alt="YouTube" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/insta.png" alt="Instagram" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/insta.ico" alt="Instagram" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/face.png" alt="Facebook" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/face.ico" alt="Facebook" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/whats.png" alt="WhatsApp" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/whats.ico" alt="WhatsApp" className="w-6 h-6 object-contain"/>
               </a>
             </div>
             <div className="overflow-x-auto">
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
                 title="Acessar painel admin"
               >
                 ©2025 TV OK. Todos os direitos reservados | @flash.grafico
-              </p>
+        </p>
             </div>
           </div>
         )}
@@ -57,19 +57,19 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex space-x-6">
               <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/you.png" alt="YouTube" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/you.ico" alt="YouTube" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/insta.png" alt="Instagram" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/insta.ico" alt="Instagram" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/face.png" alt="Facebook" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/face.ico" alt="Facebook" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">
-                <img src="/imagens/icones/whats.png" alt="WhatsApp" className="w-6 h-6 object-contain"/>
+                <img src="/imagens/icones/whats.ico" alt="WhatsApp" className="w-6 h-6 object-contain"/>
               </a>
             </div>
-          </div>
+        </div>
         )}
       </div>
     </footer>

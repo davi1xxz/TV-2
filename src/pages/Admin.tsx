@@ -13,6 +13,12 @@ import NewsTable from '@/components/NewsTable'
 import ScheduleForm from '@/components/ScheduleForm'
 import ScheduleTable from '@/components/ScheduleTable'
 import TestDataButton from '@/components/TestDataButton'
+import SponsorsTable from '@/components/SponsorsTable'
+import SponsorForm from '@/components/SponsorForm'
+import { useSponsors } from '@/hooks/use-sponsors'
+import TeamTable from '@/components/TeamTable'
+import TeamForm from '@/components/TeamForm'
+import { useTeam } from '@/hooks/use-team'
 import { 
   Settings, 
   Plus, 
@@ -43,11 +49,17 @@ const Admin = () => {
   const [editingSchedule, setEditingSchedule] = useState<ScheduleItem | null>(null)
   const [newsPerHome, setNewsPerHome] = useState(6)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeTable, setActiveTable] = useState<'news' | 'schedule'>('news')
+  const [activeTable, setActiveTable] = useState<'news' | 'schedule' | 'sponsors' | 'team'>('news')
+  const [editingSponsor, setEditingSponsor] = useState<any | null>(null)
+  const [showSponsorForm, setShowSponsorForm] = useState(false)
+  const [editingTeam, setEditingTeam] = useState<any | null>(null)
+  const [showTeamForm, setShowTeamForm] = useState(false)
   
   const { user, signOut, loading: authLoading } = useAuth()
   const { news, loading, loadNews } = useNews()
   const { schedule, loading: scheduleLoading, error: scheduleError, loadSchedule } = useSchedule()
+  const { sponsors, loading: sponsorsLoading, loadSponsors, createSponsor, updateSponsor, deleteSponsor } = useSponsors()
+  const { team, loading: teamLoading, loadTeam, createMember, updateMember, deleteMember } = useTeam()
   const navigate = useNavigate()
 
   const menuRef = useRef<HTMLDivElement>(null)
@@ -65,6 +77,8 @@ const Admin = () => {
     if (user) {
       loadNews()
       loadSchedule()
+      loadSponsors()
+      loadTeam()
     }
   }, [user])
 
@@ -222,6 +236,29 @@ const Admin = () => {
                     <Clock className="w-4 h-4 text-green-500" />
                     <span className="text-sm font-semibold">Tabela de Programação</span>
                   </button>
+                  <button
+                    onClick={() => setActiveTable('sponsors')}
+                    className={`flex items-center gap-2 w-full text-left p-2 rounded transition-colors ${
+                      activeTable === 'sponsors' 
+                        ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300' 
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    {/* Ícone de patrocinador: BarChart3 */}
+                    <BarChart3 className="w-4 h-4 text-yellow-500" />
+                    <span className="text-sm font-semibold">Tabela de Patrocinadores</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTable('team')}
+                    className={`flex items-center gap-2 w-full text-left p-2 rounded transition-colors ${
+                      activeTable === 'team' 
+                        ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300' 
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    <Users className="w-4 h-4 text-purple-500" />
+                    <span className="text-sm font-semibold">Tabela de Equipes</span>
+                  </button>
                 </CardContent>
               </Card>
             </div>
@@ -241,22 +278,33 @@ const Admin = () => {
                   <>
                     {/* Actions */}
                     <div className="flex justify-between items-center">
-                      <h2 className="text-2xl font-bold">Mural de Notícias</h2>
-                      <Button
-                        onClick={() => setShowForm(true)}
-                        className="flex items-center gap-2"
-                      >
-                        <Plus className="w-4 h-4" />
-                        Nova Notícia
-                      </Button>
+                      <h2 className="text-2xl font-bold">Gerenciar de Notícias ({news.length}/30)</h2>
+                      <div className="flex flex-col items-end">
+                        <Button
+                          onClick={() => setShowForm(true)}
+                          className="flex items-center gap-2"
+                          disabled={news.length >= 30}
+                        >
+                          <Plus className="w-4 h-4" />
+                          Nova Notícia
+                        </Button>
+                        {news.length >= 30 && (
+                          <span className="text-xs text-gray-500 mt-1">Limite de 30 notícias atingido.</span>
+                        )}
+                      </div>
                     </div>
 
                     {/* News Table */}
-                    <NewsTable news={news.slice(0, 30)} loading={loading} onEdit={handleEdit} />
+                    <NewsTable
+                      news={news.slice(0, 30)}
+                      loading={loading}
+                      onEdit={handleEdit}
+                      hideTitle
+                    />
                   </>
                 )}
               </>
-            ) : (
+            ) : activeTable === 'schedule' ? (
               <>
                 {showForm ? (
                   <ScheduleForm
@@ -268,21 +316,24 @@ const Admin = () => {
                   <>
                     {/* Actions */}
                     <div className="flex justify-between items-center">
-                      <h2 className="text-2xl font-bold">Gerenciar Programação</h2>
-                      <div className="flex gap-2">
-                        {/* <TestDataButton /> removido */}
+                      <h2 className="text-2xl font-bold">Gerenciar Programação ({schedule.length}/20)</h2>
+                      <div className="flex flex-col items-end gap-0">
                         <Button
                           onClick={() => setShowForm(true)}
                           className="flex items-center gap-2"
+                          disabled={schedule.length >= 20}
                         >
                           <Plus className="w-4 h-4" />
                           Nova Programação
                         </Button>
+                        {schedule.length >= 20 && (
+                          <span className="text-xs text-gray-500 mt-1">Limite de 20 programações atingido.</span>
+                        )}
                       </div>
                     </div>
 
                     {/* Schedule Table ordenada por horário */}
-                    <ScheduleTable schedule={schedule.slice().sort((a, b) => {
+                    <ScheduleTable schedule={schedule.slice(0, 20).sort((a, b) => {
                       // Ordena pelo horário inicial (ex: 06:00 - 09:00)
                       const getMinutes = (h: string) => {
                         const [start] = h.split(' - ')
@@ -309,7 +360,89 @@ const Admin = () => {
                   </>
                 )}
               </>
-            )}
+            ) : activeTable === 'sponsors' ? (
+              <>
+                {showSponsorForm ? (
+                  <SponsorForm
+                    editingSponsor={editingSponsor}
+                    onCancel={() => { setShowSponsorForm(false); setEditingSponsor(null) }}
+                    onSuccess={() => { setShowSponsorForm(false); setEditingSponsor(null); loadSponsors() }}
+                  />
+                ) : (
+                  <>
+                    <div className="flex justify-between items-center">
+                      <h2 className="text-2xl font-bold">Gerenciar Patrocinadores ({sponsors.length}/3)</h2>
+                      <div className="flex flex-col items-end gap-0">
+                        <Button
+                          onClick={() => { setShowSponsorForm(true); setEditingSponsor(null) }}
+                          className="flex items-center gap-2"
+                          disabled={sponsors.length >= 3}
+                        >
+                          <Plus className="w-4 h-4" />
+                          Novo Patrocinador
+                        </Button>
+                        {sponsors.length >= 3 && (
+                          <span className="text-xs text-gray-500 mt-1">Limite de 3 patrocinadores atingido.</span>
+                        )}
+                      </div>
+                    </div>
+                    <SponsorsTable
+                      sponsors={sponsors.slice(0, 3)}
+                      loading={sponsorsLoading}
+                      onEdit={(sponsor) => { setEditingSponsor(sponsor); setShowSponsorForm(true) }}
+                      onDelete={async (id) => { await deleteSponsor(id); loadSponsors() }}
+                      hideTitle
+                    />
+                  </>
+                )}
+              </>
+            ) : activeTable === 'team' ? (
+              <>
+                {showTeamForm ? (
+                  <TeamForm
+                    initialData={editingTeam}
+                    onCancel={() => { setShowTeamForm(false); setEditingTeam(null) }}
+                    onSave={async (data) => {
+                      if (editingTeam) {
+                        await updateMember(editingTeam.id, data)
+                      } else {
+                        await createMember(data)
+                      }
+                      setShowTeamForm(false)
+                      setEditingTeam(null)
+                      loadTeam()
+                    }}
+                    loading={teamLoading}
+                  />
+                ) : (
+                  <>
+                    <div className="flex justify-between items-center">
+                      <h2 className="text-2xl font-bold">Gerenciar Equipe ({team.length}/8)</h2>
+                      <div className="flex flex-col items-end gap-0">
+                        <Button
+                          onClick={() => { setShowTeamForm(true); setEditingTeam(null) }}
+                          className="flex items-center gap-2"
+                          disabled={team.length >= 8}
+                        >
+                          <Plus className="w-4 h-4" />
+                          Novo Membro
+                        </Button>
+                        {team.length >= 8 && (
+                          <span className="text-xs text-gray-500 mt-1">Limite de 8 membros atingido.</span>
+                        )}
+                      </div>
+                    </div>
+                    <TeamTable
+                      team={team}
+                      loading={teamLoading}
+                      onEdit={(member) => { setEditingTeam(member); setShowTeamForm(true) }}
+                      onDelete={async (id) => { await deleteMember(id); loadTeam() }}
+                      hideTitle
+                    />
+                  </>
+                )}
+              </>
+            ) : null}
           </div>
         </div>
       </main>

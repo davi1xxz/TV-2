@@ -1,20 +1,17 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Award, Heart, Radio, Users, Headphones, Music, MapPin, Phone, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTeam } from '@/hooks/use-team'
+import { supabase } from '@/lib/supabase'
 
 
 const Sobre = () => {
   const [currentValueSlide, setCurrentValueSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const { team, loading: teamLoading, loadTeam } = useTeam();
 
-  const team = [
-    {
-      name: "Marcos Lopes",
-      role: "Presidente",
-      image: "/imagens/marcos.jpg"
-    }
-  ];
+  useEffect(() => { loadTeam(); }, []);
 
   const values = [
     {
@@ -127,24 +124,32 @@ const Sobre = () => {
               <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
                 Nossa Equipe
               </h2>
-              <div className="flex justify-center">
-                <div className="text-center group">
-                    <div className="relative mb-4 overflow-hidden rounded-full w-32 h-32 mx-auto">
-                      <img
-                      src={team[0].image}
-                      alt={team[0].name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {teamLoading ? (
+                <div className="text-center py-8 text-muted-foreground">Carregando equipe...</div>
+              ) : team.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">Nenhum membro cadastrado.</div>
+              ) : (
+                <div className="grid grid-cols-3 gap-4 md:flex md:flex-wrap md:justify-center md:gap-8">
+                  {team.map((membro) => (
+                    <div key={membro.id} className="text-center group">
+                      <div className="relative mb-2 md:mb-4 overflow-hidden rounded-full w-16 h-16 md:w-32 md:h-32 mx-auto">
+                        <img
+                          src={supabase.storage.from('equipe').getPublicUrl(membro.url_foto).data.publicUrl}
+                          alt={membro.nome}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                      <h3 className="text-xs md:text-xl font-bold text-gray-900 dark:text-white mb-0 md:mb-1">
+                        {membro.nome}
+                      </h3>
+                      <p className="text-xs md:text-gray-600 md:dark:text-gray-300 md:mb-2">
+                        {membro.funcao}
+                      </p>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                    {team[0].name}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-2">
-                    {team[0].role}
-                    </p>
-                  </div>
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Values Section */}
@@ -164,17 +169,17 @@ const Sobre = () => {
                         <div key={index} className="w-full flex-shrink-0 min-w-full">
                           <div className="px-4 w-full h-full">
                             <div className="h-full max-w-sm mx-auto">
-                              <div className="text-center">
-                                <div className="flex justify-center mb-4">
+                <div className="text-center">
+                  <div className="flex justify-center mb-4">
                                   <value.icon className="w-12 h-12 text-[#ad1917]" />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                                   {value.title}
-                                </h3>
-                                <p className="text-gray-600 dark:text-gray-300">
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
                                   {value.description}
-                                </p>
-                              </div>
+                  </p>
+                </div>
                             </div>
                           </div>
                         </div>
@@ -205,15 +210,15 @@ const Sobre = () => {
                 <div className="grid md:grid-cols-3 gap-8">
                   {values.map((value, index) => (
                     <div key={index} className="text-center">
-                      <div className="flex justify-center mb-4">
+                  <div className="flex justify-center mb-4">
                         <value.icon className="w-12 h-12 text-[#ad1917]" />
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                         {value.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300">
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
                         {value.description}
-                      </p>
+                  </p>
                     </div>
                   ))}
                 </div>
@@ -339,7 +344,7 @@ function ContactCarousel3D() {
           href={card.href}
           target={card.target}
           rel={card.rel}
-          className="bg-white dark:bg-gray-800 rounded-2xl w-[260px] h-[200px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 space-y-3"
+          className="bg-white dark:bg-gray-800 rounded-2xl w-[260px] h-[200px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 space-y-3 hover:scale-105 hover:shadow-2xl hover:-translate-y-1"
         >
           <div className="flex items-center justify-center min-h-[48px]">{card.icon}</div>
           <div className="flex items-center justify-center min-h-[28px]">

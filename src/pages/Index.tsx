@@ -7,6 +7,7 @@ import { useNews } from '../hooks/use-news';
 import { useSchedule } from '../hooks/use-schedule';
 import { NewsItem } from '../lib/supabase';
 import RecadoForm from '../components/RecadoForm';
+import { useSponsors } from '@/hooks/use-sponsors'
 
 
 const Index = () => {
@@ -16,14 +17,7 @@ const Index = () => {
   const [isMobile, setIsMobile] = useState(false);
   const { news, loading, loadHomeNews } = useNews();
   const { schedule } = useSchedule();
-
-  const banners = ['/imagens/banner.jpg', '/imagens/banner2.jpg', '/imagens/banner3.jpg'];
-
-  const bannerHeights = [
-    { aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' },
-    { aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' },
-    { aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' }
-  ];
+  const { sponsors, loading: sponsorsLoading, loadSponsors } = useSponsors()
 
   // Função para obter o programa atual
   const getCurrentProgram = (schedule) => {
@@ -53,6 +47,7 @@ const Index = () => {
 
   useEffect(() => {
     loadHomeNews();
+    loadSponsors();
     // eslint-disable-next-line
   }, []);
 
@@ -130,13 +125,20 @@ const Index = () => {
 
   // Autoplay do carrossel de banners
   useEffect(() => {
-    startBannerAutoPlay();
-    return () => {
-      if (bannerAutoPlayRef.current) {
-        clearInterval(bannerAutoPlayRef.current);
-      }
-    };
-  }, []);
+    if (sponsors.length > 0) {
+      startBannerAutoPlay();
+      return () => {
+        if (bannerAutoPlayRef.current) {
+          clearInterval(bannerAutoPlayRef.current);
+        }
+      };
+    }
+  }, [sponsors.length]);
+
+  // Banner dinâmico de patrocinadores
+  const banners = sponsors.map(s => s.url_imagem)
+  const bannerLinks = sponsors.map(s => s.url_link)
+  const bannerHeights = sponsors.map(() => ({ aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' }))
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
@@ -157,24 +159,44 @@ const Index = () => {
             {/* Video Player com borda vermelha e RecadoForm dentro */}
           <div className="mb-6 flex justify-center">
             <div className="w-full max-w-5xl md:max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-2 md:p-4 flex flex-col items-center">
-              {/* Banner acima do player */}
+              {/* Banner acima do player - agora dinâmico */}
               <div className="w-full rounded-t-lg overflow-hidden relative">
-                <div 
-                  className="flex transition-transform duration-500"
-                  style={{ transform: `translateX(-${currentBannerSlide * 100}%)` }}
-                >
-                  {banners.map((banner, index) => (
-                    <img 
-                      key={index}
-                      src={banner} 
-                      alt="Banner TV OK" 
-                      className="w-full flex-shrink-0 object-cover"
-                      style={{ 
-                        ...bannerHeights[index]
-                      }}
-                    />
-                  ))}
-                </div>
+                {sponsorsLoading ? (
+                  <div className="w-full h-[40px] flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-400 text-sm">Carregando patrocinadores...</div>
+                ) : sponsors.length > 0 ? (
+                  <div 
+                    className="flex transition-transform duration-500"
+                    style={{ transform: `translateX(-${currentBannerSlide * 100}%)` }}
+                  >
+                    {sponsors.map((sponsor, index) => (
+                      sponsor.url_link ? (
+                        <a
+                          key={sponsor.id}
+                          href={sponsor.url_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full flex-shrink-0"
+                          style={bannerHeights[index]}
+                        >
+                          <img
+                            src={sponsor.url_imagem}
+                            alt={sponsor.nome}
+                            className="w-full object-cover"
+                            style={bannerHeights[index]}
+                          />
+                        </a>
+                      ) : (
+                        <img
+                          key={sponsor.id}
+                          src={sponsor.url_imagem}
+                          alt={sponsor.nome}
+                          className="w-full flex-shrink-0 object-cover"
+                          style={bannerHeights[index]}
+                        />
+                      )
+                    ))}
+                  </div>
+                ) : null}
               </div>
               
               <div className="w-full aspect-video overflow-hidden mb-0">

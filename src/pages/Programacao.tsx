@@ -94,9 +94,9 @@ const Programacao = () => {
               ))
             )}
             </div>
-                  </div>
-      </section>
-    </div>
+          </div>
+        </section>
+      </div>
   );
 };
 

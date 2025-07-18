@@ -85,6 +85,25 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
     try {
       let finalUrlMidia = formData.url_midia
 
+      // Se for edição e o usuário selecionou uma nova imagem
+      if (editingNews && imageFile && formData.tipo_midia === 'imagem') {
+        // Deleta a imagem antiga
+        if (editingNews.url_midia) {
+          try {
+            const url = editingNews.url_midia
+            const pathMatch = url.match(/imagens_noticias\/(.+)$/)
+            if (pathMatch && pathMatch[1]) {
+              const filePath = pathMatch[1]
+              await import('@/lib/supabase').then(({ supabase }) =>
+                supabase.storage.from('imagens_noticias').remove([filePath])
+              )
+            }
+          } catch (err) {
+            // Silenciar erro de deleção
+          }
+        }
+      }
+
       // Upload de imagem se necessário
       if (formData.tipo_midia === 'imagem' && imageFile) {
         finalUrlMidia = await uploadImage(imageFile)

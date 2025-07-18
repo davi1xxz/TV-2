@@ -67,9 +67,9 @@ const Noticias = () => {
             isVideo={selectedNews?.tipo_midia === 'youtube'}
             videoUrl={selectedNews?.tipo_midia === 'youtube' ? selectedNews?.url_midia : ''}
           />
-        </div>
-      </section>
-    </div>
+          </div>
+        </section>
+      </div>
   );
 };
 

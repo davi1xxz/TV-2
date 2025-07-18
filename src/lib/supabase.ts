@@ -31,6 +31,16 @@ export interface ScheduleItem {
   updated_at: string
 }
 
+export interface SponsorItem {
+  id: string
+  nome: string
+  url_imagem: string
+  url_link: string
+  ordem: number
+  created_at: string
+  updated_at: string
+}
+
 // Configurações do site
 export const SITE_CONFIG = {
   newsPerHome: 6,

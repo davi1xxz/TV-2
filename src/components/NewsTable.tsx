@@ -21,9 +21,10 @@ export interface NewsTableProps {
   news: NewsItem[]
   loading: boolean
   onEdit: (news: NewsItem) => void
+  hideTitle?: boolean
 }
 
-const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
+const NewsTable = ({ news, loading, onEdit, hideTitle }: NewsTableProps) => {
   const { deleteNews, loadNews, setDestaqueOrdem } = useNews()
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [confirmId, setConfirmId] = useState<string | null>(null)
@@ -97,12 +98,14 @@ const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
   if (isDesktop) {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Eye className="w-5 h-5" />
-            Gerenciar Notícias ({news.length}/30)
-          </CardTitle>
-        </CardHeader>
+        {!hideTitle && (
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Eye className="w-5 h-5" />
+              Gerenciar Notícias ({news.length}/30)
+            </CardTitle>
+          </CardHeader>
+        )}
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -231,12 +234,14 @@ const NewsTable = ({ news, loading, onEdit }: NewsTableProps) => {
   // Mobile: cards
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Eye className="w-5 h-5" />
-          Gerenciar Notícias ({news.length})
-        </CardTitle>
-      </CardHeader>
+      {!hideTitle && (
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Eye className="w-5 h-5" />
+            Gerenciar Notícias ({news.length})
+          </CardTitle>
+        </CardHeader>
+      )}
       <CardContent>
         <div className="flex flex-col gap-4">
           {news.map((item) => (
