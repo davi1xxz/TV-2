@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label'
 import { SponsorItem } from '@/lib/supabase'
 import { useSponsors } from '@/hooks/use-sponsors'
 import { Upload, Link2, Edit } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 interface SponsorFormProps {
   editingSponsor?: SponsorItem | null
@@ -52,9 +53,7 @@ const SponsorForm = ({ editingSponsor, onCancel, onSuccess }: SponsorFormProps) 
             const pathMatch = url.match(/imagenspatrocinadores\/(.+)$/)
             if (pathMatch && pathMatch[1]) {
               const filePath = pathMatch[1]
-              await import('@/lib/supabase').then(({ supabase }) =>
-                supabase.storage.from('imagenspatrocinadores').remove([filePath])
-              )
+              await supabase.storage.from('imagenspatrocinadores').remove([filePath])
             }
           } catch (err) {
             // Silenciar erro de deleção

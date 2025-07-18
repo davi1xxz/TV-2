@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useNews } from '@/hooks/use-news'
 import { NewsItem } from '@/lib/supabase'
 import { Image, Video, X, Upload } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 interface NewsFormProps {
   editingNews?: NewsItem | null
@@ -94,9 +95,7 @@ const NewsForm = ({ editingNews, onCancel, onSuccess }: NewsFormProps) => {
             const pathMatch = url.match(/imagens_noticias\/(.+)$/)
             if (pathMatch && pathMatch[1]) {
               const filePath = pathMatch[1]
-              await import('@/lib/supabase').then(({ supabase }) =>
-                supabase.storage.from('imagens_noticias').remove([filePath])
-              )
+              await supabase.storage.from('imagens_noticias').remove([filePath])
             }
           } catch (err) {
             // Silenciar erro de deleção
