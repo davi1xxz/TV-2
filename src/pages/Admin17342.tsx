@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useNews } from '@/hooks/use-news'
 import { useSchedule } from '@/hooks/use-schedule'
-import { NewsItem, ScheduleItem } from '@/lib/supabase'
+import { NewsItem, ScheduleItem, SponsorItem } from '@/lib/supabase'
 import NewsForm from '@/components/NewsForm'
 import NewsTable from '@/components/NewsTable'
 import ScheduleForm from '@/components/ScheduleForm'
@@ -18,6 +18,7 @@ import { useSponsors } from '@/hooks/use-sponsors'
 import TeamTable from '@/components/TeamTable'
 import TeamForm from '@/components/TeamForm'
 import { useTeam } from '@/hooks/use-team'
+import { TeamMember } from '@/components/TeamTable';
 import { 
   Settings, 
   Plus, 
@@ -49,9 +50,9 @@ const Admin17342 = () => {
   const [newsPerHome, setNewsPerHome] = useState(6)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeTable, setActiveTable] = useState<'news' | 'schedule' | 'sponsors' | 'team'>('news')
-  const [editingSponsor, setEditingSponsor] = useState<any | null>(null)
+  const [editingSponsor, setEditingSponsor] = useState<SponsorItem | null>(null)
   const [showSponsorForm, setShowSponsorForm] = useState(false)
-  const [editingTeam, setEditingTeam] = useState<any | null>(null)
+  const [editingTeam, setEditingTeam] = useState<TeamMember | null>(null)
   const [showTeamForm, setShowTeamForm] = useState(false)
   
   const { user, signOut, loading: authLoading } = useAuth()

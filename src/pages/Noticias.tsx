@@ -9,7 +9,7 @@ import { NewsItem } from '../lib/supabase';
 
 const Noticias = () => {
   const { news, loading, loadNews } = useNews();
-  const [selectedNews, setSelectedNews] = useState<any>(null);
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
   useEffect(() => {
     loadNews();

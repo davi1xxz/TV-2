@@ -86,8 +86,12 @@ const SponsorForm = ({ editingSponsor, onCancel, onSuccess }: SponsorFormProps) 
       }
       await loadSponsors()
       onSuccess()
-    } catch (err: any) {
-      setError(err.message || 'Erro ao salvar patrocinador')
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Erro ao salvar patrocinador');
+      } else {
+        setError('Erro ao salvar patrocinador');
+      }
     } finally {
       setLoading(false)
     }
