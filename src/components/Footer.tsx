@@ -21,13 +21,13 @@ const Footer: React.FC = () => {
         {isMobile && (
           <div className="text-center">
             <div className="flex justify-center space-x-6 mb-3">
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.youtube.com/tvokminas" target="_blank" rel="noopener noreferrer">
                 <img src="/imagens/icones/you.ico" alt="YouTube" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/tvokpassos" target="_blank" rel="noopener noreferrer">
                 <img src="/imagens/icones/insta.ico" alt="Instagram" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/tvokpassos" target="_blank" rel="noopener noreferrer">
                 <img src="/imagens/icones/face.ico" alt="Facebook" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">
@@ -35,34 +35,26 @@ const Footer: React.FC = () => {
               </a>
             </div>
             <div className="overflow-x-auto">
-              <p
-                className="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer hover:underline whitespace-nowrap"
-                onClick={() => navigate('/admin17342/login')}
-                title="Acessar painel admin"
-              >
-                ©2025 TV OK. Todos os direitos reservados | @flash.grafico
-        </p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 font-medium whitespace-nowrap">
+                ©2025 TV OK. Todos os direitos reservados | design by <a href="https://instagram.com/davy.flow" target="_blank" rel="noopener noreferrer" className="text-purple-500 dark:text-purple-400 hover:underline cursor-pointer">DΛVY Flow</a>
+              </p>
             </div>
           </div>
         )}
         {/* DESKTOP: Layout horizontal */}
         {!isMobile && (
           <div className="flex justify-between items-center">
-            <p
-              className="text-sm text-gray-600 dark:text-gray-300 font-medium cursor-pointer hover:underline"
-              onClick={() => navigate('/admin17342/login')}
-              title="Acessar painel admin"
-            >
-              ©2025 TV OK. Todos os direitos reservados | @flash.grafico
+            <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
+              ©2025 TV OK. Todos os direitos reservados | design by <a href="https://instagram.com/davy.flow" target="_blank" rel="noopener noreferrer" className="text-purple-500 dark:text-purple-400 hover:underline cursor-pointer">DΛVY Flow</a>
             </p>
             <div className="flex space-x-6">
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.youtube.com/tvokminas" target="_blank" rel="noopener noreferrer">
                 <img src="/imagens/icones/you.ico" alt="YouTube" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/tvokpassos" target="_blank" rel="noopener noreferrer">
                 <img src="/imagens/icones/insta.ico" alt="Instagram" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/tvokpassos" target="_blank" rel="noopener noreferrer">
                 <img src="/imagens/icones/face.ico" alt="Facebook" className="w-6 h-6 object-contain"/>
               </a>
               <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">

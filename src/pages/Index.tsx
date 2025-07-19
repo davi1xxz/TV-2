@@ -7,7 +7,7 @@ import { useNews } from '../hooks/use-news';
 import { useSchedule } from '../hooks/use-schedule';
 import { NewsItem } from '../lib/supabase';
 import RecadoForm from '../components/RecadoForm';
-import { useSponsors } from '@/hooks/use-sponsors'
+import { useSponsors } from '../hooks/use-sponsors'
 
 
 const Index = () => {
