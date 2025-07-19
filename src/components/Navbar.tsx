@@ -14,7 +14,7 @@ import ContactDropdown from './ContactDropdown';
 
 const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
   const [showContact, setShowContact] = React.useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const location = useLocation();
 
   const navItems = [
@@ -70,7 +70,7 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={toggleTheme}
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               tabIndex={-1}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200 focus:outline-none focus:ring-0 active:bg-transparent shadow-none ring-0 outline-none"
             >
