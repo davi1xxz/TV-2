@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
             <div className="overflow-x-auto">
               <p
                 className="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer hover:underline whitespace-nowrap"
-                onClick={() => navigate('/admin/login')}
+                onClick={() => navigate('/admin17342/login')}
                 title="Acessar painel admin"
               >
                 ©2025 TV OK. Todos os direitos reservados | @flash.grafico
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
           <div className="flex justify-between items-center">
             <p
               className="text-sm text-gray-600 dark:text-gray-300 font-medium cursor-pointer hover:underline"
-              onClick={() => navigate('/admin/login')}
+              onClick={() => navigate('/admin17342/login')}
               title="Acessar painel admin"
             >
               ©2025 TV OK. Todos os direitos reservados | @flash.grafico

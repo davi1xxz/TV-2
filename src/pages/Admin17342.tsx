@@ -12,7 +12,6 @@ import NewsForm from '@/components/NewsForm'
 import NewsTable from '@/components/NewsTable'
 import ScheduleForm from '@/components/ScheduleForm'
 import ScheduleTable from '@/components/ScheduleTable'
-import TestDataButton from '@/components/TestDataButton'
 import SponsorsTable from '@/components/SponsorsTable'
 import SponsorForm from '@/components/SponsorForm'
 import { useSponsors } from '@/hooks/use-sponsors'
@@ -43,7 +42,7 @@ function useIsDesktop() {
   return isDesktop
 }
 
-const Admin = () => {
+const Admin17342 = () => {
   const [showForm, setShowForm] = useState(false)
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null)
   const [editingSchedule, setEditingSchedule] = useState<ScheduleItem | null>(null)
@@ -69,7 +68,7 @@ const Admin = () => {
 
   useEffect(() => {
     if (!authLoading && !user) {
-      navigate('/admin/login')
+      navigate('/admin17342/login')
     }
   }, [user, authLoading, navigate])
 
@@ -85,7 +84,7 @@ const Admin = () => {
   const handleLogout = async () => {
     try {
       await signOut()
-      navigate('/admin/login')
+      navigate('/admin17342/login')
     } catch (error) {
       // Silenciar erros
     }
@@ -280,14 +279,14 @@ const Admin = () => {
                     <div className="flex justify-between items-center">
                       <h2 className="text-2xl font-bold">Gerenciar de Notícias ({news.length}/30)</h2>
                       <div className="flex flex-col items-end">
-                        <Button
-                          onClick={() => setShowForm(true)}
-                          className="flex items-center gap-2"
+                      <Button
+                        onClick={() => setShowForm(true)}
+                        className="flex items-center gap-2"
                           disabled={news.length >= 30}
-                        >
-                          <Plus className="w-4 h-4" />
-                          Nova Notícia
-                        </Button>
+                      >
+                        <Plus className="w-4 h-4" />
+                        Nova Notícia
+                      </Button>
                         {news.length >= 30 && (
                           <span className="text-xs text-gray-500 mt-1">Limite de 30 notícias atingido.</span>
                         )}
@@ -373,14 +372,14 @@ const Admin = () => {
                     <div className="flex justify-between items-center">
                       <h2 className="text-2xl font-bold">Gerenciar Patrocinadores ({sponsors.length}/3)</h2>
                       <div className="flex flex-col items-end gap-0">
-                        <Button
-                          onClick={() => { setShowSponsorForm(true); setEditingSponsor(null) }}
-                          className="flex items-center gap-2"
+                      <Button
+                        onClick={() => { setShowSponsorForm(true); setEditingSponsor(null) }}
+                        className="flex items-center gap-2"
                           disabled={sponsors.length >= 3}
-                        >
-                          <Plus className="w-4 h-4" />
-                          Novo Patrocinador
-                        </Button>
+                      >
+                        <Plus className="w-4 h-4" />
+                        Novo Patrocinador
+                      </Button>
                         {sponsors.length >= 3 && (
                           <span className="text-xs text-gray-500 mt-1">Limite de 3 patrocinadores atingido.</span>
                         )}
@@ -439,8 +438,8 @@ const Admin = () => {
                       onDelete={async (id) => { await deleteMember(id); loadTeam() }}
                       hideTitle
                     />
-                  </>
-                )}
+              </>
+            )}
               </>
             ) : null}
           </div>
@@ -450,4 +449,4 @@ const Admin = () => {
   )
 }
 
-export default Admin 
+export default Admin17342 

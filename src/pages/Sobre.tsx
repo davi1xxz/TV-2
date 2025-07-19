@@ -133,22 +133,22 @@ const Sobre = () => {
                   {team.map((membro) => (
                     <div key={membro.id} className="text-center group">
                       <div className="relative mb-2 md:mb-4 overflow-hidden rounded-full w-16 h-16 md:w-32 md:h-32 mx-auto">
-                        <img
+                      <img
                           src={supabase.storage.from('equipe').getPublicUrl(membro.url_foto).data.publicUrl}
                           alt={membro.nome}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      </div>
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
                       <h3 className="text-xs md:text-xl font-bold text-gray-900 dark:text-white mb-0 md:mb-1">
                         {membro.nome}
-                      </h3>
+                    </h3>
                       <p className="text-xs md:text-gray-600 md:dark:text-gray-300 md:mb-2">
                         {membro.funcao}
-                      </p>
-                    </div>
+                    </p>
+                  </div>
                   ))}
-                </div>
+              </div>
               )}
             </div>
 

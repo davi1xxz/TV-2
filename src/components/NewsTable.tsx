@@ -99,12 +99,12 @@ const NewsTable = ({ news, loading, onEdit, hideTitle }: NewsTableProps) => {
     return (
       <Card>
         {!hideTitle && (
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Eye className="w-5 h-5" />
-              Gerenciar Notícias ({news.length}/30)
-            </CardTitle>
-          </CardHeader>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Eye className="w-5 h-5" />
+            Gerenciar Notícias ({news.length}/30)
+          </CardTitle>
+        </CardHeader>
         )}
         <CardContent>
           <div className="overflow-x-auto">
@@ -235,12 +235,12 @@ const NewsTable = ({ news, loading, onEdit, hideTitle }: NewsTableProps) => {
   return (
     <Card>
       {!hideTitle && (
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Eye className="w-5 h-5" />
-            Gerenciar Notícias ({news.length})
-          </CardTitle>
-        </CardHeader>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Eye className="w-5 h-5" />
+          Gerenciar Notícias ({news.length})
+        </CardTitle>
+      </CardHeader>
       )}
       <CardContent>
         <div className="flex flex-col gap-4">

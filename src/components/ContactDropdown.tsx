@@ -31,15 +31,15 @@ const ContactDropdown = () => {
 
   return (
     <div className="relative contact-popup">
-      <Button
-        variant="ghost"
-        size="sm"
-        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200 focus:outline-none focus:ring-0"
-        aria-label="Abrir contato"
+          <Button
+            variant="ghost"
+            size="sm"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200 focus:outline-none focus:ring-0"
+            aria-label="Abrir contato"
         onClick={() => setIsOpen(!isOpen)}
-      >
-        <Phone className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-      </Button>
+          >
+            <Phone className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+          </Button>
 
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 z-50">
