@@ -46,7 +46,30 @@ const App = () => {
                 aria-label="Fechar menu mobile ao clicar fora"
               />
             )}
-            <Suspense fallback={<div>Carregando...</div>}>
+            <Suspense
+              fallback={
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '100vh',
+                  width: '100vw',
+                  background: 'rgba(255,255,255,0.85)',
+                  zIndex: 9999,
+                  position: 'fixed',
+                  top: 0,
+                  left: 0
+                }}>
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="20" stroke="#ad1917" strokeWidth="4" strokeDasharray="31.4 31.4" strokeLinecap="round">
+                      <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" from="0 24 24" to="360 24 24"/>
+                    </circle>
+                  </svg>
+                  <span style={{marginTop: 16, fontSize: '1.2rem', color: '#ad1917'}}>Carregando...</span>
+                </div>
+              }
+            >
               <Routes>
                 {/* Admin routes - without navbar/footer */}
                 <Route path="/admin17342" element={<Admin17342 />} />
