@@ -36,7 +36,7 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-                              <img src="/imagens/logo.webp" alt="Logo TV OK" className="w-16 h-16 object-contain" fetchpriority="high" />
+                              <img src="/imagens/logoi.webp" alt="Logo TV OK" className="w-16 h-16 object-contain" fetchpriority="high" />
             </Link>
           </div>
 
