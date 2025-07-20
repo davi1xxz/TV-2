@@ -244,9 +244,8 @@ const Index = () => {
                   height="100%"
                   frameBorder="0"
                   scrolling="no"
-                  allowFullScreen={true}
-                  className="w-full h-full object-cover bg-[#222]"
                   allow="autoplay; fullscreen"
+                  className="w-full h-full object-cover bg-[#222]"
                   title="Kick TVOK Player"
                   style={{ display: 'block' }}
                 ></iframe>
