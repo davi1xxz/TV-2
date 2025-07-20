@@ -87,8 +87,9 @@ const MobileNewsCarousel: React.FC<MobileNewsCarouselProps> = ({ news, onNewsCli
           resetAutoPlay();
         }}
         className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10 border border-gray-300 dark:border-gray-600"
+        aria-label="Notícia anterior"
       >
-        <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+        <ChevronLeft className="w-5 h-5 text-gray-700 dark:text-gray-300" />
       </button>
       
       <button
@@ -97,8 +98,9 @@ const MobileNewsCarousel: React.FC<MobileNewsCarouselProps> = ({ news, onNewsCli
           resetAutoPlay();
         }}
         className="absolute -right-2 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 shadow-lg rounded-full w-10 h-10 p-0 flex items-center justify-center z-10 border border-gray-300 dark:border-gray-600"
+        aria-label="Próxima notícia"
       >
-        <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+        <ChevronRight className="w-5 h-5 text-gray-700 dark:text-gray-300" />
       </button>
     </div>
   );

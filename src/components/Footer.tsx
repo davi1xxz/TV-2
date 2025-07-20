@@ -21,16 +21,16 @@ const Footer: React.FC = () => {
         {isMobile && (
           <div className="text-center">
             <div className="flex justify-center space-x-6 mb-3">
-              <a href="https://www.youtube.com/tvokminas" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.youtube.com/tvokminas" target="_blank" rel="noopener noreferrer" aria-label="Seguir TV OK no YouTube">
                 <img src="/imagens/icones/you.ico" alt="YouTube" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.instagram.com/tvokpassos" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/tvokpassos" target="_blank" rel="noopener noreferrer" aria-label="Seguir TV OK no Instagram">
                 <img src="/imagens/icones/insta.ico" alt="Instagram" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.facebook.com/tvokpassos" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/tvokpassos" target="_blank" rel="noopener noreferrer" aria-label="Seguir TV OK no Facebook">
                 <img src="/imagens/icones/face.ico" alt="Facebook" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensagem no WhatsApp">
                 <img src="/imagens/icones/whats.ico" alt="WhatsApp" className="w-6 h-6 object-contain"/>
               </a>
             </div>
@@ -48,16 +48,16 @@ const Footer: React.FC = () => {
               ©2025 TV OK. Todos os direitos reservados | design by <a href="https://instagram.com/davy.flow" target="_blank" rel="noopener noreferrer" className="text-purple-500 dark:text-purple-400 hover:underline cursor-pointer">DΛVY Flow</a>
             </p>
             <div className="flex space-x-6">
-              <a href="https://www.youtube.com/tvokminas" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.youtube.com/tvokminas" target="_blank" rel="noopener noreferrer" aria-label="Seguir TV OK no YouTube">
                 <img src="/imagens/icones/you.ico" alt="YouTube" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.instagram.com/tvokpassos" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/tvokpassos" target="_blank" rel="noopener noreferrer" aria-label="Seguir TV OK no Instagram">
                 <img src="/imagens/icones/insta.ico" alt="Instagram" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://www.facebook.com/tvokpassos" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/tvokpassos" target="_blank" rel="noopener noreferrer" aria-label="Seguir TV OK no Facebook">
                 <img src="/imagens/icones/face.ico" alt="Facebook" className="w-6 h-6 object-contain"/>
               </a>
-              <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/553599799988" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensagem no WhatsApp">
                 <img src="/imagens/icones/whats.ico" alt="WhatsApp" className="w-6 h-6 object-contain"/>
               </a>
             </div>

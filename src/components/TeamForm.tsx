@@ -86,7 +86,7 @@ const TeamForm = ({ initialData, onSave, onCancel, loading }: TeamFormProps) => 
                 <img src={preview} alt="Pré-visualização" className="w-24 h-24 object-cover rounded-full border" />
               </div>
             )}
-            {uploading && <div className="text-xs text-gray-500 mt-1">Enviando imagem...</div>}
+            {uploading && <div className="text-xs text-gray-700 dark:text-gray-300 mt-1">Enviando imagem...</div>}
           </div>
           <div className="flex gap-2 mt-4">
             <Button type="submit" disabled={loading || uploading}>

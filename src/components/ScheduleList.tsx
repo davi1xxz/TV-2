@@ -10,7 +10,7 @@ const ScheduleList: React.FC<ScheduleListProps> = ({ schedule, loading }) => {
   if (loading) {
     return (
       <div className="space-y-5 md:space-y-6">
-        <div className="text-center py-8 text-gray-500">Carregando programação...</div>
+        <div className="text-center py-8 text-gray-700 dark:text-gray-300">Carregando programação...</div>
       </div>
     );
   }
@@ -30,7 +30,7 @@ const ScheduleList: React.FC<ScheduleListProps> = ({ schedule, loading }) => {
               <p className="text-gray-600 dark:text-gray-300 mb-1 md:mb-2 text-sm md:text-base">
                 {item.subtitulo}
               </p>
-              <div className="flex items-center space-x-2 text-xs md:text-sm text-gray-500 dark:text-gray-400">
+              <div className="flex items-center space-x-2 text-xs md:text-sm text-gray-700 dark:text-gray-300">
                 <span>{item.autor}</span>
               </div>
             </div>

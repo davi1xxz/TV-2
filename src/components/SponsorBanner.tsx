@@ -3,7 +3,7 @@ import React from 'react';
 const SponsorBanner = ({ sponsors, sponsorsLoading, currentBannerSlide, bannerHeights }) => {
   if (sponsorsLoading) {
     return (
-      <div className="w-full h-[40px] flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-400 text-sm">
+      <div className="w-full h-[40px] flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm">
         Carregando patrocinadores...
       </div>
     );

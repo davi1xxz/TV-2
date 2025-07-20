@@ -161,7 +161,7 @@ const Index = () => {
               {/* Banner acima do player - agora dinâmico */}
               <div className="w-full rounded-t-lg overflow-hidden relative">
                 {sponsorsLoading ? (
-                  <div className="w-full h-[40px] flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-400 text-sm">Carregando patrocinadores...</div>
+                  <div className="w-full h-[40px] flex items-center justify-center bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm">Carregando patrocinadores...</div>
                 ) : sponsors.length > 0 ? (
                   <div 
                     className="flex transition-transform duration-500"
@@ -248,7 +248,7 @@ const Index = () => {
             </h2>
             {loading ? (
               <div className="text-center py-8">
-                <div className="text-gray-600 dark:text-gray-400">Carregando notícias...</div>
+                <div className="text-gray-700 dark:text-gray-300">Carregando notícias...</div>
               </div>
             ) : ultimasNoticias.length > 0 ? (
               <>
@@ -344,7 +344,7 @@ const Index = () => {
               </>
             ) : (
               <div className="text-center py-8">
-                <div className="text-gray-600 dark:text-gray-400">Nenhuma notícia em destaque encontrada.</div>
+                <div className="text-gray-700 dark:text-gray-300">Nenhuma notícia em destaque encontrada.</div>
               </div>
             )}
           {/* Modal de detalhes da notícia */}

@@ -289,7 +289,7 @@ const Admin17342 = () => {
                         Nova Notícia
                       </Button>
                         {news.length >= 30 && (
-                          <span className="text-xs text-gray-500 mt-1">Limite de 30 notícias atingido.</span>
+                          <span className="text-xs text-gray-700 dark:text-gray-300 mt-1">Limite de 30 notícias atingido.</span>
                         )}
                       </div>
                     </div>
@@ -327,7 +327,7 @@ const Admin17342 = () => {
                           Nova Programação
                         </Button>
                         {schedule.length >= 20 && (
-                          <span className="text-xs text-gray-500 mt-1">Limite de 20 programações atingido.</span>
+                          <span className="text-xs text-gray-700 dark:text-gray-300 mt-1">Limite de 20 programações atingido.</span>
                         )}
                       </div>
                     </div>
@@ -387,7 +387,7 @@ const Admin17342 = () => {
                         Novo Patrocinador
                       </Button>
                         {sponsors.length >= 3 && (
-                          <span className="text-xs text-gray-500 mt-1">Limite de 3 patrocinadores atingido.</span>
+                          <span className="text-xs text-gray-700 dark:text-gray-300 mt-1">Limite de 3 patrocinadores atingido.</span>
                         )}
                       </div>
                     </div>
@@ -433,7 +433,7 @@ const Admin17342 = () => {
                           Novo Membro
                         </Button>
                         {team.length >= 8 && (
-                          <span className="text-xs text-gray-500 mt-1">Limite de 8 membros atingido.</span>
+                          <span className="text-xs text-gray-700 dark:text-gray-300 mt-1">Limite de 8 membros atingido.</span>
                         )}
                       </div>
                     </div>

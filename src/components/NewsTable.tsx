@@ -258,8 +258,8 @@ const NewsTable = ({ news, loading, onEdit, hideTitle }: NewsTableProps) => {
                 ) : (
                   <span className="text-xs text-muted-foreground">-</span>
                 )}
-                <span className="capitalize text-xs text-gray-500">{item.tipo_midia}</span>
-                <span className="text-xs text-gray-500">{new Date(item.created_at).toLocaleDateString('pt-BR')}</span>
+                        <span className="capitalize text-xs text-gray-700 dark:text-gray-300">{item.tipo_midia}</span>
+        <span className="text-xs text-gray-700 dark:text-gray-300">{new Date(item.created_at).toLocaleDateString('pt-BR')}</span>
               </div>
               <div className="flex gap-2 mt-2">
                 <Button size="sm" variant="outline" onClick={() => onEdit(item)} disabled={isLoading} className="flex-1"><Edit className="w-4 h-4" />Editar</Button>

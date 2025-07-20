@@ -119,7 +119,7 @@ const ValuesCarousel: React.FC<ValuesCarouselProps> = ({ isMobile }) => {
       
       {/* Indicadores */}
       <div className="flex justify-center space-x-2 mt-4">
-        {values.map((_, index) => (
+        {values.map((value, index) => (
           <button
             key={index}
             onClick={() => {
@@ -131,6 +131,8 @@ const ValuesCarousel: React.FC<ValuesCarouselProps> = ({ isMobile }) => {
                 ? 'bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] w-6'
                 : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
             }`}
+            aria-label={`Ir para slide ${index + 1}: ${value.title}`}
+            aria-current={index === currentSlide ? 'true' : 'false'}
           />
         ))}
       </div>

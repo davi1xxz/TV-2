@@ -76,9 +76,9 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
               aria-label={theme === 'light' ? 'Alternar para modo escuro' : 'Alternar para modo claro'}
             >
               {theme === 'light' ? (
-                <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                <Moon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               ) : (
-                <Sun className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                <Sun className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               )}
             </Button>
 

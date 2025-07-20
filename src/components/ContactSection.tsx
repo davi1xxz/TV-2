@@ -97,11 +97,13 @@ const ContactSection: React.FC = () => {
             </button>
           </div>
           <div className="flex justify-center space-x-2 mt-4">
-            {contactCards.map((_, idx) => (
+            {contactCards.map((card, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrent(idx)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === current ? 'bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] w-6' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'}`}
+                aria-label={`Ir para ${card.title}`}
+                aria-current={idx === current ? 'true' : 'false'}
               />
             ))}
           </div>

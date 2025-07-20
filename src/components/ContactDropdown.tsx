@@ -38,7 +38,7 @@ const ContactDropdown = () => {
             aria-label={isOpen ? 'Fechar menu de contato' : 'Abrir menu de contato'}
         onClick={() => setIsOpen(!isOpen)}
           >
-            <Phone className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            <Phone className="h-5 w-5 text-gray-700 dark:text-gray-300" />
           </Button>
 
       {isOpen && (
@@ -68,7 +68,7 @@ const ContactDropdown = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900 dark:text-white text-sm">Telefone</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-300">(35) 9979-9988</p>
+                  <p className="text-xs text-gray-700 dark:text-gray-300">(35) 9979-9988</p>
                 </div>
               </a>
               
@@ -82,7 +82,7 @@ const ContactDropdown = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900 dark:text-white text-sm">Email</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-300">lopeshow@hotmail.com</p>
+                  <p className="text-xs text-gray-700 dark:text-gray-300">lopeshow@hotmail.com</p>
                 </div>
               </a>
             </div>

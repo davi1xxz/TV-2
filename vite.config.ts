@@ -10,6 +10,13 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     hmr: {
       overlay: false // Desabilita overlay de erros para melhor performance
+    },
+    headers: {
+      // Headers de cache para otimizar performance
+      'Cache-Control': 'public, max-age=31536000, immutable',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'X-XSS-Protection': '1; mode=block'
     }
   },
   plugins: [

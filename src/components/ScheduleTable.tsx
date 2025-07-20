@@ -74,7 +74,7 @@ const ScheduleTable = ({ schedule, loading, onEdit, onDelete }: ScheduleTablePro
       <Card>
         <CardContent className="p-6 py-16">
           <div className="text-center text-muted-foreground">
-            <Clock className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+            <Clock className="w-12 h-12 mx-auto mb-4 text-gray-600 dark:text-gray-300" />
             <p className="text-lg font-medium">Nenhuma programação encontrada</p>
             <p className="text-sm">Adicione a primeira programação para começar</p>
             <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
@@ -124,14 +124,14 @@ const ScheduleTable = ({ schedule, loading, onEdit, onDelete }: ScheduleTablePro
                         </div>
                       </td>
                       <td className="p-4">
-                        <div className="text-gray-600 dark:text-gray-400 max-w-xs truncate">
+                        <div className="text-gray-700 dark:text-gray-300 max-w-xs truncate">
                           {item.subtitulo}
                         </div>
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-2">
-                          <User className="w-4 h-4 text-gray-400" />
-                          <span className="text-gray-600 dark:text-gray-400">
+                          <User className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+                          <span className="text-gray-700 dark:text-gray-300">
                             {item.autor}
                           </span>
                         </div>
@@ -212,16 +212,16 @@ const ScheduleTable = ({ schedule, loading, onEdit, onDelete }: ScheduleTablePro
 
                 {/* Description */}
                 <div className="flex items-start gap-2 w-full max-w-full">
-                  <FileText className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed break-words w-full max-w-full">
+                  <FileText className="w-4 h-4 text-gray-600 dark:text-gray-300 mt-0.5 flex-shrink-0" />
+                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed break-words w-full max-w-full">
                     {item.subtitulo}
                   </p>
                 </div>
 
                 {/* Author */}
                 <div className="flex items-center gap-2 pt-1 w-full max-w-full">
-                  <User className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-600 dark:text-gray-400 text-sm">
+                  <User className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+                  <span className="text-gray-700 dark:text-gray-300 text-sm">
                     {item.autor}
                   </span>
                 </div>

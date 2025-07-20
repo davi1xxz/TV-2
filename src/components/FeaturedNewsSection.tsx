@@ -25,7 +25,7 @@ const FeaturedNewsSection: React.FC<FeaturedNewsSectionProps> = ({
           </span>
         </h2>
         <div className="text-center py-8">
-          <div className="text-gray-600 dark:text-gray-400">Carregando notícias...</div>
+          <div className="text-gray-700 dark:text-gray-300">Carregando notícias...</div>
         </div>
       </div>
     );
@@ -40,7 +40,7 @@ const FeaturedNewsSection: React.FC<FeaturedNewsSectionProps> = ({
           </span>
         </h2>
         <div className="text-center py-8">
-          <div className="text-gray-600 dark:text-gray-400">Nenhuma notícia em destaque no momento.</div>
+          <div className="text-gray-700 dark:text-gray-300">Nenhuma notícia em destaque no momento.</div>
         </div>
       </div>
     );

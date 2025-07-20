@@ -20,7 +20,7 @@ const RecadoForm: React.FC = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40" onClick={() => setShowModal(false)}>
       <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 w-[95vw] max-w-md relative mx-2" onClick={e => e.stopPropagation()}>
         <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl font-bold"
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white text-xl font-bold"
           onClick={() => setShowModal(false)}
           aria-label="Fechar"
         >

@@ -85,6 +85,7 @@ const NewsSlider = () => {
             size="sm"
             onClick={() => setIsAutoPlay(!isAutoPlay)}
             className="text-sm"
+            aria-label={isAutoPlay ? 'Pausar reprodução automática' : 'Iniciar reprodução automática'}
           >
             {isAutoPlay ? 'Pausar' : 'Reproduzir'}
           </Button>
@@ -118,7 +119,7 @@ const NewsSlider = () => {
                         </div>
                       </div>
                       <div className="p-8 flex flex-col justify-center">
-                        <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        <div className="flex items-center space-x-4 text-sm text-gray-700 dark:text-gray-300 mb-4">
                           <div className="flex items-center space-x-1">
                             <Calendar className="w-4 h-4" />
                             <span>{news.date}</span>
@@ -136,6 +137,7 @@ const NewsSlider = () => {
                         </p>
                         <Button 
                           className="self-start bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-0"
+                          aria-label={`Ler mais sobre: ${news.title}`}
                         >
                           Ler mais
                         </Button>
@@ -154,6 +156,7 @@ const NewsSlider = () => {
           size="sm"
           onClick={prevSlide}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-12 h-12 p-0"
+          aria-label="Notícia anterior"
         >
           <ChevronLeft className="w-6 h-6 text-[#ad1917]" />
         </Button>
@@ -162,13 +165,14 @@ const NewsSlider = () => {
           size="sm"
           onClick={nextSlide}
           className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg rounded-full w-12 h-12 p-0"
+          aria-label="Próxima notícia"
         >
           <ChevronRight className="w-6 h-6 text-[#ad1917]" />
         </Button>
 
         {/* Dots Indicator */}
         <div className="flex justify-center space-x-2 mt-6">
-          {newsItems.map((_, index) => (
+          {newsItems.map((news, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
@@ -177,6 +181,8 @@ const NewsSlider = () => {
                   ? 'bg-gradient-to-r from-red-500 to-pink-500 w-8'
                   : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
               }`}
+              aria-label={`Ir para notícia ${index + 1}: ${news.title}`}
+              aria-current={index === currentSlide ? 'true' : 'false'}
             />
           ))}
         </div>

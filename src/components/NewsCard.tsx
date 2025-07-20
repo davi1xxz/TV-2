@@ -1,5 +1,6 @@
 import React from 'react';
 import { Play, Image } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 
 interface NewsCardProps {
   image: string;
@@ -34,19 +35,26 @@ const NewsCard: React.FC<NewsCardProps> = ({
     if (isVideo && videoUrl) {
       const videoId = extractYouTubeId(videoUrl)
       if (videoId) {
+        const youtubeThumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        
         return (
           <div className="relative w-full h-40">
-            <img
-              src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+            <OptimizedImage
+              src={youtubeThumbnail}
               alt={title}
               className="w-full h-full object-cover"
-              fetchpriority="high"
-              width="400"
-              height="160"
+              width={400}
+              height={160}
+              priority={true}
               loading="eager"
+              fallback={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
             />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-red-600 text-white rounded-full p-3 hover:bg-red-700 transition-colors">
+              <div 
+                className="bg-red-600 text-white rounded-full p-3 hover:bg-red-700 transition-colors"
+                role="button"
+                aria-label={`Reproduzir vídeo: ${title}`}
+              >
                 <Play className="w-6 h-6 ml-1" />
               </div>
             </div>
@@ -57,17 +65,22 @@ const NewsCard: React.FC<NewsCardProps> = ({
     
     return (
       <div className="relative w-full h-40">
-        <img
+        <OptimizedImage
           src={image}
           alt={title}
           className="w-full h-full object-cover"
-          fetchpriority="high"
-          width="400"
-          height="160"
+          width={400}
+          height={160}
+          priority={true}
           loading="eager"
+          fallback="/imagens/placeholder.svg"
         />
         {isVideo && (
-          <div className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1">
+          <div 
+            className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1"
+            role="button"
+            aria-label={`Reproduzir vídeo: ${title}`}
+          >
             <Play className="w-4 h-4" />
           </div>
         )}
@@ -88,7 +101,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
         <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed flex-1 break-normal line-clamp-3 text-sm">
           {subtitulo || ''}
       </p>
-      <div className="mt-auto flex items-center justify-start text-sm text-gray-500 dark:text-gray-400 gap-2">
+              <div className="mt-auto flex items-center justify-start text-sm text-gray-700 dark:text-gray-300 gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
         {date}
       </div>
