@@ -234,4 +234,34 @@ window.addEventListener('error', (e) => {
 window.addEventListener('load', () => {
     const loadTime = performance.now();
     console.log(`⚡ Página carregada em ${Math.round(loadTime)}ms`);
+    
+    // Monitorar recursos críticos
+    const resources = performance.getEntriesByType('resource');
+    const cssResources = resources.filter(r => r.name.includes('.css'));
+    const fontResources = resources.filter(r => r.name.includes('fonts.googleapis.com'));
+    
+    console.log('📊 Performance Report:');
+    console.log(`- CSS Files: ${cssResources.length} (${Math.round(cssResources.reduce((sum, r) => sum + r.duration, 0))}ms)`);
+    console.log(`- Font Files: ${fontResources.length} (${Math.round(fontResources.reduce((sum, r) => sum + r.duration, 0))}ms)`);
+    
+    // Verificar render-blocking
+    const renderBlocking = resources.filter(r => r.renderBlockingStatus === 'blocking');
+    if (renderBlocking.length > 0) {
+        console.warn('⚠️ Render-blocking resources detected:', renderBlocking.map(r => r.name));
+    } else {
+        console.log('✅ No render-blocking resources detected');
+    }
 });
+
+// Monitorar mudanças de performance em tempo real
+let lastPerformanceCheck = performance.now();
+setInterval(() => {
+    const now = performance.now();
+    const timeSinceLastCheck = now - lastPerformanceCheck;
+    
+    if (timeSinceLastCheck > 100) { // Se demorou mais de 100ms
+        console.warn(`🐌 Performance drop detected: ${Math.round(timeSinceLastCheck)}ms since last check`);
+    }
+    
+    lastPerformanceCheck = now;
+}, 1000);

@@ -130,7 +130,7 @@ export const useNews = () => {
       const fileExt = file.name.split('.').pop()
       const fileName = `${Math.random()}.${fileExt}`
       const filePath = `${fileName}`
-
+      
       const { data, error } = await supabase.storage
         .from('imagens_noticias')
         .upload(filePath, file)
@@ -170,12 +170,13 @@ export const useNews = () => {
         .from('noticias')
         .update({ destaque_ordem: ordem, destaque_home: !!ordem })
         .eq('id', id)
+
       if (error) throw error
       await loadNews()
       return { success: true }
     } catch (err) {
-      return {
-        success: false,
+      return { 
+        success: false, 
         error: err instanceof Error ? err.message : 'Erro ao atualizar destaque'
       }
     }

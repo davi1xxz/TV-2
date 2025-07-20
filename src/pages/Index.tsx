@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Waves, Users, Radio, Headphones, ChevronLeft, ChevronRight } from 'lucide-react';
 import NewsCard from '../components/NewsCard';
 import NewsModal from '../components/NewsModal';
@@ -8,7 +8,6 @@ import { useSchedule } from '../hooks/use-schedule';
 import { NewsItem } from '../lib/supabase';
 import RecadoForm from '../components/RecadoForm';
 import { useSponsors } from '../hooks/use-sponsors'
-
 
 const Index = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
@@ -41,7 +40,7 @@ const Index = () => {
     return null;
   };
 
-  const currentProgram = useMemo(() => getCurrentProgram(schedule), [schedule]);
+  const currentProgram = getCurrentProgram(schedule);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const bannerAutoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -76,11 +75,11 @@ const Index = () => {
   };
 
   const nextBannerSlide = () => {
-    setCurrentBannerSlide((prev) => (prev + 1) % banners.length);
+    setCurrentBannerSlide((prev) => (prev + 1) % sponsors.length);
   };
 
   const prevBannerSlide = () => {
-    setCurrentBannerSlide((prev) => (prev - 1 + banners.length) % banners.length);
+    setCurrentBannerSlide((prev) => (prev - 1 + sponsors.length) % sponsors.length);
   };
 
   const startAutoPlay = () => {
@@ -141,22 +140,21 @@ const Index = () => {
   const bannerHeights = sponsors.map(() => ({ aspectRatio: '800/100', maxHeight: `calc(100vw * 0.1)`, minHeight: '40px' }))
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
-        {/* Hero Section */}
-        <section id="inicio" className="pt-24 pb-4">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
+      <section id="inicio" className="pt-24 pb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 px-4">
-                <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
-                  Sua TV Online
-                </span>
-              </h1>
-              <p className="text-sm md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-4 leading-relaxed">
-                Conectando você com o melhor conteudo que há na região.
-              </p>
-            </div>
+              <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
+                Sua TV Online
+              </span>
+            </h1>
+            <p className="text-sm md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-4 leading-relaxed">
+              Conectando você com o melhor conteudo que há na região.
+            </p>
+          </div>
 
-            {/* Video Player com borda vermelha e RecadoForm dentro */}
+          {/* Video Player com borda vermelha e RecadoForm dentro */}
           <div className="mb-6 flex justify-center">
             <div className="w-full max-w-5xl md:max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-2 md:p-4 flex flex-col items-center">
               {/* Banner acima do player - agora dinâmico */}
@@ -198,7 +196,7 @@ const Index = () => {
                   </div>
                 ) : null}
               </div>
-              
+
               <div className="w-full aspect-video overflow-hidden mb-0">
                 <video controls className="w-full h-full object-cover bg-[#222]">
                   <source src="/sample.mp4" type="video/mp4" />
@@ -346,7 +344,6 @@ const Index = () => {
                 <div className="text-gray-600 dark:text-gray-400">Nenhuma notícia em destaque encontrada.</div>
               </div>
             )}
-          </div>
           {/* Modal de detalhes da notícia */}
           <NewsModal
             open={!!selectedNews}
@@ -362,7 +359,8 @@ const Index = () => {
             videoUrl={selectedNews?.tipo_midia === 'youtube' ? selectedNews.url_midia : ''}
           />
           </div>
-        </section>
+        </div>
+      </section>
     </div>
   );
 };
