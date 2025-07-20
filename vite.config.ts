@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => ({
   base: '/',
   server: {
     host: "::",
-    port: 8080,
+    port: 3030,
     hmr: {
       overlay: false // Desabilita overlay de erros para melhor performance
     },

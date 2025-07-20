@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react'
 
 
-const AdminLogin17342 = () => {
+const Login17342 = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -30,7 +30,7 @@ const AdminLogin17342 = () => {
       const { error } = await signIn(email, password)
       
       if (!error) {
-        navigate('/admin17342')
+        navigate('/17342')
       }
     } catch (error) {
       // Silenciar erros
@@ -114,4 +114,4 @@ const AdminLogin17342 = () => {
   )
 }
 
-export default AdminLogin17342 
+export default Login17342 

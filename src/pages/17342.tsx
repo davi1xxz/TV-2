@@ -43,7 +43,7 @@ function useIsDesktop() {
   return isDesktop
 }
 
-const Admin40417342 = () => {
+const Painel17342 = () => {
   const [showForm, setShowForm] = useState(false)
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null)
   const [editingSchedule, setEditingSchedule] = useState<ScheduleItem | null>(null)
@@ -57,7 +57,7 @@ const Admin40417342 = () => {
   
   const { user, signOut, loading: authLoading } = useAuth()
   const { news, loading, loadNews } = useNews()
-  const { schedule, loading: scheduleLoading, error: scheduleError, loadSchedule } = useSchedule()
+  const { schedule, loading: scheduleLoading, error: scheduleError, loadSchedule, deleteSchedule } = useSchedule()
   const { sponsors, loading: sponsorsLoading, loadSponsors, createSponsor, updateSponsor, deleteSponsor } = useSponsors()
   const { team, loading: teamLoading, loadTeam, createMember, updateMember, deleteMember } = useTeam()
   const navigate = useNavigate()
@@ -69,7 +69,7 @@ const Admin40417342 = () => {
 
   useEffect(() => {
     if (!authLoading && !user) {
-      navigate('/40417342/login')
+      navigate('/17342/login')
     }
   }, [user, authLoading, navigate])
 
@@ -85,7 +85,7 @@ const Admin40417342 = () => {
   const handleLogout = async () => {
     try {
       await signOut()
-      navigate('/40417342/login')
+      navigate('/17342/login')
     } catch (error) {
       // Silenciar erros
     }
@@ -345,7 +345,9 @@ const Admin40417342 = () => {
                       })} 
                       loading={scheduleLoading} 
                       onEdit={handleEditSchedule}
-                      onDelete={async (id) => { await deleteSchedule(id); loadSchedule() }}
+                      onDelete={async (id) => {
+                        return await deleteSchedule(id);
+                      }}
                     />
                     {/* Debug Info */}
                     {scheduleError && (
@@ -455,4 +457,4 @@ const Admin40417342 = () => {
   )
 }
 
-export default Admin40417342 
+export default Painel17342; 

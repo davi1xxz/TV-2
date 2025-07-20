@@ -14,8 +14,8 @@ const Noticias = lazy(() => import('./pages/Noticias'));
 const Programacao = lazy(() => import('./pages/Programacao'));
 const Sobre = lazy(() => import('./pages/Sobre'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const Admin40417342 = lazy(() => import('./pages/Admin40417342'));
-const AdminLogin40417342 = lazy(() => import('./pages/AdminLogin40417342'));
+const Painel17342 = lazy(() => import('./pages/17342'));
+const Login17342 = lazy(() => import('./pages/Login17342'));
 
 const queryClient = new QueryClient();
 
@@ -71,9 +71,6 @@ const App = () => {
               }
             >
               <Routes>
-                {/* Admin routes - without navbar/footer */}
-                <Route path="/40417342" element={<Admin40417342 />} />
-                <Route path="/40417342/login" element={<AdminLogin40417342 />} />
                 {/* Public routes - with navbar/footer */}
                 <Route path="/" element={
                   <>
@@ -110,6 +107,9 @@ const App = () => {
                     <Footer />
                   </>
                 } />
+                {/* Rotas de admin */}
+                <Route path="/17342" element={<Painel17342 />} />
+                <Route path="/17342/login" element={<Login17342 />} />
               </Routes>
             </Suspense>
           </BrowserRouter>
