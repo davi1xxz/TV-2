@@ -221,7 +221,6 @@ const Index = () => {
                             alt={sponsor.nome}
                             className="w-full object-cover"
                             style={bannerHeights[index]}
-                            fetchpriority="high"
                           />
                         </a>
                       ) : (
@@ -231,7 +230,6 @@ const Index = () => {
                           alt={sponsor.nome}
                           className="w-full flex-shrink-0 object-cover"
                           style={bannerHeights[index]}
-                          fetchpriority="high"
                         />
                       )
                     ))}
@@ -240,10 +238,18 @@ const Index = () => {
               </div>
 
               <div className="w-full aspect-video overflow-hidden mb-0">
-                <video controls className="w-full h-full object-cover bg-[#222]">
-                  <source src="/sample.mp4" type="video/mp4" />
-                  Seu navegador não suporta o elemento de vídeo.
-                </video>
+                <iframe
+                  src="https://player.kick.com/tvok"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowFullScreen={true}
+                  className="w-full h-full object-cover bg-[#222]"
+                  allow="autoplay; fullscreen"
+                  title="Kick TVOK Player"
+                  style={{ display: 'block' }}
+                ></iframe>
               </div>
               {/* Faixa do programa atual */}
               {currentProgram && (
