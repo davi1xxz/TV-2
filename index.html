@@ -12,8 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     
+    <!-- Preconnect para Supabase - economiza 300ms no LCP -->
+    <link rel="preconnect" href="https://hnbsjqhdtiwhcjcqkeoa.supabase.co">
+    <link rel="dns-prefetch" href="https://hnbsjqhdtiwhcjcqkeoa.supabase.co">
+    
     <!-- Preload de recursos críticos -->
     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/imagens/logo.webp" as="image" type="image/webp">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
     
     <!-- Google Fonts com display=swap para não bloquear renderização -->
