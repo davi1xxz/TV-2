@@ -135,6 +135,30 @@ const Index = () => {
     }
   }, [sponsors.length, startBannerAutoPlay]);
 
+  // Preload dinâmico da thumbnail do YouTube da primeira notícia em destaque
+  useEffect(() => {
+    if (ultimasNoticias.length > 0 && ultimasNoticias[0].tipo_midia === 'youtube') {
+      // Extrair ID do vídeo do YouTube
+      const url = ultimasNoticias[0].url_midia;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      const videoId = match && match[2].length === 11 ? match[2] : null;
+      if (videoId) {
+        const preloadId = `preload-youtube-thumb-${videoId}`;
+        // Evitar múltiplos preloads
+        if (!document.getElementById(preloadId)) {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+          link.type = 'image/jpeg';
+          link.id = preloadId;
+          document.head.appendChild(link);
+        }
+      }
+    }
+  }, [ultimasNoticias]);
+
   // Banner dinâmico de patrocinadores
   const banners = sponsors.map(s => s.url_imagem)
   const bannerLinks = sponsors.map(s => s.url_link)
