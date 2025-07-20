@@ -25,6 +25,8 @@
     <link rel="preload" href="/imagens/logo.webp" as="image" type="image/webp">
     <!-- Preload da primeira imagem do carrossel de notícias -->
     <link rel="preload" href="https://img.youtube.com/vi/RyVkVqrtPxo/maxresdefault.jpg" as="image" type="image/jpeg">
+    <!-- Preload da primeira imagem para LCP -->
+    <link rel="preload" href="/imagens/placeholder.svg" as="image" type="image/svg+xml">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
     
     <!-- Google Fonts com display=swap para não bloquear renderização -->
@@ -59,6 +61,14 @@
     </style>
 </head>
 <body style="min-height:0;padding:0;margin:0;">
+    <!-- Imagem de placeholder para LCP - será substituída pelo React -->
+    <img 
+      src="/imagens/placeholder.svg" 
+      alt="TV OK - Carregando..." 
+      style="position: absolute; top: -9999px; left: -9999px; width: 400px; height: 160px;"
+      fetchpriority="high"
+      loading="eager"
+    />
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 </body>

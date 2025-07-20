@@ -1,0 +1,5 @@
+<svg width="400" height="160" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="160" fill="#ad1917"/>
+  <text x="200" y="80" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">TV OK</text>
+  <text x="200" y="110" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">Carregando...</text>
+</svg> 
