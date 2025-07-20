@@ -23,8 +23,6 @@
     <!-- Preload de recursos críticos -->
     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="/imagens/logo.webp" as="image" type="image/webp">
-    <!-- Preload da primeira imagem do carrossel de notícias -->
-    <link rel="preload" href="https://img.youtube.com/vi/RyVkVqrtPxo/maxresdefault.jpg" as="image" type="image/jpeg">
     <!-- Preload da primeira imagem para LCP -->
     <link rel="preload" href="/imagens/placeholder.svg" as="image" type="image/svg+xml">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
@@ -55,9 +53,7 @@
         flex-direction: column;
       }
       /* Fallback para fontes enquanto carregam */
-      body {
-        font-display: swap;
-      }
+      /* font-display: swap; removido pois só funciona em @font-face */
     </style>
 </head>
 <body style="min-height:0;padding:0;margin:0;">
