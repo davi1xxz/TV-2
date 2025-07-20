@@ -182,6 +182,7 @@ const Index = () => {
                             alt={sponsor.nome}
                             className="w-full object-cover"
                             style={bannerHeights[index]}
+                            fetchpriority="high"
                           />
                         </a>
                       ) : (
@@ -191,6 +192,7 @@ const Index = () => {
                           alt={sponsor.nome}
                           className="w-full flex-shrink-0 object-cover"
                           style={bannerHeights[index]}
+                          fetchpriority="high"
                         />
                       )
                     ))}

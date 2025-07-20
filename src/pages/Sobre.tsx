@@ -110,7 +110,7 @@ const Sobre = () => {
               <div className="flex justify-center">
                 <div className="relative">
                   <div className="w-64 h-64 flex items-center justify-center">
-                    <img src="/imagens/logo.webp" alt="Logo TV OK" className="w-56 h-56 object-contain" />
+                    <img src="/imagens/logo.webp" alt="Logo TV OK" className="w-56 h-56 object-contain" fetchpriority="high" />
                   </div>
                   <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-[#f37335] to-[#fda63d] rounded-full flex items-center justify-center animate-pulse">
                     <Heart className="w-12 h-12 text-white" />
@@ -137,6 +137,7 @@ const Sobre = () => {
                           src={supabase.storage.from('equipe').getPublicUrl(membro.url_foto).data.publicUrl}
                           alt={membro.nome}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        fetchpriority="high"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>

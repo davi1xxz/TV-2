@@ -40,6 +40,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
               src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
               alt={title}
               className="w-full h-full object-cover"
+              fetchpriority="high"
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="bg-red-600 text-white rounded-full p-3 hover:bg-red-700 transition-colors">
@@ -57,6 +58,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
           src={image}
           alt={title}
           className="w-full h-full object-cover"
+          fetchpriority="high"
         />
         {isVideo && (
           <div className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1">
