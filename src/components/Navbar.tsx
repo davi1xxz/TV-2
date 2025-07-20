@@ -73,6 +73,7 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               tabIndex={-1}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200 focus:outline-none focus:ring-0 active:bg-transparent shadow-none ring-0 outline-none"
+              aria-label={theme === 'light' ? 'Alternar para modo escuro' : 'Alternar para modo claro'}
             >
               {theme === 'light' ? (
                 <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400" />

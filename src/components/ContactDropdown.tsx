@@ -35,7 +35,7 @@ const ContactDropdown = () => {
             variant="ghost"
             size="sm"
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-200 focus:outline-none focus:ring-0"
-            aria-label="Abrir contato"
+            aria-label={isOpen ? 'Fechar menu de contato' : 'Abrir menu de contato'}
         onClick={() => setIsOpen(!isOpen)}
           >
             <Phone className="h-5 w-5 text-gray-600 dark:text-gray-400" />
@@ -51,6 +51,7 @@ const ContactDropdown = () => {
                 size="sm"
                 onClick={() => setIsOpen(false)}
                 className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700"
+                aria-label="Fechar menu de contato"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -60,6 +61,7 @@ const ContactDropdown = () => {
               <a 
                 href="tel:3599799988" 
                 className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Ligar para (35) 9979-9988"
               >
                 <div className="w-8 h-8 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center">
                   <Phone className="h-4 w-4 text-white" />
@@ -73,6 +75,7 @@ const ContactDropdown = () => {
               <a 
                 href="mailto:lopeshow@hotmail.com" 
                 className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Enviar email para lopeshow@hotmail.com"
               >
                 <div className="w-8 h-8 bg-gradient-to-r from-[#ad1917] to-[#fda63d] rounded-full flex items-center justify-center">
                   <Mail className="h-4 w-4 text-white" />
