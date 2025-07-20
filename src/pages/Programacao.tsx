@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useSchedule } from '@/hooks/use-schedule';
 import { Calendar, Clock, Play, Pause } from 'lucide-react';
 
@@ -27,7 +27,12 @@ function getCurrentProgram(schedule) {
 }
 
 const Programacao = () => {
-  const { schedule, loading } = useSchedule();
+  const { schedule, loading, loadSchedule } = useSchedule();
+  
+  useEffect(() => {
+    loadSchedule();
+  }, [loadSchedule]);
+  
   // Ordena pelo horário inicial
   const sortedSchedule = useMemo(() => schedule.slice().sort((a, b) => {
     const getMinutes = (h) => {

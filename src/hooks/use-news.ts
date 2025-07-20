@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { supabase, NewsItem } from '@/lib/supabase'
 
 export const useNews = () => {
   const [news, setNews] = useState<NewsItem[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   // Carregar todas as notícias
-  const loadNews = async () => {
+  const loadNews = useCallback(async () => {
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -23,10 +23,10 @@ export const useNews = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Carregar notícias em destaque para a home
-  const loadHomeNews = async () => {
+  const loadHomeNews = useCallback(async () => {
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -43,7 +43,7 @@ export const useNews = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Criar nova notícia
   const createNews = async (newsData: Omit<NewsItem, 'id' | 'created_at'>) => {

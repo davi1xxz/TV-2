@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Award, Heart, Radio, Users, Headphones, Music, MapPin, Phone, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTeam } from '@/hooks/use-team'
 import { supabase } from '@/lib/supabase'
@@ -11,7 +11,7 @@ const Sobre = () => {
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const { team, loading: teamLoading, loadTeam } = useTeam();
 
-  useEffect(() => { loadTeam(); }, []);
+  useEffect(() => { loadTeam(); }, [loadTeam]);
 
   const values = [
     {
@@ -42,20 +42,20 @@ const Sobre = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const nextValueSlide = () => {
+  const nextValueSlide = useCallback(() => {
     setCurrentValueSlide((prev) => (prev + 1) % values.length);
-  };
+  }, [values.length]);
 
-  const prevValueSlide = () => {
+  const prevValueSlide = useCallback(() => {
     setCurrentValueSlide((prev) => (prev - 1 + values.length) % values.length);
-  };
+  }, [values.length]);
 
-  const startAutoPlay = () => {
+  const startAutoPlay = useCallback(() => {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
     }
     autoPlayRef.current = setInterval(nextValueSlide, 4000);
-  };
+  }, [nextValueSlide]);
 
   const resetAutoPlay = () => {
     if (autoPlayRef.current) {
@@ -74,7 +74,7 @@ const Sobre = () => {
         }
       };
     }
-  }, [isMobile, values.length]);
+  }, [isMobile, values.length, startAutoPlay]);
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 pt-0">

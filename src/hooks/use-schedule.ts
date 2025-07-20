@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { ScheduleItem } from '@/lib/supabase'
 
 export const useSchedule = () => {
   const [schedule, setSchedule] = useState<ScheduleItem[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const loadSchedule = async () => {
+  const loadSchedule = useCallback(async () => {
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -29,9 +29,9 @@ export const useSchedule = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  const addSchedule = async (scheduleData: Omit<ScheduleItem, 'id' | 'created_at' | 'updated_at'>) => {
+  const addSchedule = useCallback(async (scheduleData: Omit<ScheduleItem, 'id' | 'created_at' | 'updated_at'>) => {
     try {
       const { data, error } = await supabase
         .from('programacao')
@@ -49,9 +49,9 @@ export const useSchedule = () => {
       console.error('Erro ao adicionar programação:', error)
       return null
     }
-  }
+  }, [loadSchedule])
 
-  const updateSchedule = async (id: string, scheduleData: Partial<ScheduleItem>) => {
+  const updateSchedule = useCallback(async (id: string, scheduleData: Partial<ScheduleItem>) => {
     try {
       const { data, error } = await supabase
         .from('programacao')
@@ -70,9 +70,9 @@ export const useSchedule = () => {
       console.error('Erro ao atualizar programação:', error)
       return null
     }
-  }
+  }, [loadSchedule])
 
-  const deleteSchedule = async (id: string) => {
+  const deleteSchedule = useCallback(async (id: string) => {
     try {
       const { error } = await supabase
         .from('programacao')
@@ -90,11 +90,7 @@ export const useSchedule = () => {
       console.error('Erro ao deletar programação:', error)
       return false
     }
-  }
-
-  useEffect(() => {
-    loadSchedule()
-  }, [])
+  }, [loadSchedule])
 
   return {
     schedule,

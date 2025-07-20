@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Waves, Users, Radio, Headphones, ChevronLeft, ChevronRight } from 'lucide-react';
 import NewsCard from '../components/NewsCard';
 import NewsModal from '../components/NewsModal';
@@ -15,7 +15,7 @@ const Index = () => {
   const [currentBannerSlide, setCurrentBannerSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const { news, loading, loadHomeNews } = useNews();
-  const { schedule } = useSchedule();
+  const { schedule, loadSchedule } = useSchedule();
   const { sponsors, loading: sponsorsLoading, loadSponsors } = useSponsors()
 
   // Função para obter o programa atual
@@ -46,6 +46,7 @@ const Index = () => {
 
   useEffect(() => {
     loadHomeNews();
+    loadSchedule();
     loadSponsors();
     // eslint-disable-next-line
   }, []);
@@ -66,35 +67,35 @@ const Index = () => {
     .map(ordem => news.find(n => n.destaque_ordem === ordem))
     .filter(Boolean);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % ultimasNoticias.length);
-  };
+  }, [ultimasNoticias.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + ultimasNoticias.length) % ultimasNoticias.length);
-  };
+  }, [ultimasNoticias.length]);
 
-  const nextBannerSlide = () => {
+  const nextBannerSlide = useCallback(() => {
     setCurrentBannerSlide((prev) => (prev + 1) % sponsors.length);
-  };
+  }, [sponsors.length]);
 
-  const prevBannerSlide = () => {
+  const prevBannerSlide = useCallback(() => {
     setCurrentBannerSlide((prev) => (prev - 1 + sponsors.length) % sponsors.length);
-  };
+  }, [sponsors.length]);
 
-  const startAutoPlay = () => {
+  const startAutoPlay = useCallback(() => {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
     }
     autoPlayRef.current = setInterval(nextSlide, 5000);
-  };
+  }, [nextSlide]);
 
-  const startBannerAutoPlay = () => {
+  const startBannerAutoPlay = useCallback(() => {
     if (bannerAutoPlayRef.current) {
       clearInterval(bannerAutoPlayRef.current);
     }
     bannerAutoPlayRef.current = setInterval(nextBannerSlide, 4000);
-  };
+  }, [nextBannerSlide]);
 
   const resetAutoPlay = () => {
     if (autoPlayRef.current) {
@@ -120,7 +121,7 @@ const Index = () => {
         }
       };
     }
-  }, [isMobile, ultimasNoticias.length]);
+  }, [isMobile, ultimasNoticias.length, startAutoPlay]);
 
   // Autoplay do carrossel de banners
   useEffect(() => {
@@ -132,7 +133,7 @@ const Index = () => {
         }
       };
     }
-  }, [sponsors.length]);
+  }, [sponsors.length, startBannerAutoPlay]);
 
   // Banner dinâmico de patrocinadores
   const banners = sponsors.map(s => s.url_imagem)

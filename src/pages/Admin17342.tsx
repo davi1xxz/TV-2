@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useAuth } from '@/contexts/AuthContext'
+import { useAuth } from '@/contexts/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -80,7 +80,7 @@ const Admin17342 = () => {
       loadSponsors()
       loadTeam()
     }
-  }, [user])
+  }, [user, loadNews, loadSchedule, loadSponsors, loadTeam])
 
   const handleLogout = async () => {
     try {
@@ -333,15 +333,20 @@ const Admin17342 = () => {
                     </div>
 
                     {/* Schedule Table ordenada por horário */}
-                    <ScheduleTable schedule={schedule.slice(0, 20).sort((a, b) => {
-                      // Ordena pelo horário inicial (ex: 06:00 - 09:00)
-                      const getMinutes = (h: string) => {
-                        const [start] = h.split(' - ')
-                        const [hh, mm] = start.split(':').map(Number)
-                        return hh * 60 + mm
-                      }
-                      return getMinutes(a.horario) - getMinutes(b.horario)
-                    })} loading={scheduleLoading} onEdit={handleEditSchedule} />
+                    <ScheduleTable 
+                      schedule={schedule.slice(0, 20).sort((a, b) => {
+                        // Ordena pelo horário inicial (ex: 06:00 - 09:00)
+                        const getMinutes = (h: string) => {
+                          const [start] = h.split(' - ')
+                          const [hh, mm] = start.split(':').map(Number)
+                          return hh * 60 + mm
+                        }
+                        return getMinutes(a.horario) - getMinutes(b.horario)
+                      })} 
+                      loading={scheduleLoading} 
+                      onEdit={handleEditSchedule}
+                      onDelete={async (id) => { await deleteSchedule(id); loadSchedule() }}
+                    />
                     {/* Debug Info */}
                     {scheduleError && (
                       <Card className="mt-4 border-red-200 bg-red-50 dark:bg-red-900/20">

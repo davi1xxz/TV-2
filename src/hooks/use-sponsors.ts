@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { supabase, SponsorItem } from '@/lib/supabase'
 
 export const useSponsors = () => {
   const [sponsors, setSponsors] = useState<SponsorItem[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   // Carregar todos os patrocinadores
-  const loadSponsors = async () => {
+  const loadSponsors = useCallback(async () => {
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -22,7 +22,7 @@ export const useSponsors = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Criar novo patrocinador
   const createSponsor = async (sponsorData: Omit<SponsorItem, 'id' | 'created_at' | 'updated_at'>) => {

@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { TeamMember } from '@/components/TeamTable'
 
 export const useTeam = () => {
   const [team, setTeam] = useState<TeamMember[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   // Carregar todos os membros da equipe
-  const loadTeam = async () => {
+  const loadTeam = useCallback(async () => {
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -22,10 +22,10 @@ export const useTeam = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Criar novo membro
-  const createMember = async (memberData: Omit<TeamMember, 'id'>) => {
+  const createMember = useCallback(async (memberData: Omit<TeamMember, 'id'>) => {
     try {
       const { error } = await supabase
         .from('equipe')
@@ -36,10 +36,10 @@ export const useTeam = () => {
     } catch (err) {
       return { success: false, error: err instanceof Error ? err.message : 'Erro ao criar membro' }
     }
-  }
+  }, [loadTeam])
 
   // Atualizar membro
-  const updateMember = async (id: string, memberData: Partial<TeamMember>) => {
+  const updateMember = useCallback(async (id: string, memberData: Partial<TeamMember>) => {
     try {
       const { error } = await supabase
         .from('equipe')
@@ -51,10 +51,10 @@ export const useTeam = () => {
     } catch (err) {
       return { success: false, error: err instanceof Error ? err.message : 'Erro ao atualizar membro' }
     }
-  }
+  }, [loadTeam])
 
   // Deletar membro
-  const deleteMember = async (id: string) => {
+  const deleteMember = useCallback(async (id: string) => {
     try {
       const { error } = await supabase
         .from('equipe')
@@ -66,7 +66,7 @@ export const useTeam = () => {
     } catch (err) {
       return { success: false, error: err instanceof Error ? err.message : 'Erro ao deletar membro' }
     }
-  }
+  }, [loadTeam])
 
   return { team, loading, error, loadTeam, createMember, updateMember, deleteMember }
 } 

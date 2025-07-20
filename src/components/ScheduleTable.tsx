@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ScheduleItem } from '@/lib/supabase'
-import { useSchedule } from '@/hooks/use-schedule'
 import { Edit, Trash2, Clock, User, FileText, AlertCircle } from 'lucide-react'
 
 interface ScheduleTableProps {
   schedule: ScheduleItem[]
   loading: boolean
   onEdit: (schedule: ScheduleItem) => void
+  onDelete: (id: string) => Promise<boolean>
 }
 
 // Hook para detectar se está em tela md+ (desktop)
@@ -22,23 +22,16 @@ function useIsDesktop() {
   return isDesktop
 }
 
-const ScheduleTable = ({ schedule, loading, onEdit }: ScheduleTableProps) => {
-  const { deleteSchedule } = useSchedule()
+const ScheduleTable = ({ schedule, loading, onEdit, onDelete }: ScheduleTableProps) => {
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const isDesktop = useIsDesktop()
-
-  // Debug: mostrar informações no console
-  useEffect(() => {
-    console.log('ScheduleTable - schedule:', schedule)
-    console.log('ScheduleTable - loading:', loading)
-  }, [schedule, loading])
 
   const handleDelete = async (id: string) => {
     if (confirm('Tem certeza que deseja excluir esta programação?')) {
       setDeletingId(id)
       try {
-        const success = await deleteSchedule(id)
+        const success = await onDelete(id)
         if (!success) {
           setError('Erro ao excluir programação')
         }
