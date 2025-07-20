@@ -388,23 +388,23 @@ const Index = () => {
                 <div className="text-gray-700 dark:text-gray-300">Nenhuma notícia em destaque encontrada.</div>
               </div>
             )}
-          {/* Modal de detalhes da notícia */}
-          <NewsModal
-            open={!!selectedNews}
-            onClose={() => setSelectedNews(null)}
-            image={selectedNews?.tipo_midia === 'imagem' ? selectedNews.url_midia : ''}
-            title={selectedNews?.titulo || ''}
-            subtitulo={selectedNews?.subtitulo || ''}
-            details={selectedNews?.descricao || ''}
-            date={selectedNews ? new Date(selectedNews.created_at).toLocaleDateString('pt-BR') : ''}
-            autor={selectedNews?.autor || ''}
-            created_at={selectedNews?.created_at || ''}
-            isVideo={selectedNews?.tipo_midia === 'youtube'}
-            videoUrl={selectedNews?.tipo_midia === 'youtube' ? selectedNews.url_midia : ''}
-          />
           </div>
         </div>
       </section>
+      {/* Modal de detalhes da notícia - fora do fluxo principal para garantir fundo desfocado */}
+      <NewsModal
+        open={!!selectedNews}
+        onClose={() => setSelectedNews(null)}
+        image={selectedNews?.tipo_midia === 'imagem' ? selectedNews.url_midia : ''}
+        title={selectedNews?.titulo || ''}
+        subtitulo={selectedNews?.subtitulo || ''}
+        details={selectedNews?.descricao || ''}
+        date={selectedNews ? new Date(selectedNews.created_at).toLocaleDateString('pt-BR') : ''}
+        autor={selectedNews?.autor || ''}
+        created_at={selectedNews?.created_at || ''}
+        isVideo={selectedNews?.tipo_midia === 'youtube'}
+        videoUrl={selectedNews?.tipo_midia === 'youtube' ? selectedNews.url_midia : ''}
+      />
     </div>
   );
 };

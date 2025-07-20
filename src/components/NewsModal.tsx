@@ -157,11 +157,9 @@ const NewsModal: React.FC<NewsModalProps> = ({
               <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 md:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="prose prose-lg max-w-none text-gray-800 dark:text-gray-100">
                   <div 
-                    className="leading-relaxed text-justify whitespace-pre-wrap break-words"
+                    className="leading-relaxed text-left px-2 text-base md:text-justify md:text-lg whitespace-pre-wrap break-words"
                     style={{
-                      textAlign: 'justify',
                       lineHeight: '1.8',
-                      fontSize: '1.1rem',
                       fontFamily: 'inherit'
                     }}
                   >
