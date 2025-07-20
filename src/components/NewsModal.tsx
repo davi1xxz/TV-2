@@ -140,7 +140,7 @@ const NewsModal: React.FC<NewsModalProps> = ({
             
             {/* Título */}
             <div className="w-full max-w-3xl mb-6">
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight text-justify mb-4">
+              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight mb-4 text-center md:text-left">
                 {title}
               </h3>
               
@@ -172,28 +172,25 @@ const NewsModal: React.FC<NewsModalProps> = ({
             </div>
 
             {/* Metadados */}
-            <div className="flex items-center justify-center space-x-4 text-sm text-gray-700 dark:text-gray-300 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div className="w-full flex flex-col items-center md:flex-row md:justify-center md:items-center md:space-x-4 text-sm text-gray-700 dark:text-gray-300 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex flex-row items-center space-x-2 mb-1 md:mb-0">
+                {created_at && (
+                  <div className="flex items-center space-x-1">
+                    <span>às {new Date(created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
+                  </div>
+                )}
+                {autor && (
+                  <div className="flex items-center space-x-1">
+                    <span>Por {autor}</span>
+                  </div>
+                )}
+              </div>
               <div className="flex items-center space-x-1">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <span>{date}</span>
               </div>
-              
-              {created_at && (
-                <div className="flex items-center space-x-1">
-                  <span>às {new Date(created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
-                </div>
-              )}
-              
-              {autor && (
-                <>
-                  <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-                  <div className="flex items-center space-x-1">
-                    <span>Por {autor}</span>
-                  </div>
-                </>
-              )}
             </div>
           </div>
         </div>

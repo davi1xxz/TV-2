@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-3 mt-auto">
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 pt-3 pb-1 mt-auto">
       <div className="container mx-auto px-4">
         {/* MOBILE: Layout vertical */}
         {isMobile && (
@@ -34,9 +34,9 @@ const Footer: React.FC = () => {
                 <img src="/imagens/icones/whats.ico" alt="WhatsApp" className="w-6 h-6 object-contain"/>
               </a>
             </div>
-            <div className="overflow-x-auto">
-              <p className="text-xs text-gray-600 dark:text-gray-300 font-medium whitespace-nowrap">
-                ©2025 TV OK. Todos os direitos reservados | design by <a href="https://instagram.com/davy.flow" target="_blank" rel="noopener noreferrer" className="text-purple-500 dark:text-purple-400 hover:underline cursor-pointer">DΛVY Flow</a>
+            <div className="w-full">
+              <p className="w-full text-[clamp(12px,4vw,16px)] text-gray-600 dark:text-gray-300 font-medium text-center break-words">
+                ©2025 TV OK. Todos os direitos reservados design by <a href="https://instagram.com/davy.flow" target="_blank" rel="noopener noreferrer" className="text-purple-500 dark:text-purple-400 hover:underline cursor-pointer">DΛVY Flow</a>
               </p>
             </div>
           </div>
