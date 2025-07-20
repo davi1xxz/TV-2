@@ -14,8 +14,8 @@ const Noticias = lazy(() => import('./pages/Noticias'));
 const Programacao = lazy(() => import('./pages/Programacao'));
 const Sobre = lazy(() => import('./pages/Sobre'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const Admin17342 = lazy(() => import('./pages/Admin17342'));
-const AdminLogin17342 = lazy(() => import('./pages/AdminLogin17342'));
+const Admin40417342 = lazy(() => import('./pages/Admin40417342'));
+const AdminLogin40417342 = lazy(() => import('./pages/AdminLogin40417342'));
 
 const queryClient = new QueryClient();
 
@@ -72,8 +72,8 @@ const App = () => {
             >
               <Routes>
                 {/* Admin routes - without navbar/footer */}
-                <Route path="/admin17342" element={<Admin17342 />} />
-                <Route path="/admin17342/login" element={<AdminLogin17342 />} />
+                <Route path="/40417342" element={<Admin40417342 />} />
+                <Route path="/40417342/login" element={<AdminLogin40417342 />} />
                 {/* Public routes - with navbar/footer */}
                 <Route path="/" element={
                   <>
