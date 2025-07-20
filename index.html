@@ -6,21 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV OK - Sua TV Online</title>
     <meta name="description" content="Transmitindo música, notícias e entretenimento 24 horas por dia" />
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preconnect para fontes e recursos externos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <!-- Google Fonts com display=swap para não bloquear renderização -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
     <link rel="icon" type="image/x-icon" href="/imagens/logox.ico" />
+    
+    <!-- CSS crítico inline para evitar render-blocking -->
     <style>
+      /* CSS crítico para renderização inicial */
       html, body {
         min-height: 0 !important;
         padding: 0 !important;
         margin: 0 !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
       .container {
         min-height: 0 !important;
         padding-bottom: 0 !important;
         margin-bottom: 0 !important;
+      }
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      /* Fallback para fontes enquanto carregam */
+      body {
+        font-display: swap;
       }
     </style>
 </head>
