@@ -44,10 +44,24 @@ const Index = () => {
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const bannerAutoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Estados para carregamento dinâmico
+  const [showMainBlock, setShowMainBlock] = useState(false); // patrocinadores, player, faixa
+  const [showRecado, setShowRecado] = useState(false);
+  const [showNoticias, setShowNoticias] = useState(false);
+
   useEffect(() => {
     loadHomeNews();
     loadSchedule();
     loadSponsors();
+    // Hero aparece imediatamente, os outros em sequência
+    const t1 = setTimeout(() => setShowMainBlock(true), 120);
+    const t2 = setTimeout(() => setShowRecado(true), 240);
+    const t3 = setTimeout(() => setShowNoticias(true), 360);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -168,6 +182,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-black transition-colors duration-300 relative">
       <section id="inicio" className="pt-24 pb-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* HERO - aparece imediatamente */}
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 px-4">
               <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
@@ -179,8 +194,8 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Video Player com borda vermelha e RecadoForm dentro */}
-          <div className="mb-6 flex justify-center">
+          {/* Patrocinadores, player e faixa - juntos, fade-in */}
+          <div className={`mb-6 flex justify-center transition-all duration-700 ${showMainBlock ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
             <div className="w-full max-w-5xl md:max-w-3xl rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 p-2 md:p-4 flex flex-col items-center">
               {/* Banner acima do player - agora dinâmico */}
               <div className="w-full rounded-t-lg overflow-hidden relative">
@@ -230,7 +245,6 @@ const Index = () => {
                   Seu navegador não suporta o elemento de vídeo.
                 </video>
               </div>
-              
               {/* Faixa do programa atual */}
               {currentProgram && (
                 <div className="w-full bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] text-white py-2 px-3 rounded-b-lg shadow-lg border-t-2 border-white/20 animate-fade-in"
@@ -256,15 +270,15 @@ const Index = () => {
                   </div>
                 </div>
               )}
-              
-              <div className="w-full mt-4">
+              {/* Recado - fade-in depois */}
+              <div className={`w-full mt-4 transition-all duration-700 ${showRecado ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
                 <RecadoForm />
               </div>
             </div>
           </div>
 
-          {/* Últimas Notícias */}
-          <div className="mb-10">
+          {/* Últimas Notícias - fade-in depois */}
+          <div className={`mb-10 transition-all duration-700 ${showNoticias ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
             <h2 className="text-3xl font-bold mb-8 text-center md:text-left px-4">
               <span className="bg-gradient-to-r from-[#ad1917] via-[#f37335] to-[#fda63d] bg-clip-text text-transparent">
                 Notícias em Destaque
