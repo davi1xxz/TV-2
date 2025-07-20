@@ -35,7 +35,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       width={width}
       height={height}
       loading={priority ? 'eager' : loading}
-      fetchpriority={priority ? 'high' : 'auto'}
+      fetchpriority="high"
       crossOrigin="anonymous"
       style={{
         opacity: isLoading ? 0.5 : 1,

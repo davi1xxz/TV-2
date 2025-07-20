@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Clock, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import OptimizedImage from './OptimizedImage';
 
 interface NewsItem {
   id: number;
@@ -107,10 +108,12 @@ const NewsSlider = () => {
                   <CardContent className="p-0">
                     <div className="grid md:grid-cols-2 gap-0">
                       <div className="relative h-64 md:h-auto">
-                        <img
+                        <OptimizedImage
                           src={news.image}
                           alt={news.title}
                           className="w-full h-full object-cover"
+                          priority={true}
+                          loading="eager"
                         />
                         <div className="absolute top-4 left-4">
                           <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
